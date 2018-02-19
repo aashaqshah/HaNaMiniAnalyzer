@@ -8,11 +8,18 @@ JetReader::JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector &
   JetPtCut( iConfig.getParameter<double>( "JetPtCut" ) ),
   JetEtaCut( iConfig.getParameter<double>( "JetEtaCut" ) ),
   MinNJets( iConfig.getParameter<unsigned int>( "MinNJets" ) ),
-  
+  //For CSV2
   BTagWPL( iConfig.getParameter<double>( "BTagWPL" ) ),
   BTagWPM( iConfig.getParameter<double>( "BTagWPM" ) ),
   BTagWPT( iConfig.getParameter<double>( "BTagWPT" ) ),
+  //For DeepCSV
+  BTagDWPL( iConfig.getParameter<double>( "BTagDWPL" ) ),
+  BTagDWPM( iConfig.getParameter<double>( "BTagDWPM" ) ),
+  BTagDWPT( iConfig.getParameter<double>( "BTagDWPT" ) ),
+  //Two different taggers
   BTagAlgo( iConfig.getParameter<string>( "BTagAlgo" ) ),
+  BTagDAlgo( iConfig.getParameter<string>( "BTagDAlgo" ) ),
+
   MinNBJets( iConfig.getParameter<unsigned int>( "MinNBJets" ) ),
   MaxNBJets( iConfig.getParameter<int>( "MaxNBJets" ) ),
   rndJER(new TRandom3( 13611360 ) )
@@ -44,6 +51,26 @@ JetReader::JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector &
     weighters.push_back(new BTagWeight("CSVv2", 2 , SetupDir, 2 , 2 , BTagWPL, BTagWPM, BTagWPT,-1));
 
 
+    //btDw1L
+    weightersD.push_back(new BTagWeight("DeepCSV", 0 , SetupDir, 1 , -1 , BTagDWPL, BTagDWPM, BTagDWPT,-1)); 
+    //btDw1M
+    weightersD.push_back(new BTagWeight("DeepCSV", 1 , SetupDir, 1 , -1 , BTagDWPL, BTagDWPM, BTagDWPT,-1));
+    //btDw1T
+    weightersD.push_back(new BTagWeight("DeepCSV", 2 , SetupDir, 1 , -1 , BTagDWPL, BTagDWPM, BTagDWPT,-1));
+    //btDw1M1L
+    weightersD.push_back(new BTagWeight("DeepCSV", 1, SetupDir, 1, -1, BTagDWPL, BTagDWPM, BTagDWPT, 0, 0, 1, -1));
+    //btDw1T1L
+    weightersD.push_back(new BTagWeight("DeepCSV", 2, SetupDir, 1, -1, BTagDWPL, BTagDWPM, BTagDWPT, 0, 0, 1, -1));
+    //btDw1T1M
+    weightersD.push_back(new BTagWeight("DeepCSV", 2, SetupDir, 1, -1, BTagDWPL, BTagDWPM, BTagDWPT, 1, 0, 1, -1));
+    //btDw2L
+    weightersD.push_back(new BTagWeight("DeepCSV", 0 , SetupDir, 2 , 2 , BTagDWPL, BTagDWPM, BTagDWPT,-1));
+    //btDw2M
+    weightersD.push_back(new BTagWeight("DeepCSV", 1 , SetupDir, 2 , 2 , BTagDWPL, BTagDWPM, BTagDWPT,-1));
+    //btDw2T
+    weightersD.push_back(new BTagWeight("DeepCSV", 2 , SetupDir, 2 , 2 , BTagDWPL, BTagDWPM, BTagDWPT,-1));
+
+
     t_Rho_ = (iC.consumes<double>( edm::InputTag( "fixedGridRhoFastjetAll" ) ) );
     resolution = JME::JetResolution( SetupDir + "/MCJetPtResolution.txt" );
     resolution_sf = JME::JetResolutionScaleFactor(SetupDir + "/MCJetSF.txt");
@@ -70,11 +97,19 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
   selectedBJets.clear();
   selectedJetsSortedByB.clear();
 
+  selectedDJets.clear();
+  selectedDBJets.clear();
+  selectedDJetsSortedByB.clear();
 
   nNonTagged = 0;
   nLooseNotMed = 0;
   nMedNotTight = 0;
   nTight = 0;
+
+  nNonTaggedD = 0;
+  nLooseNotMedD = 0;
+  nMedNotTightD = 0;
+  nTightD = 0;
 
   for ( pat::Jet j : *handle) {
     if( !IsData && ApplyJER ){
@@ -96,12 +131,22 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
     selectedJets.push_back(j);
     selectedJetsSortedByB.push_back(j);
  
+    selectedDJets.push_back(j);
+    selectedDJetsSortedByB.push_back(j);
+
     float btagval = j.bDiscriminator( BTagAlgo );
+    float btagvalD = j.bDiscriminator( BTagDAlgo );
 
    if(btagval < BTagWPL) nNonTagged++;
    else if(btagval < BTagWPM) nLooseNotMed++;
    else if(btagval < BTagWPT) nMedNotTight++;
    else nTight++;
+
+   //DeepCSV
+   if(btagvalD < BTagDWPL) nNonTaggedD++;
+   else if(btagvalD < BTagDWPM) nLooseNotMedD++;
+   else if(btagvalD < BTagDWPT) nMedNotTightD++;
+   else nTightD++;
 
     if(BTagCuts[0] == 0) {
       if(btagval > BTagWPL) selectedBJets.push_back(j);
@@ -111,6 +156,18 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
       if(btagval > BTagWPT) selectedBJets.push_back(j);
     } else
 	selectedBJets.push_back(j);
+    //Deep CSV
+    if(BTagCuts[0] == 0) {
+      if(btagvalD > BTagDWPL) selectedDBJets.push_back(j);
+    } else if (BTagCuts[0] == 1) {
+      if(btagvalD > BTagDWPM) selectedDBJets.push_back(j);
+    } else if (BTagCuts[0] == 2) {
+      if(btagvalD > BTagDWPT) selectedDBJets.push_back(j);
+    } else
+	selectedDBJets.push_back(j);
+
+
+
   }
   
   ptSort<pat::Jet> mySort; 
@@ -118,6 +175,12 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
   std::sort(selectedBJets.begin(),selectedBJets.end(),mySort);
   btagSort<pat::Jet> myBsort(BTagAlgo);
   std::sort(selectedJetsSortedByB.begin(),selectedJetsSortedByB.end(),myBsort);
+ 
+  //For DeepCSV
+  std::sort(selectedDJets.begin(),selectedDJets.end(),mySort);
+  std::sort(selectedDBJets.begin(),selectedDBJets.end(),mySort);
+  btagSort<pat::Jet> myDBsort(BTagDAlgo);
+  std::sort(selectedDJetsSortedByB.begin(), selectedDJetsSortedByB.end(),myDBsort);
     
   if( selectedJets.size() < MinNJets ) return JetReader::NotEnoughJets ;
   if(  selectedBJets.size() < MinNBJets ) return JetReader::NotEnoughBJets;

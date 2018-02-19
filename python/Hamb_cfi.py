@@ -38,14 +38,19 @@ Hamb = cms.EDFilter('TreeHamb',
                                       ApplyJER = cms.bool( False ),
                                       JetPtCut = cms.double( 15. ),
                                       JetEtaCut = cms.double( 2.4 ),
+                                      #For CSV Algo
                                       BTagAlgo = cms.string("pfCombinedInclusiveSecondaryVertexV2BJetTags"),
-                                      BTagWPL = cms.double(  0.5426  ),
-                                      BTagWPM = cms.double(  0.8484  ),
-                                      BTagWPT = cms.double(  0.9535 ),
+                                      BTagWPL = cms.double(  0.5803  ),
+                                      BTagWPM = cms.double(  0.8838  ),
+                                      BTagWPT = cms.double(  0.9693 ),
+                                      #For DeepCSV Algo
+                                      BTagDAlgo = cms.string("pfDeepCSVJetTags:probb + pfDeepCSVJetTags:probbb"), #D-->deep
+                                      BTagDWPL = cms.double(  0.1522  ),  #D->Deeep->WorkingPoints
+                                      BTagDWPM = cms.double(  0.4941  ),
+                                      BTagDWPT = cms.double(  0.8001 ),
                                       #Which WP to use in selection: 0,1,2 ---> L, M, T
                                       # -1 ---> no requirement
                                       BTagCuts = cms.vint32(1,-1), # supporting up to two working point, the second is for veto
-
                                       MinNJets = cms.uint32( 2 ),
                                       MinNBJets = cms.uint32( 2 ),
 				      MaxNBJets = cms.int32( -1 )
@@ -53,7 +58,7 @@ Hamb = cms.EDFilter('TreeHamb',
                      
                      sample = cms.string("WJetsMG"),
                      isData = cms.bool( False ),
-                     SetupDir = cms.string("Setup80"),
+                     SetupDir = cms.string("Setup94"),
 		     		 StoreEventNumbers = cms.bool( True ),
 		     		 forOptimization = cms.untracked.bool(False)
                      )

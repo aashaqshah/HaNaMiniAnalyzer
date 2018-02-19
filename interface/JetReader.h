@@ -34,11 +34,19 @@ public:
   pat::JetCollection selectedJetsJESDown;
   pat::JetCollection selectedJetsJERUp;
   pat::JetCollection selectedJetsJERDown;
+
+  //For DeepCSV info 
+  pat::JetCollection selectedDJets;
+  pat::JetCollection selectedDJetsSortedByB;
+  pat::JetCollection selectedDBJets;
+
   double W;
   float weights[9];
+  //float weightsD[9];
 
 private :
   std::vector<BTagWeight*> weighters;
+  std::vector<BTagWeight*> weightersD;
 
   bool IsData;
   /* JET SELECTION PARAMS */
@@ -49,14 +57,26 @@ private :
 
 
   /* b-JET SELECTION PARAMS */
-  double BTagWPL , BTagWPM , BTagWPT ;
+  double BTagWPL , BTagWPM , BTagWPT ;     //For CSV2
+  double BTagDWPL , BTagDWPM , BTagDWPT ;  //For DeepCSV
+
   std::vector<int> BTagCuts; // atm only 2 are accepted, first for selection, second for veto
 public:
-  string BTagAlgo ;
+  string BTagAlgo ;    //For Btag CSV
+  string BTagDAlgo ;  //For DeepCSV
+
   float nNonTagged;
   float nLooseNotMed;
   float nMedNotTight;
   float nTight;
+
+
+  float nNonTaggedD;
+  float nLooseNotMedD;
+  float nMedNotTightD;
+  float nTightD;
+
+
 private:
   unsigned int MinNBJets; 
   int MaxNBJets ;
