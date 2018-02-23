@@ -55,6 +55,8 @@ private :
 public:
   string BTagAlgo ; 
   string BTagAlgoType;
+  string BTagAlgoSubTypeA;
+  string BTagAlgoSubTypeB;
 
   float nNonTagged;
   float nLooseNotMed;

@@ -13,6 +13,8 @@ JetReader::JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector &
   BTagWPT( iConfig.getParameter<double>( "BTagWPT" ) ),
   BTagAlgo( iConfig.getParameter<string>( "BTagAlgo" ) ),
   BTagAlgoType( iConfig.getParameter<string>( "BTagAlgoType" ) ),
+  BTagAlgoSubTypeA( iConfig.getParameter<string>( "BTagAlgoSubTypeA" ) ),
+  BTagAlgoSubTypeB( iConfig.getParameter<string>( "BTagAlgoSubTypeB" ) ),
   MinNBJets( iConfig.getParameter<unsigned int>( "MinNBJets" ) ),
   MaxNBJets( iConfig.getParameter<int>( "MaxNBJets" ) ),
   rndJER(new TRandom3( 13611360 ) )
@@ -95,9 +97,13 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
     selectedJets.push_back(j);
     selectedJetsSortedByB.push_back(j);
  
-    float btagval = j.bDiscriminator( BTagAlgo );
-
-    std::cout<<"BtageValue for discrimnators "<<BTagAlgoType<<" is " <<btagval<<std::endl;
+    float btagval;    
+    if (BTagAlgoType == "CSVv2") 
+        btagval = j.bDiscriminator( BTagAlgo );
+    else 
+        btagval = j.bDiscriminator(BTagAlgoSubTypeA) + j.bDiscriminator(BTagAlgoSubTypeB);
+   std::cout << std::setprecision(5) << std::fixed;
+   std::cout<<"BTag Value for Discriminator\t"<<BTagAlgoType<<"\tis\t" <<btagval<<std::endl;
 
    if(btagval < BTagWPL) nNonTagged++;
    else if(btagval < BTagWPM) nLooseNotMed++;
