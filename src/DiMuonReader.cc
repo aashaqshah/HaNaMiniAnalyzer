@@ -27,18 +27,39 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
       hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
     else if(MuonID == 3 ) // Tight ID
       hMuSFID = (TH2*)( f1->Get("MC_NUM_TightID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
-    //else if(MuonID == 4 ) // Soft ID
-    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_SoftID_DEN_genTracks_PAR_pt_spliteta_bin1/pt_abseta_ratio")->Clone("MuSFID") );
+    else if(MuonID == 4 ) // Soft ID
+      hMuSFID = (TH2*)( f1->Get("MC_NUM_SoftID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    else if(MuonID == 5 ) // HighPt ID 
+      hMuSFID = (TH2*)( f1->Get("MC_NUM_HighPtID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    else if(MuonID == 6 ) // MediumPrompt ID
+      hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumPromptID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    else if(MuonID == 7 ) // TrkHighPt ID
+      hMuSFID = (TH2*)( f1->Get("MC_NUM_TrkHighPtID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
     else
       cout << "No scale factor is availabel for Muon ID " << MuonID << endl;
     f1->Close();
-    
+
+    //Muon Isolation cretia
     f1 = TFile::Open( TString(SetupDir + "/MuonIsoSF.root") );
     gROOT->cd();
-    if( MuonIsoCut == 0.15 )
-      hMuSFIso = (TH2*)( f1->Get("TightISO_TightID_pt_eta/pt_abseta_ratio")->Clone("MuSFIso") );
-    else if( MuonIsoCut == 0.25 )
-      hMuSFIso = (TH2*)( f1->Get("LooseISO_TightID_pt_eta/pt_abseta_ratio")->Clone("MuSFIso") );
+    if( MuonIsoCut == 0.25 && MuonID == 1)
+      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_LooseID/pt_abseta_ratio")->Clone("MuSFIso") );
+    else if( MuonIsoCut == 0.25 && MuonID == 2 )
+      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_MediumID/pt_abseta_ratio")->Clone("MuSFIso") );
+    else if( MuonIsoCut == 0.15 && MuonID == 2 )
+      hMuSFIso = (TH2*)( f1->Get("NUM_TightRelIso_DEN_MediumID/pt_abseta_ratio")->Clone("MuSFIso") );
+    else if( MuonIsoCut == 0.10 && MuonID == 7 )
+      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelTrkIso_DEN_TrkHighPtID/pt_abseta_ratio")->Clone("MuSFIso") );
+    else if( MuonIsoCut == 0.05 && MuonID == 7 )
+      hMuSFIso = (TH2*)( f1->Get("NUM_TightRelTkIso_DEN_TrkHighPtID/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.25 && MuonID == TightIDandIPCut ) #WP's for IDandIPcut's has not been defined yet and hence commented
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_TightIDandIPCut/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.15 && MuonID == TightIDandIPCut )
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_TightRelIso_DEN_TightIDandIPCut/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.10 && MuonID == HighPtIDandIPCut)
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelTkIso_DEN_HighPtIDandIPCut/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.05 && MuonID == HighPtIDandIPCut)
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_TightRelTkIso_DEN_HighPtIDandIPCut/pt_abseta_ratio")->Clone("MuSFIso") );
     else
       cout << "No scale factor is availabel for Muon Iso " << MuonIsoCut << endl;
     f1->Close();
@@ -53,7 +74,6 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
      * ** If necessary at analysis level the muon topologic cut should be applied
      * ** Only one of the two weights below is sufficient
     */
-    
 
     /* Tracking efficiency 
      * https://twiki.cern.ch/twiki/bin/view/CMS/MuonWorkInProgressAndPagResults#Results_on_the_full_2016_data

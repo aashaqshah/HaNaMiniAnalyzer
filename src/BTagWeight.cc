@@ -130,9 +130,10 @@ float BTagWeight::MCTagEfficiency(pat::Jet jet, int WP){
 
 float BTagWeight::TagScaleFactor(pat::Jet jet, bool LooseWP ){
 
-	float MinJetPt = 20.;
-	float MaxBJetPt = 670., MaxLJetPt = 1000.;
-        float JetPt = jet.pt(); bool DoubleUncertainty = false;
+	//float MinJetPt = 20.;
+	//float MaxBJetPt = 670., MaxLJetPt = 1000.;
+        float JetPt = jet.pt(); 
+        //bool DoubleUncertainty = false;
 	int flavour = fabs(jet.hadronFlavour());
 	if(flavour == 5) flavour = BTagEntry::FLAV_B;
 	else if(flavour == 4) flavour = BTagEntry::FLAV_C;

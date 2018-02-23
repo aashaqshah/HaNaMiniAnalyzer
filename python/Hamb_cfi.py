@@ -18,12 +18,16 @@ Hamb = cms.EDFilter('TreeHamb',
                      DiMuon = cms.PSet( Input = cms.InputTag("slimmedMuons"),
                                         MuonLeadingPtCut = cms.double(24),
                                         MuonSubLeadingPtCut = cms.double(9),
-                                        MuonIsoCut = cms.double( 0.15 ),
+                                        MuonIsoCut = cms.double( 0.15 ),  # VeryTightRelIso=0.10, TightRelIso=0.15, MediumRelIso=0.20,
+                                                                          # LooseRelIso=0.25, VeryLooseRelIso=0.4  
+                                                                          # LooseRelTkIso=0.10, TightRelTkIso =0.05
+                                                                          #Cut based have not been defined yet for 2017 data.
                                         MuonEtaCut = cms.double( 2.4 ),
-                                        DiMuLowMassCut = cms.double(15  ),#Remove the dimu lower bound
+                                        DiMuLowMassCut = cms.double(15  ),  # Remove the dimu lower bound
                                         DiMuCharge = cms.int32( -1 ),
-                                        MuonID = cms.int32( 3 ), #0:no id, 1:Loose , 2:Medium , 3:tight , 4 : soft
-                                        DiMuZMassWindow = cms.double( 70 ), #Remove the dimu upper bound
+                                        MuonID = cms.int32( 2 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
+                                                                            # 5:HighPt, 6:MediumPrompt, 7:TrkHighPt 
+                                        DiMuZMassWindow = cms.double( 70 ), # 70-->Remove the dimu upper bound 
 					isHamb = cms.bool(True),
 					isSignalStudy = cms.bool(False)
                                         ),
@@ -38,16 +42,11 @@ Hamb = cms.EDFilter('TreeHamb',
                                       ApplyJER = cms.bool( False ),
                                       JetPtCut = cms.double( 15. ),
                                       JetEtaCut = cms.double( 2.4 ),
-                                      #For CSV Algo
                                       BTagAlgo = cms.string("pfCombinedInclusiveSecondaryVertexV2BJetTags"),
+                                      BTagAlgoType = cms.string("CSVv2"),
                                       BTagWPL = cms.double(  0.5803  ),
                                       BTagWPM = cms.double(  0.8838  ),
                                       BTagWPT = cms.double(  0.9693 ),
-                                      #For DeepCSV Algo
-                                      BTagDAlgo = cms.string("pfDeepCSVJetTags:probb + pfDeepCSVJetTags:probbb"), #D-->deep
-                                      BTagDWPL = cms.double(  0.1522  ),  #D->Deeep->WorkingPoints
-                                      BTagDWPM = cms.double(  0.4941  ),
-                                      BTagDWPT = cms.double(  0.8001 ),
                                       #Which WP to use in selection: 0,1,2 ---> L, M, T
                                       # -1 ---> no requirement
                                       BTagCuts = cms.vint32(1,-1), # supporting up to two working point, the second is for veto

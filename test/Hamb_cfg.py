@@ -207,5 +207,15 @@ process.outp1=cms.OutputModule("PoolOutputModule",
    fileName = cms.untracked.string(job.Output2),
    SelectEvents = cms.untracked.PSet(  SelectEvents = cms.vstring('p')  )
 )
+process.HambDeepCSV = process.Hamb.clone()
+#process.HambDeepCSV.Jets.BTagAlgo = "pfDeepCSVJetTags:probb + pfDeepCSVJetTags:probbb"
+process.HambDeepCSV.Jets.BTagAlgo = "pfCombinedInclusiveSecondaryVertexV2BJetTags"
+process.HambDeepCSV.Jets.BTagWPL = 0.1522
+process.HambDeepCSV.Jets.BTagWPM = 0.4941
+process.HambDeepCSV.Jets.BTagWPT = 0.8001
+process.HambDeepCSV.Jets.BTagAlgoType = "DeepCSV"
+
+process.p2 = cms.Path( process.HambDeepCSV )
+
 process.ep = cms.EndPath( process.outp1 )
 

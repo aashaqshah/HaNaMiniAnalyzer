@@ -49,6 +49,7 @@ class BTagWeight
 	bTagMapCSVv2[0] = BLCut;
 	bTagMapCSVv2[1] = BMCut;
 	bTagMapCSVv2[2] = BTCut;
+
 	if(WPL != -1){
 		if(minTagL == -1){
 			std::cout<<"At least provide the minimum number of loose-non-tight tags you want!!"<<std::endl;
