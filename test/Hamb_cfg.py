@@ -140,7 +140,6 @@ if theSample.IsData :
     
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
-    #process.GlobalTag.globaltag = '76X_dataRun2_v15'
     #process.GlobalTag.globaltag = '80X_dataRun2_Prompt_ICHEP16JEC_v0
     process.GlobalTag.globaltag = '80X_dataRun2_2016SeptRepro_v7'
     if (theSample.Name is 'DoubleMuH2') or (theSample.Name is 'DoubleMuH3'):
@@ -168,23 +167,21 @@ else :
     process.Hamb.MET.Input = "slimmedMETs"
 
     process.Hamb.Jets.ApplyJER = True
-    #process.GlobalTag.globaltag = '76X_dataRun2_16Dec2015_v0' #76X_mcRun2_asymptotic_RunIIFall15DR76_v1
-    #process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_miniAODv2_v1'
-    #process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_TrancheIV_v8'
-    # from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
-    # process.patJetCorrFactorsReapplyJEC = updatedPatJetCorrFactors.clone(
+    process.GlobalTag.globaltag = '94X_mc2017_realistic_v12'
+    from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
+    #process.patJetCorrFactorsReapplyJEC = updatedPatJetCorrFactors.clone(
     #     src = cms.InputTag("slimmedJets"),
     #     levels = ['L1FastJet', 
     #               'L2Relative', 
     #               'L3Absolute'],
     #     payload = 'AK4PFchs' ) # Make sure to choose the appropriate levels and payload here!
 
-    # process.patJetsReapplyJEC = updatedPatJets.clone(
+    #process.patJetsReapplyJEC = updatedPatJets.clone(
     #     jetSource = cms.InputTag("slimmedJets"),
     #     jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
     #     )
 
-    # process.Hamb.Jets.Input = "patJetsReapplyJEC"
+    #process.Hamb.Jets.Input = "patJetsReapplyJEC"
     # process.METSignificance.srcPfJets = "patJetsReapplyJEC"
     #  + process.METSignificance
     process.p = cms.Path( process.Hamb)
@@ -209,7 +206,6 @@ process.outp1=cms.OutputModule("PoolOutputModule",
 )
 process.HambDeepCSV = process.Hamb.clone()
 process.HambDeepCSV.Jets.BTagAlgo = "pfDeepCSVJetTags:probb + pfDeepCSVJetTags:probbb"
-#process.HambDeepCSV.Jets.BTagAlgo = "pfDeepCSVJetTags:probb" #Two b's
 process.HambDeepCSV.Jets.BTagWPL = 0.1522
 process.HambDeepCSV.Jets.BTagWPM = 0.4941
 process.HambDeepCSV.Jets.BTagWPT = 0.8001

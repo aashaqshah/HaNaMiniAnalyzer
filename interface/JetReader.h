@@ -74,7 +74,8 @@ private:
   TRandom3* rndJER;
 
   float JER( pat::Jet jet , double rho , int syst = 0 );
-  bool JetLooseID( pat::Jet j );
+  //bool JetLooseID( pat::Jet j );
+  bool JetTightID( pat::Jet j );
   /* JET TOOLS */
 
   edm::EDGetTokenT<double> t_Rho_;

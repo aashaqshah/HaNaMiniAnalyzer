@@ -87,7 +87,8 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
     }
     if (j.pt() < JetPtCut) continue;
     if ( fabs(j.eta() ) > JetEtaCut ) continue;
-    if ( !JetLooseID( j ) ) continue;
+    //if ( !JetLooseID( j ) ) continue;
+    if ( !JetTightID( j ) ) continue;
     if( diLepton ){
       double dr0 = reco::deltaR( j.p4() , diLepton->cand1().p4() );
       double dr1 = reco::deltaR( j.p4() , diLepton->cand2().p4() );
@@ -161,17 +162,21 @@ float JetReader::JER( pat::Jet jet , double rho , int syst ){
   return ret;
 }
 
-bool JetReader::JetLooseID( pat::Jet j ){
+//bool JetReader::JetLooseID( pat::Jet j ){
+bool JetReader::JetTightID( pat::Jet j ){
   float NHF = j.neutralHadronEnergyFraction ();
   float NEMF = j.neutralEmEnergyFraction ();
   int NumConst = j.numberOfDaughters ();
   float eta = j.eta();
   float CHF = j.chargedHadronEnergyFraction ( ) ;
   float CHM = j.chargedMultiplicity ();
-  float CEMF = j.chargedEmEnergyFraction ();
+  //float CEMF = j.chargedEmEnergyFraction (); //Not used in 94X any where and hence commented.
   int NumNeutralParticle = j.neutralMultiplicity ( );
-  bool looseJetID1 = (NHF<0.99 && NEMF<0.99 && NumConst>1) && ((abs(eta)<=2.4 && CHF>0 && CHM>0 && CEMF<0.99) || abs(eta)>2.4) && abs(eta)<=3.0 ;
-  bool looseJetID2 = (NEMF<0.90 && NumNeutralParticle>10 && abs(eta)>3.0 ) ;
+  bool TightJetID1 = (NHF<0.90 && NEMF<0.90 && NumConst>1) && ((abs(eta)<=2.4 && CHF>0.0 && CHM>0.0) || abs(eta)>2.4) && abs(eta)<=2.7;
+  bool TightJetID2 = (NEMF<0.99 && NEMF>0.02 && NumNeutralParticle>2) && (abs(eta)>2.7 && abs(eta)<=3.0) ;
+  bool TightJetID3 = (NEMF<0.90 && NHF>0.02 && NumNeutralParticle>10 && abs(eta)>3.0 ) ;
+  //bool looseJetID1 = (NHF<0.99 && NEMF<0.99 && NumConst>1) && ((abs(eta)<=2.4 && CHF>0 && CHM>0 && CEMF<0.99) || abs(eta)>2.4) && abs(eta)<=3.0 ;
+  //bool looseJetID2 = (NEMF<0.90 && NumNeutralParticle>10 && abs(eta)>3.0 ) ;
   
-  return looseJetID1 || looseJetID2 ;
+  return TightJetID1 || TightJetID2 || TightJetID3;
 }
