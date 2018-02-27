@@ -1,10 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("HaNa")
-
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 100000
-
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.Services_cff')
@@ -14,6 +12,7 @@ process.load("RecoMET/METProducers.METSignificanceParams_cfi")
 ##____________________________________________________________________________||
 process.load('Configuration.StandardSequences.Services_cff')
 process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
+from Configuration.AlCa.GlobalTag import GlobalTag
 #process.load("JetMETCorrections.Modules.JetResolutionESProducer_cfi")
 #from CondCore.DBCommon.CondDBSetup_cfi import *
 
@@ -54,7 +53,6 @@ process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
                             fileNames = cms.untracked.vstring()
 )
-
 process.load("Haamm.HaNaMiniAnalyzer.Hamb_cfi")
 #process.TTH 
 
@@ -141,13 +139,23 @@ if theSample.IsData :
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
     #process.GlobalTag.globaltag = '80X_dataRun2_Prompt_ICHEP16JEC_v0
-    process.GlobalTag.globaltag = '80X_dataRun2_2016SeptRepro_v7'
-    if (theSample.Name is 'DoubleMuH2') or (theSample.Name is 'DoubleMuH3'):
-	process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v16'
-    
-    
+    process.GlobalTag.globaltag = '80X_dataRun2_2016SeptRepro_v7' #Has to be added for 2017 data
+
+    #Applying Jet Energy Corrections to Data
+    from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
+    print "Jet Energy Corrections to Data shall be applied"
+    jetCorrectionsList = ('AK4PFchs', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute', 'L2L3Residual']), 'None')
+    updateJetCollection(
+      process,
+      jetSource = cms.InputTag('slimmedJets'),
+      labelName = 'UpdatedJEC',
+      jetCorrections = jetCorrectionsList
+      )   
+    process.Hamb.Jets.Input = "updatedPatJetsUpdatedJEC"
+    process.p = cms.Path( process.patJetCorrFactorsUpdatedJEC * process.updatedPatJetsUpdatedJEC*process.Hamb)
     #process.p = cms.Path( process.fullPatMetSequence+process.METSignificance + process.Hamb )
-    process.p = cms.Path( process.Hamb )
+    #process.p = cms.Path( process.Hamb )
+
     for v in range(0 , 8):
         process.Hamb.HLT_Mu17Mu8_DZ.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
         process.Hamb.HLT_Mu17Mu8_DZ.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v%d' % (v) )
@@ -168,24 +176,24 @@ else :
 
     process.Hamb.Jets.ApplyJER = True
     process.GlobalTag.globaltag = '94X_mc2017_realistic_v12'
-    from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import *
-    #process.patJetCorrFactorsReapplyJEC = updatedPatJetCorrFactors.clone(
-    #     src = cms.InputTag("slimmedJets"),
-    #     levels = ['L1FastJet', 
-    #               'L2Relative', 
-    #               'L3Absolute'],
-    #     payload = 'AK4PFchs' ) # Make sure to choose the appropriate levels and payload here!
 
-    #process.patJetsReapplyJEC = updatedPatJets.clone(
-    #     jetSource = cms.InputTag("slimmedJets"),
-    #     jetCorrFactorsSource = cms.VInputTag(cms.InputTag("patJetCorrFactorsReapplyJEC"))
-    #     )
+    # Applying Jet Energy Corrections to MC
+    from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
+    print "Jet Energy Corrections to MC shall be applied"
+    #Update: Safe to always add 'L2L3Residual' as MC contains dummy L2L3Residual corrections (always set to 1)
+    jetCorrectionsList = ('AK4PFchs', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute']), 'None')
+    updateJetCollection(
+      process,
+      jetSource = cms.InputTag('slimmedJets'),
+      labelName = 'UpdatedJEC',
+      jetCorrections = jetCorrectionsList
+      )   
+    process.Hamb.Jets.Input = "updatedPatJetsUpdatedJEC"
+    process.p = cms.Path( process.patJetCorrFactorsUpdatedJEC * process.updatedPatJetsUpdatedJEC*process.Hamb)
 
-    #process.Hamb.Jets.Input = "patJetsReapplyJEC"
-    # process.METSignificance.srcPfJets = "patJetsReapplyJEC"
-    #  + process.METSignificance
-    process.p = cms.Path( process.Hamb)
+    #process.p = cms.Path( process.Hamb)
     #process.p = cms.Path( process.fullPatMetSequence + process.Hamb)
+    #process.jecSequence = cms.Sequence(process.patJetCorrFactorsUpdatedJEC * process.updatedPatJetsUpdatedJEC)
     if options.sync == 0 :
         for v in range(0 , 8 ):
             process.Hamb.HLT_Mu17Mu8_DZ.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
