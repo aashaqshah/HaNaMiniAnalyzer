@@ -162,7 +162,6 @@ float JetReader::JER( pat::Jet jet , double rho , int syst ){
   return ret;
 }
 
-//bool JetReader::JetLooseID( pat::Jet j ){
 bool JetReader::JetTightID( pat::Jet j ){
   float NHF = j.neutralHadronEnergyFraction ();
   float NEMF = j.neutralEmEnergyFraction ();
@@ -172,11 +171,8 @@ bool JetReader::JetTightID( pat::Jet j ){
   float CHM = j.chargedMultiplicity ();
   //float CEMF = j.chargedEmEnergyFraction (); //Not used in 94X any where and hence commented.
   int NumNeutralParticle = j.neutralMultiplicity ( );
-  bool TightJetID1 = (NHF<0.90 && NEMF<0.90 && NumConst>1) && ((abs(eta)<=2.4 && CHF>0.0 && CHM>0.0) || abs(eta)>2.4) && abs(eta)<=2.7;
+  bool TightJetID1 = (NEMF<0.90 && NHF<0.90 && NumConst>1) && ((abs(eta)<=2.4 && CHF>0.0 && CHM>0.0) || abs(eta)>2.4) && abs(eta)<=2.7;
   bool TightJetID2 = (NEMF<0.99 && NEMF>0.02 && NumNeutralParticle>2) && (abs(eta)>2.7 && abs(eta)<=3.0) ;
   bool TightJetID3 = (NEMF<0.90 && NHF>0.02 && NumNeutralParticle>10 && abs(eta)>3.0 ) ;
-  //bool looseJetID1 = (NHF<0.99 && NEMF<0.99 && NumConst>1) && ((abs(eta)<=2.4 && CHF>0 && CHM>0 && CEMF<0.99) || abs(eta)>2.4) && abs(eta)<=3.0 ;
-  //bool looseJetID2 = (NEMF<0.90 && NumNeutralParticle>10 && abs(eta)>3.0 ) ;
-  
   return TightJetID1 || TightJetID2 || TightJetID3;
 }

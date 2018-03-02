@@ -1,0 +1,136 @@
+Sender: LSF System <lsfadmin@b66c651217.cern.ch>
+Subject: Job 148248195[4]: <ZZTo2L2NuRS[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]> in cluster <batch> Done
+
+Job <ZZTo2L2NuRS[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]> was submitted from host <lxplus085.cern.ch> by user <aashah> in cluster <batch>.
+Job was executed on host(s) <b66c651217.cern.ch>, in queue <1nd>, as user <aashah> in cluster <batch>.
+</afs/cern.ch/user/a/aashah> was used as the home directory.
+</afs/cern.ch/work/a/aashah/mub_analysis/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/test/In_CMSSW_94X> was used as the working directory.
+Started at Fri Mar  2 10:23:56 2018
+Results reported on Fri Mar  2 10:27:05 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/afs/cern.ch/work/a/aashah/mub_analysis/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/test/In_CMSSW_94X/SetupAndRun.sh /afs/cern.ch/work/a/aashah/mub_analysis/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/test/In_CMSSW_94X/.x509up_u72964 slc6_amd64_gcc630 CMSSW_9_4_4 CMSSW_94X ZZTo2L2Nu out /eos/cms/store/user/aashah/Out_CMSSW_94X 15
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   98.75 sec.
+    Max Memory :                                 153.57 MB
+    Average Memory :                             32.48 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   360 MB
+    Max Processes :                              16
+    Max Threads :                                17
+    Run time :                                   187 sec.
+    Turnaround time :                            193 sec.
+
+The output (if any) follows:
+
+@(#)CERN job starter $Date: 2010/06/23 14:22:16 $
+Working directory is </pool/lsf/aashah/148248195.4> on <b66c651217.cern.ch>
+
+subject   : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=aashah/CN=761631/CN=Aashaq Hussain Shah/CN=1309534304
+issuer    : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=aashah/CN=761631/CN=Aashaq Hussain Shah
+identity  : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=aashah/CN=761631/CN=Aashaq Hussain Shah
+type      : RFC3820 compliant impersonation proxy
+strength  : 1024
+path      : /afs/cern.ch/work/a/aashah/mub_analysis/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/test/In_CMSSW_94X/.x509up_u72964
+timeleft  : 999:56:50
+key usage : Digital Signature, Key Encipherment
+WARNING: In non-interactive mode release checks e.g. deprecated releases, production architectures are disabled.
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Building CMSSW version CMSSW_9_4_4 ----
+>> Subsystem BigProducts built
+gmake[1]: Entering directory '/pool/lsf/aashah/148248195.4/CMSSW_9_4_4'
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Creating project symlinks
+>> Done python_symlink
+>> Compiling python modules cfipython/slc6_amd64_gcc630
+>> Compiling python modules python
+>> All python modules compiled
+>> Plugins of all types refreshed.
+>> Done generating edm plugin poisoned information
+gmake[1]: Leaving directory '/pool/lsf/aashah/148248195.4/CMSSW_9_4_4'
+Cloning into 'HaNaMiniAnalyzer'...
+Already on 'CMSSW_94X'
+Your branch is up-to-date with 'origin/CMSSW_94X'.
+Reading cached build data
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Entering Package Haamm/HaNaMiniAnalyzer
+>> Creating project symlinks
+Entering library rule at src/Haamm/HaNaMiniAnalyzer/plugins
+>> Compiling edm plugin /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/plugins/TreeHamb.cc 
+>> Compiling edm plugin /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/plugins/Hamb.cc 
+Entering library rule at Haamm/HaNaMiniAnalyzer
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/HambTree.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/JetReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/BTagCalibrationReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/DiMuonReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/VertexReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/LHEEventReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/GenEventInfoProductReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/BaseMiniAnalyzer.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/Histograms.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/Category.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/METReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/HLTReader.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/BTagWeight.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/BTagCalibration.cc 
+>> Compiling  /pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/src/HaNaBaseMiniAnalyzer.cc 
+>> Building shared library tmp/slc6_amd64_gcc630/src/Haamm/HaNaMiniAnalyzer/src/HaammHaNaMiniAnalyzer/libHaammHaNaMiniAnalyzer.so
+Copying tmp/slc6_amd64_gcc630/src/Haamm/HaNaMiniAnalyzer/src/HaammHaNaMiniAnalyzer/libHaammHaNaMiniAnalyzer.so to productstore area:
+Leaving library rule at Haamm/HaNaMiniAnalyzer
+>> Building edm plugin tmp/slc6_amd64_gcc630/src/Haamm/HaNaMiniAnalyzer/plugins/HaammHaNaMiniAnalyzerAuto/libHaammHaNaMiniAnalyzerAuto.so
+Leaving library rule at src/Haamm/HaNaMiniAnalyzer/plugins
+@@@@ Running edmWriteConfigs for HaammHaNaMiniAnalyzerAuto
+--- Registered EDM Plugin: HaammHaNaMiniAnalyzerAuto
+>> Leaving Package Haamm/HaNaMiniAnalyzer
+>> Package Haamm/HaNaMiniAnalyzer built
+gmake[1]: Entering directory '/pool/lsf/aashah/148248195.4/CMSSW_9_4_4'
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Creating project symlinks
+>> Done python_symlink
+>> Compiling python modules cfipython/slc6_amd64_gcc630/Haamm/HaNaMiniAnalyzer
+>> Compiling python modules python
+>> Compiling python modules src/Haamm/HaNaMiniAnalyzer/python
+>> All python modules compiled
+@@@@ Refreshing Plugins:edmPluginRefresh
+>> Plugins of all types refreshed.
+>> Done generating edm plugin poisoned information
+gmake[1]: Leaving directory '/pool/lsf/aashah/148248195.4/CMSSW_9_4_4'
+4
+3
+cmsRun Hamb_cfg.py sample=ZZTo2L2Nu job=3 output=out maxEvents=-1 nFilesPerJob=15
+/pool/lsf/aashah/148248195.4/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/test/Samples94
+Jet Energy Corrections to MC shall be applied
+02-Mar-2018 10:26:02 CET  Initiating request to open file root://eoscms.cern.ch//eos/cms/store/mc/RunIIFall17MiniAOD/ZZTo2L2Nu_13TeV_powheg_pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/20000/945C3518-8DFA-E711-A534-0242AC130002.root
+02-Mar-2018 10:26:05 CET  Successfully opened file root://eoscms.cern.ch//eos/cms/store/mc/RunIIFall17MiniAOD/ZZTo2L2Nu_13TeV_powheg_pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/20000/945C3518-8DFA-E711-A534-0242AC130002.root
+02-Mar-2018 10:26:07 CET  Closed file root://eoscms.cern.ch//eos/cms/store/mc/RunIIFall17MiniAOD/ZZTo2L2Nu_13TeV_powheg_pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/20000/945C3518-8DFA-E711-A534-0242AC130002.root
+----- Begin Fatal Exception 02-Mar-2018 10:26:07 CET-----------------------
+An exception of category 'FatalRootError' occurred while
+   [0] Constructing the EventProcessor
+   [1] Constructing module: class=TreeHamb label='Hamb'
+   Additional Info:
+      [a] Fatal Root Error: @SUB=TFile::TFile
+file Setup94/pileUpMC.root does not exist
+
+----- End Fatal Exception -------------------------------------------------
+-rw-r--r-- 1 aashah zh 637 Mar  2 10:26 out_ZZTo2L2Nu_945C3518-8DFA-E711-A534-0242AC130002_15.root
+the file exists, is being renamed
+1th Try
+
+Job finished at Fri Mar  2 10:26:20 CET 2018 on node 
+ under linux version Scientific Linux CERN SLC release 6.9 (Carbon)
+
+CERN statistics: This process used approximately : 0:04:15 KSI2K hours (255 KSI2K seconds)
+                 This process corresponds to     : 0:16:36 HS06  hours (996 HS06  seconds)

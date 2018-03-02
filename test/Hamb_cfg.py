@@ -138,8 +138,8 @@ if theSample.IsData :
     
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
-    #process.GlobalTag.globaltag = '80X_dataRun2_Prompt_ICHEP16JEC_v0
-    process.GlobalTag.globaltag = '80X_dataRun2_2016SeptRepro_v7' #Has to be added for 2017 data
+    #process.GlobalTag.globaltag = '80X_dataRun2_Prompt_ICHEP16JEC_v0'
+    process.GlobalTag.globaltag = '94X_dataRun2_ReReco_EOY17_v2' #Has to be added for 2017 data
 
     #Applying Jet Energy Corrections to Data
     from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
