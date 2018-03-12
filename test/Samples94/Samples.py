@@ -48,15 +48,15 @@ MiniAOD94Samples.append( DYJetsLowMass94 )
 DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsHighMass94 )
 
-TTBar94 = Sample( "TTbar" , 72.1 , True ,  "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
-MiniAOD94Samples.append( TTBar94 ) # alternative inclusive sample available
+#TTbar94 = Sample( "TTbar" , 72.1 , True ,  "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
+#MiniAOD94Samples.append( TTbar94 ) # alternative inclusive sample available
 
 
 TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 72.1 , True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append( TTTo2L2Nu94 )
 
-ZZTo2L2Nu94 = Sample( "ZZTo2L2Nu" , 0.6008 , True ,  "/ZZTo2L2Nu_13TeV_powheg_pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
-MiniAOD94Samples.append( ZZTo2L2Nu94 )
+#ZZTo2L2Nu94 = Sample( "ZZTo2L2Nu" , 0.6008 , True ,  "/ZZTo2L2Nu_13TeV_powheg_pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
+#MiniAOD94Samples.append( ZZTo2L2Nu94 )
 
 TChannelTbar94 = Sample("TChannelTbar" , 80.95 , False ,  "/ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append( TChannelTbar94 )

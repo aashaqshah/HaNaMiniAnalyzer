@@ -92,7 +92,6 @@ theSample = None
 import os
 
 if options.sync == 0 :
-    #from Samples80.Samples import MiniAOD80Samples as samples
     from Samples94.Samples import MiniAOD94Samples as samples
 
 
