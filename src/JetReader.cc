@@ -103,8 +103,8 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
         btagval = j.bDiscriminator( BTagAlgo );
     else 
         btagval = j.bDiscriminator(BTagAlgoSubTypeA) + j.bDiscriminator(BTagAlgoSubTypeB);
-   std::cout << std::setprecision(5) << std::fixed;
-   std::cout<<"BTag Value for Discriminator\t"<<BTagAlgoType<<"\tis\t" <<btagval<<std::endl;
+ //  std::cout << std::setprecision(5) << std::fixed;
+ //  std::cout<<"BTag Value for Discriminator\t"<<BTagAlgoType<<"\tis\t" <<btagval<<std::endl;
 
    if(btagval < BTagWPL) nNonTagged++;
    else if(btagval < BTagWPM) nLooseNotMed++;
