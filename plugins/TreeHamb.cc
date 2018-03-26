@@ -367,7 +367,13 @@ bool TreeHamb::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
     jetsEta.push_back(jetReader->selectedJets[iJet].eta());
     jetsE.push_back(jetReader->selectedJets[iJet].energy());
     jetsPhi.push_back(jetReader->selectedJets[iJet].phi());
-    jetsBtag.push_back(jetReader->selectedJets[iJet].bDiscriminator(jetReader->BTagAlgo));
+    if  (jetReader->BTagAlgoType == "CSVv2"){ 
+         jetsBtag.push_back(jetReader->selectedJets[iJet].bDiscriminator(jetReader->BTagAlgo));
+         }
+    else 
+         {
+         jetsBtag.push_back(jetReader->selectedJets[iJet].bDiscriminator(jetReader->BTagAlgoSubTypeA) + jetReader->selectedJets[iJet].bDiscriminator(jetReader->BTagAlgoSubTypeB)); }
+
     if(!IsData)
 	jetsFlavour.push_back(jetReader->selectedJets[iJet].hadronFlavour());
   }
@@ -388,9 +394,16 @@ bool TreeHamb::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 			   jetReader->selectedJets[0].pz()+jetReader->selectedJets[1].pz(),
 			   jetReader->selectedJets[0].energy()+jetReader->selectedJets[1].energy());
 
+        if  (jetReader->BTagAlgoType == "CSVv2") {
 	aBjetPtOrdered.set(tmp.Pt(), tmp.Eta(), tmp.Phi(), tmp.M(), 
 			   jetReader->selectedJets[0].bDiscriminator(jetReader->BTagAlgo), 
 			   jetReader->selectedJets[1].bDiscriminator(jetReader->BTagAlgo));
+                            }
+        else { 
+	aBjetPtOrdered.set(tmp.Pt(), tmp.Eta(), tmp.Phi(), tmp.M(), 
+			   jetReader->selectedJets[0].bDiscriminator(jetReader->BTagAlgoSubTypeA) + jetReader->selectedJets[0].bDiscriminator(jetReader->BTagAlgoSubTypeB), 
+			   jetReader->selectedJets[1].bDiscriminator(jetReader->BTagAlgoSubTypeA) + jetReader->selectedJets[1].bDiscriminator(jetReader->BTagAlgoSubTypeB) );
+             }
 
 	//making the higgs with pt-ordered
 	tmp.SetPxPyPzE(tmp.Px()+amu.Px(), tmp.Py()+amu.Py(), tmp.Pz()+amu.Pz(), tmp.E()+amu.E());

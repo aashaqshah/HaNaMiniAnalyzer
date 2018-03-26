@@ -42,6 +42,19 @@ MiniAOD94Samples.append( W3JetsToLNu94 )
 W4JetsToLNu94 = Sample( "W4JetsToLNu" , 524.2, True , "/W4JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append( W4JetsToLNu94 )
 
+#PreselectionLL Low Mass KFactor is 1.43 +- 0.06 
+#PreselectionLL High Mass KFactor is 0.64 +- 0.00 
+#PreselectionML Low Mass KFactor is 2.38 +- 0.15 
+#PreselectionML High Mass KFactor is 0.77 +- 0.01 
+#PreselectionTL Low Mass KFactor is 3.06 +- 0.28 
+#PreselectionTL High Mass KFactor is 0.75 +- 0.01 
+#PreselectionMM Low Mass KFactor is 3.03 +- 0.41 
+#PreselectionMM High Mass KFactor is 0.64 +- 0.01 
+#PreselectionTM Low Mass KFactor is 3.84 +- 0.59 
+#PreselectionTM High Mass KFactor is 0.66 +- 0.01 
+#PreselectionTT Low Mass KFactor is 2.35 +- 0.59 
+#PreselectionTT High Mass KFactor is 0.58 +- 0.02
+
 DYJetsLowMass94 = Sample( "DYJetsLowMass" , 18610, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v2/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsLowMass94 )
 

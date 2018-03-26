@@ -109,6 +109,7 @@ class ExtendedSample: #extend the sample object to store histograms
             
         
     def DrawTreeHistos( self , treeselections ,  treeName = "Hamb/Trees/Events"):
+    #def DrawTreeHistos( self , treeselections ,  treeName = "HambDeepCSV/Trees/Events"):
         if hasattr(self, "TreeName" ):
             treeName = self.TreeName
             print "Tree Name is : %s" % (treeName)
@@ -128,6 +129,7 @@ class ExtendedSample: #extend the sample object to store histograms
         self.Tree.GetFile().Close()
                     
     def LoadHistos(self , dirName = "Hamb" , cftName = "CutFlowTable" , loadonly = [] , indices = [0]):
+    #def LoadHistos(self , dirName = "HambDeepCSV" , cftName = "CutFlowTable" , loadonly = [] , indices = [0]):
         self.LoadedIndices = indices
         self.CutFlowTableName = cftName
         self.DirName = dirName

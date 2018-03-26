@@ -150,7 +150,7 @@ class CutInfo:
             return ("Weight.W%d" % (index) )
 
     def LoadHistos( self , samplename , isdata , tree , indices=[0] , additionalCut = None ):
-        UseEventList = gROOT.GetVersionCode() > 600000
+        UseEventList = gROOT.GetVersionInt() > 60000
         
         #print UseEventList, gROOT.GetVersionCode()
         if UseEventList :
@@ -296,6 +296,7 @@ class Plotter:
         return None
 
     def LoadHistos(self  , lumi , dirName = "Hamb" , cftName = "CutFlowTable"):
+    #def LoadHistos(self  , lumi , dirName = "HambDeepCSV" , cftName = "CutFlowTable"):
         for st in self.Samples :
             print "%sCreating histos for : %s%s" % (bcolors.OKGREEN , st.Name , bcolors.ENDC)
             st.LoadHistos( lumi , dirName , cftName , self.TreePlots )
