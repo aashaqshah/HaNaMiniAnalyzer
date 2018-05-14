@@ -42,23 +42,11 @@ MiniAOD94Samples.append( W3JetsToLNu94 )
 W4JetsToLNu94 = Sample( "W4JetsToLNu" , 524.2, True , "/W4JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append( W4JetsToLNu94 )
 
-#PreselectionLL Low Mass KFactor is 1.43 +- 0.06 
-#PreselectionLL High Mass KFactor is 0.64 +- 0.00 
-#PreselectionML Low Mass KFactor is 2.38 +- 0.15 
-#PreselectionML High Mass KFactor is 0.77 +- 0.01 
-#PreselectionTL Low Mass KFactor is 3.06 +- 0.28 
-#PreselectionTL High Mass KFactor is 0.75 +- 0.01 
-#PreselectionMM Low Mass KFactor is 3.03 +- 0.41 
-#PreselectionMM High Mass KFactor is 0.64 +- 0.01 
-#PreselectionTM Low Mass KFactor is 3.84 +- 0.59 
-#PreselectionTM High Mass KFactor is 0.66 +- 0.01 
-#PreselectionTT Low Mass KFactor is 2.35 +- 0.59 
-#PreselectionTT High Mass KFactor is 0.58 +- 0.02
 
-DYJetsLowMass94 = Sample( "DYJetsLowMass" , 18610, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v2/MINIAODSIM" )
+DYJetsLowMass94 = Sample( "DYJetsLowMass" , 18610*2.36, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v2/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsLowMass94 )
 
-DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
+DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181*0.66, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsHighMass94 )
 
 #TTbar94 = Sample( "TTbar" , 72.1 , True ,  "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
@@ -114,7 +102,7 @@ MiniAOD94Samples.append(WW94)
 #GGH4594 = Sample( "GGH45", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-45_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
 #MiniAOD94Samples.append(GGH4594)
 
-#GGH5094 = Sample( "GGH50", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-50_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
+GGH5094 = Sample( "GGH50", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-50_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
 #MiniAOD94Samples.append(GGH5094)
 
 #GGH5594 = Sample( "GGH55", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-55_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")

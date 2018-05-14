@@ -56,6 +56,14 @@ process.source = cms.Source("PoolSource",
 process.load("Haamm.HaNaMiniAnalyzer.Hamb_cfi")
 #process.TTH 
 
+def AddSystematics( Name , Object , Property , NewValue ):
+    setattr( process , "Hamb" + Name , process.Hamb.clone() )
+    hamb_syst = getattr( process , "Hamb" +Name)
+    obj = getattr ( hamb_syst , Object )
+    prop = setattr( obj , Property , NewValue )
+
+    setattr( process , "PathSyst" + Name , cms.Path( hamb_syst ) )
+
 import FWCore.ParameterSet.VarParsing as opts
 options = opts.VarParsing ('analysis')
 options.register('sync',
@@ -129,11 +137,12 @@ process.TFileService.fileName = job.Output
 
 process.maxEvents.input = options.maxEvents
 
-#from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
-#runMetCorAndUncFromMiniAOD(process, isData = theSample.IsData)
+from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
+runMetCorAndUncFromMiniAOD(process, isData = theSample.IsData)
 
 if theSample.IsData :
     #process.Hamb.MET.Input = "slimmedMETsMuEGClean"
+    process.Hamb.MET.Input = "slimmedMETs"
     
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
@@ -154,6 +163,7 @@ if theSample.IsData :
     process.p = cms.Path( process.patJetCorrFactorsUpdatedJEC * process.updatedPatJetsUpdatedJEC*process.Hamb)
     #process.p = cms.Path( process.fullPatMetSequence+process.METSignificance + process.Hamb )
     #process.p = cms.Path( process.Hamb )
+    #process.Hamb.MET.Un
 
     for v in range(0 , 8):
         process.Hamb.HLT_Mu17Mu8_DZ.HLT_To_Or.append( 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v%d' % (v) )
@@ -165,16 +175,16 @@ if theSample.IsData :
         process.Hamb.HLT_Mu17Mu8.HLT_To_Or.append( 'HLT_IsoMu24_v%d' % (v) )
 
 else :
-    #from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
+    from PhysicsTools.PatUtils.tools.runMETCorrectionsAndUncertainties import runMetCorAndUncFromMiniAOD
 
    # If you only want to re-correct and get the proper uncertainties
-    #runMetCorAndUncFromMiniAOD(process,
-    #                           isData=False
-    #                           )
+    runMetCorAndUncFromMiniAOD(process,
+                               isData=False
+                               )
     process.Hamb.MET.Input = "slimmedMETs"
 
     process.Hamb.Jets.ApplyJER = True
-    process.GlobalTag.globaltag = '94X_mc2017_realistic_v12'
+    process.GlobalTag.globaltag = '94X_mc2017_realistic_v13'
 
     # Applying Jet Energy Corrections to MC
     from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
@@ -206,6 +216,31 @@ else :
     if theSample.DSName.count( "_reHLT_" ):
 	process.Hamb.HLT_Mu17Mu8_DZ.Input = cms.InputTag( "TriggerResults","","HLT2" )
 	process.Hamb.HLT_Mu17Mu8.Input = cms.InputTag( "TriggerResults","","HLT2" )
+
+
+    if theSample.Name.count("GGH2016") :
+        AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root")
+        AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root")
+        AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1)
+        process.HambJECUP.MET.Uncertainty = 2
+        AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1)
+        process.HambJECDOWN.MET.Uncertainty = 3
+
+        AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
+        AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
+
+        #AddSystematics( "BUP"  , "Jets" , "BTagUncertainty"  , 1)
+        #AddSystematics( "BDOWN"  , "Jets" , "BTagUncertainty"  , -1)
+
+        AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11)
+        AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10)
+
+
+        AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
+        AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1)
+
+        AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
+
 process.outp1=cms.OutputModule("PoolOutputModule",
    outputCommands = cms.untracked.vstring('keep *'), 
    fileName = cms.untracked.string(job.Output2),
@@ -219,6 +254,9 @@ process.HambDeepCSV.Jets.BTagWPT = 0.8001
 process.HambDeepCSV.Jets.BTagAlgoType = "DeepCSV"
 process.HambDeepCSV.Jets.BTagAlgoSubTypeA = "pfDeepCSVJetTags:probb"
 process.HambDeepCSV.Jets.BTagAlgoSubTypeB = "pfDeepCSVJetTags:probbb"
+process.HambDeepCSV.Jets.BTagWeightShapes = True
+process.HambDeepCSV.Jets.BTagWeightNonShapes = True
+#process.HambDeepCSV.Jets.BTagUncertainty = 1
 
 process.p2 = cms.Path( process.HambDeepCSV )
 

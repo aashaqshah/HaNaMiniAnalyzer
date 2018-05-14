@@ -3,7 +3,8 @@ from Property import *
 import math
 
 
-selections = [ "PreselectionLL" , "PreselectionML", "PreselectionTL", "PreselectionMM", "PreselectionTM", "PreselectionTT" ]
+selections = [ "PreselectionLL" , "PreselectionMM", "PreselectionTT" ]
+#selections = [ "PreselectionTM"]
 
 low_DYmass = 35.
 low_DYmass_window_size = 15.0
@@ -11,7 +12,8 @@ low_DYmass_window_size = 15.0
 ZMass = 91.
 window_size = 10.0
 
-f_in = root.TFile.Open( "../test/out_FinalPlots_defaults.root" )
+#f_in = root.TFile.Open( "../test/out_FinalPlots_defaults.root" )
+f_in = root.TFile.Open( "../test/out_FinalPlots_defaults_DeepCSV_LL_MM_TM_TT.root" )
 
 for selection in selections:
         #print "Processing " + selection
@@ -41,6 +43,6 @@ for selection in selections:
         #print  "Error on data is %f and Error on DY is %f" %(Err_Data , Err_DY)
 	kfactorlow = Data_NotInZPeak/DY_NotInZPeak
 	kfactorhigh = Data_InZPeak/DY_InZPeak
-	print selection + " Low Mass KFactor is %.2f +- %.2f " % (kfactorlow, kfactorlow*sqrt( (low_Err_Data.real/Data_NotInZPeak)*(low_Err_Data.real/Data_NotInZPeak) + (low_Err_DY.real/DY_NotInZPeak)* (low_Err_DY.real/DY_NotInZPeak) ) )
-	print selection + " High Mass KFactor is %.2f +- %.2f " % (kfactorhigh, kfactorhigh*sqrt( (Err_Data.real/Data_InZPeak)*(Err_Data.real/Data_InZPeak) + (Err_DY.real/DY_InZPeak)* (Err_DY.real/DY_InZPeak) ) )
+	print "#"+ selection + " Low Mass KFactor is %.2f +- %.2f " % (kfactorlow, kfactorlow*sqrt( (low_Err_Data.real/Data_NotInZPeak)*(low_Err_Data.real/Data_NotInZPeak) + (low_Err_DY.real/DY_NotInZPeak)* (low_Err_DY.real/DY_NotInZPeak) ) )
+	print "#" + selection + " High Mass KFactor is %.2f +- %.2f " % (kfactorhigh, kfactorhigh*sqrt( (Err_Data.real/Data_InZPeak)*(Err_Data.real/Data_InZPeak) + (Err_DY.real/DY_InZPeak)* (Err_DY.real/DY_InZPeak) ) )
 

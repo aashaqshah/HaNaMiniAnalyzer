@@ -6,14 +6,15 @@ Hamb = cms.EDFilter('TreeHamb',
 
                      HLT_Mu17Mu8 = cms.PSet( Input = cms.InputTag( "TriggerResults","","HLT" ), 
                                      HLT_To_Or = cms.vstring(),
-                                             PrintTrigNamesPerRun = cms.bool( False )
+                                     PrintTrigNamesPerRun = cms.bool( False )
                                      ),
                      HLT_Mu17Mu8_DZ = cms.PSet( Input = cms.InputTag( "TriggerResults","","HLT" ), 
-                                     HLT_To_Or = cms.vstring(),
-                                                PrintTrigNamesPerRun = cms.bool( False )
+                                       HLT_To_Or = cms.vstring(),
+                                       PrintTrigNamesPerRun = cms.bool( False )
                                      ),
                      Vertex = cms.PSet( Input = cms.InputTag( "offlineSlimmedPrimaryVertices" ),
-                                        pileupSrc = cms.InputTag("slimmedAddPileupInfo")
+                                        pileupSrc = cms.InputTag("slimmedAddPileupInfo"),
+                                        PUDataFileName = cms.string("pileUpData.root")
                                         ),
                      DiMuon = cms.PSet( Input = cms.InputTag("slimmedMuons"),
                                         MuonLeadingPtCut = cms.double(24),
@@ -30,17 +31,28 @@ Hamb = cms.EDFilter('TreeHamb',
                                         DiMuZMassWindow = cms.double( 200 ), # 70-->Remove the dimu upper bound 
                                         #DiMuZMassWindow = cms.double( 70 ), # 70-->Remove the dimu upper bound 
 					isHamb = cms.bool(True),
-					isSignalStudy = cms.bool(False)
+					isSignalStudy = cms.bool(False),
+                                        HLTUnc = cms.int32(0)
                                         ),
 
                      MET = cms.PSet( Input = cms.InputTag("slimmedMETs"),
                                      Cut = cms.double( 40. ),
-                                     
+                                     Uncertainty = cms.int32(-1)
+                                     #http://cmsdoxygen.web.cern.ch/cmsdoxygen/CMSSW_8_4_0_patch2/doc/html/db/deb/classpat_1_1MET.html#a5c8ea7c9575730bedb6f1639140a7422
+                                     #enum  	METUncertainty {
+                                     #   JetResUp =0, JetResDown =1, JetEnUp =2, JetEnDown =3,
+                                     #   MuonEnUp =4, MuonEnDown =5, ElectronEnUp =6, ElectronEnDown =7,
+                                     #   TauEnUp =8, TauEnDown =9, UnclusteredEnUp =10, UnclusteredEnDown =11,
+                                     #   PhotonEnUp =12, PhotonEnDown =13, NoShift =14, METUncertaintySize =15,
+                                     #   JetResUpSmear =16, JetResDownSmear =17, METFullUncertaintySize =18
+                                     # }                                   
                                      #oldjets = cms.InputTag("slimmedJets"),
 				     #metsig = cms.InputTag("METSignificance:METSignificance:HaNa")	
                                      ),
                      Jets = cms.PSet( Input = cms.InputTag("slimmedJets"),
                                       ApplyJER = cms.bool( False ),
+                                      JECUncertainty = cms.int32(0),
+                                      JERUncertainty = cms.int32(0),
                                       JetPtCut = cms.double( 15. ),
                                       JetEtaCut = cms.double( 2.4 ),
                                       BTagAlgo = cms.string("pfCombinedInclusiveSecondaryVertexV2BJetTags"),
@@ -53,10 +65,13 @@ Hamb = cms.EDFilter('TreeHamb',
                                       #Which WP to use in selection: 0,1,2 ---> L, M, T
                                       # -1 ---> no requirement
                                       BTagCuts = cms.vint32(1,-1), # supporting up to two working point, the second is for veto
+                                      BTagUncertainty = cms.int32(0),
                                       MinNJets = cms.uint32( 2 ),
                                       MinNBJets = cms.uint32( 0 ),
                                       #MinNBJets = cms.uint32( 2 ),
-				      MaxNBJets = cms.int32( -1 )
+				      MaxNBJets = cms.int32( -1 ),
+                                      BTagWeightShapes = cms.bool( False ),
+                                      BTagWeightNonShapes = cms.bool( True )
                                       ),
                      
                      sample = cms.string("WJetsMG"),

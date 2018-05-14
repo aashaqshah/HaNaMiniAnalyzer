@@ -7,14 +7,14 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "BaseEventReader.h"
 
 #include "CondFormats/BTauObjects/interface/BTagCalibration.h"
 #include "CondTools/BTau/interface/BTagCalibrationReader.h"
 
 #include "DataFormats/PatCandidates/interface/Jet.h"
 using namespace std;
-
-
+using namespace edm;
 
 /*
  *
@@ -32,8 +32,6 @@ using namespace std;
  *
  */
 
-
-
 class BTagWeight
   {
   private:
@@ -42,6 +40,9 @@ class BTagWeight
     int syst, minTagL, maxTagL;
     float bTagMapCSVv2[3];
   public:
+
+    BTagWeight( edm::ParameterSet const& iConfig) ;
+
     BTagWeight(string algorithm, int WPt, string setupDir, int mintag, int maxtag, double BLCut = 0.460, double BMCut = 0.800, 
 	       double BTCut = 0.935, int WPl = -1, int systematics = 0, int mintagl = -1, int maxtagl = -1): 
       algo(algorithm), WPT(WPt), WPL(WPl), minTag(mintag), maxTag(maxtag), syst(systematics), minTagL(mintagl), maxTagL(maxtagl), readerExc(0),readerCentExc(0)
@@ -66,27 +67,59 @@ class BTagWeight
 	Systs[-1] = "down";
 	Systs[1] = "up";
 	cout<< setupDir+"/"+algo+string(".csv")<<endl;
-	calib = new BTagCalibration(algo /*"CSVv2"*/, setupDir+"/"+algo+string(".csv"));
+	calib = new BTagCalibration(algo/*"CSVv2"*/, setupDir+"/"+algo+string(".csv"));
 	reader = new BTagCalibrationReader( (BTagEntry::OperatingPoint)WPT, "central" , {"up", "down"} );
 
 	reader->load( *calib , BTagEntry::FLAV_B , "mujets" );
 	reader->load( *calib , BTagEntry::FLAV_UDSG , "incl" );
 	
-	/* reader = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint)WPT,"mujets",Systs[syst]); */
-        /* readerCent = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint)WPT,"mujets","central");   */
-	/* readerLight = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint)WPT,"incl",Systs[syst]); */
-        /* readerCentLight = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint)WPT,"incl","central");   */
 	if(WPL != -1){
 	  readerExc = new BTagCalibrationReader( (BTagEntry::OperatingPoint)WPL , "central" , {"up", "down"} );
 	  readerExc->load( *calib , BTagEntry::FLAV_B , "mujets" );
 	  readerExc->load( *calib , BTagEntry::FLAV_UDSG , "incl" );
 
-		/* readerExc = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint)WPL,"mujets",Systs[syst]); */
-        	/* readerCentExc = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint) WPL,"mujets","central");   */
-		/* readerExcLight = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint)WPL,"incl",Systs[syst]); */
-        	/* readerCentExcLight = new BTagCalibrationReader(calib,(BTagEntry::OperatingPoint) WPL,"incl","central");   */
 	}
 
+     };
+
+   BTagWeight(string fileweights , string algorithm,  string setupDir): 
+       algo(algorithm), WPT(-100), WPL(-1), minTag(-1), maxTag(-1), syst(-1), minTagL(-1), maxTagL(-1), readerExc(0),readerCentExc(0)
+     {
+	//for reshaping 
+	Systs[0] = "central";
+	Systs[-1] = "down_hfstats1";
+	Systs[1] = "up_hfstats1";
+	Systs[2] = "up_hfstats2";
+	Systs[-2] = "down_hfstats2";
+	Systs[3] = "up_lfstats1";
+	Systs[-3] = "down_lfstats1";
+	Systs[4] = "up_lfstats2";
+	Systs[-4] = "down_lfstats2";
+	Systs[5] = "up_jes";
+	Systs[-5] = "down_jes";
+	Systs[6] = "up_lf";
+	Systs[-6] = "down_lf";
+	Systs[7] = "up_cferr1";
+	Systs[-7] = "down_cferr1";
+	Systs[8] = "up_cferr2";
+	Systs[-8] = "down_cferr2";
+	Systs[9] = "up_hf";
+	Systs[-9] = "down_hf";
+
+	std::vector<string> allSystNames;
+	for(auto syst_ : Systs )
+	  if( syst_.first != 0 )
+	    allSystNames.push_back( syst_.second );
+
+	cout<< "Working in "+ setupDir+"/"+ " directory and using "+algo + " algorithm"<<endl;
+	cout << setupDir+"/"+fileweights+string(".csv") << endl;
+	calib = new BTagCalibration(algo /*"CSVv2"*/, setupDir+"/"+fileweights+string(".csv"));
+
+	//formula: https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSPhysicsObjectSchoolVertBTag#Exercise_I_applying_the_BTV_scal
+	reader = new BTagCalibrationReader( BTagEntry::OP_RESHAPING, "central" , allSystNames );
+	reader->load(*calib, BTagEntry::FLAV_B, "iterativefit");
+	reader->load(*calib, BTagEntry::FLAV_C, "iterativefit");
+	reader->load(*calib, BTagEntry::FLAV_UDSG, "iterativefit");
 	/* Sanity checks
 	 * std::cout<< "---- BTag WPs ----\n\t" <<bTagMapCSVv2[0] <<",\t"<<bTagMapCSVv2[1] <<",\t"<<bTagMapCSVv2[2]
 	 *	 <<"\n---- WPs to select ----\n\t"<<bTagMapCSVv2[WPT]
@@ -96,26 +129,48 @@ class BTagWeight
 	 * End Sanity Checks
 	 */
     };
+
+
+      bool isSystMatchFlavor(int flavor, int syst){ // only for reshaping
+	if (syst == 0) return false;
+	if(fabs(flavor) == 5){
+	  if(fabs(syst) == 1 || fabs(syst) == 2 || fabs(syst) == 6 || fabs(syst) == 5)
+	    return true;
+	  else return false;
+	} else if (fabs(flavor) == 4){
+	  if(fabs(syst) == 7 || fabs(syst) == 8 )
+            return true;
+	  else return false;
+	} else {
+	  if(fabs(syst) == 3 || fabs(syst) == 4 || fabs(syst) == 5 || fabs(syst) == 9)
+	    return true;
+	  else return false;
+	}
+	return false;
+      }
+
     inline bool filter(int t){
 	if(maxTag != -1)
-		return (t >= minTag && t <= maxTag);
+	  return (t >= minTag && t <= maxTag);
 	else
-		return (t >= minTag);
-    }
-    inline bool filter(int tight, int looseNonTight){
+	  return (t >= minTag);
+      }
+     inline bool filter(int tight, int looseNonTight){
         bool OK = false;
 	if(maxTag != -1)
-		OK = (tight >= minTag && tight <= maxTag);
+         OK = (tight >= minTag && tight <= maxTag);
 	else
-		OK = (tight >= minTag);
+	 OK = (tight >= minTag);
         if(maxTagL != -1)
-		OK = (OK && (looseNonTight >= minTagL && looseNonTight <= maxTagL));
+	 OK = (OK && (looseNonTight >= minTagL && looseNonTight <= maxTagL));
 	else
-		OK = (OK && (looseNonTight >= minTagL));
+	 OK = (OK && (looseNonTight >= minTagL));
 	return OK;
     }
+
     float weight(pat::JetCollection jets);
     float weight(pat::JetCollection jets, int);
+    float weightShape(pat::JetCollection , int);
     float weightExclusive(pat::JetCollection jetsTags);
     float TagScaleFactor(pat::Jet jet, bool LooseWP = false);
     float MCTagEfficiency(pat::Jet jet, int WP);

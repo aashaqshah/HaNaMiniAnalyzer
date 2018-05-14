@@ -5,6 +5,7 @@ using namespace pat;
 
 DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector && iC , bool isData , string SetupDir) :
   BaseEventReader< pat::MuonCollection >( iConfig , &iC ),
+  uncert( iConfig.getParameter<int>( "HLTUnc" ) ),
   MuonLeadingPtCut( iConfig.getParameter<double>( "MuonLeadingPtCut" ) ),
   MuonSubLeadingPtCut( iConfig.getParameter<double>( "MuonSubLeadingPtCut" ) ),
   MuonIsoCut( iConfig.getParameter<double>( "MuonIsoCut" ) ),
@@ -63,6 +64,16 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
     else
       cout << "No scale factor is availabel for Muon Iso " << MuonIsoCut << endl;
     f1->Close();
+
+    //f1 = TFile::Open(TString(SetupDir + "/DiMuonHLTs.root"));
+    f1 = TFile::Open(TString(SetupDir + "/DiMuonHLTs.root"));
+    gROOT->cd();
+    //f1->ls();
+    hMuHltMu17Mu8 = (TH2*)( f1->Get("scalefactor_eta2d_with_syst")->Clone("scalefactor_eta2d_with_syst_") );
+    f1->Close();
+     //hMuHltMu17Mu8_DZ = (TH2*)( f1->Get("Mu17Mu8_DZ")->Clone("Mu17Mu8_DZ_") );
+     //-    //f1->Close();
+     //+    f1->Close();
 
     //f1 = TFile::Open(TString(SetupDir + "/DiMuonHLTs.root"));
     //gROOT->cd();
@@ -199,7 +210,10 @@ DiMuonReader::SelectionStatus DiMuonReader::Read( const edm::Event& iEvent, cons
     if( MuonIsoCut == 0.25 )
       W *= MuonSFLoose(  goodMusOS[0].eta() , goodMusOS[0].pt() , goodMusOS[1].eta() , goodMusOS[1].pt() ); 
     else if( MuonIsoCut == 0.15 )
-      W *= MuonSFMedium( goodMusOS[0].eta() , goodMusOS[0].pt() , goodMusOS[1].eta() , goodMusOS[1].pt() ); 
+    W *= MuonSFMedium( goodMusOS[0].eta() , goodMusOS[0].pt() , goodMusOS[1].eta() , goodMusOS[1].pt() );
+
+    W *= MuonSFHltEta( goodMusOS[0].eta() , goodMusOS[1].eta() ); 
+
   }
     
   DiMuon = DiObjectProxy( goodMusOS[0] , goodMusOS[1] );
@@ -275,6 +289,17 @@ double DiMuonReader::MuonSFHltMu17Mu8_DZ( double ptL , double ptSL ){
   return ret;
 }
 
+double DiMuonReader::MuonSFHltEta( double eta1 , double eta2 ){
+
+  int bin_id = hMuHltMu17Mu8->FindBin(fabs(eta1),fabs(eta2));
+  double ret = hMuHltMu17Mu8->GetBinContent(bin_id);
+  if(uncert != 0){
+    double error = hMuHltMu17Mu8->GetBinError(bin_id);
+    ret += (uncert*error);
+  }
+  return ret;
+}
+
 double DiMuonReader::MuonTrkEff(double abseta){
     double x,y;
     int iPoint = -1;
@@ -291,5 +316,6 @@ double DiMuonReader::MuonTrkEff(double abseta){
     else if (abseta < 2.2) iPoint = 10;
     else iPoint = 11;
     hTrk->GetPoint(iPoint,x,y);
-    return y;
+    //return y;
+   return (y*9.2/35.9)+((35.9-9.2)/35.9);
 }
