@@ -185,6 +185,7 @@ for cut in cuts :
         #cut.AddHist( "Jet2Eta" , "jetsEta[1]" , 10 , -2.5 , 2.5 , False , Title="jet_{sub-lead.} #eta" , dirName="Jets"  )
     #chi2sum = cut.AddHist( "chi2Sum" , "chi2Sum", 25 , 0. , 50., False , Title="#chi^{2}_{H}+#chi^{2}_{a#rightarrowbb}", dirName="Jets")
     amuMass = cut.AddHist( "amuMass" , "aMu.mass", 200 , 10 , 200 , Title="#mu#mu mass" , dirName="General")
+    amuPt = cut.AddHist( "amuPt" , "aMu.pt" , 30 , 0. , 300., False , Title="p_{T}^{#mu#mu}" , dirName="General")
     #amuMass = cut.AddHist( "amuMass" , "aMu.mass", 200 , 0 , 200 , Title="#mu#mu mass" , dirName="General") #More bins for just K-factor extraction
     #cut.AddHist( "HiggsMass" , "higgsMass" , 46 , 75 , 305, False , Title="m_{#mu#mubb}" , dirName="MuMU" )
     cut.AddHist( "HiggsMass" , "higgsjetPtOrdered.mass" , 46 , 75 , 305, False , Title="m_{#mu#mubb}" , dirName="MuMubb" )
