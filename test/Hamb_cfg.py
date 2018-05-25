@@ -126,7 +126,12 @@ process.Hamb.sample = theSample.Name
 process.Hamb.LHE.useLHEW = theSample.LHEWeight
 process.Hamb.isData = theSample.IsData
 process.Hamb.Jets.BTagCuts = cms.vint32(0,-1)
-process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(20)
+process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(17.)
+process.Hamb.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
+process.Hamb.Jets.JetPtCut = cms.double( 10.)
+process.Hamb.Jets.BTagWeightShapes = True
+process.Hamb.Jets.BTagWeightNonShapes = True
+
 
 if not ( options.job < theSample.MakeJobs( options.nFilesPerJob , options.output ) ):
     raise NameError("Job %d is not in the list of the jobs of sample %s with %d files per run" % (options.job , options.sample , options.nFilesPerJob ) )
@@ -229,8 +234,8 @@ else :
         AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
         AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
 
-        #AddSystematics( "BUP"  , "Jets" , "BTagUncertainty"  , 1)
-        #AddSystematics( "BDOWN"  , "Jets" , "BTagUncertainty"  , -1)
+        AddSystematics( "BUP"  , "Jets" , "BTagUncertainty"  , 1)
+        AddSystematics( "BDOWN"  , "Jets" , "BTagUncertainty"  , -1)
 
         AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11)
         AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10)
@@ -256,6 +261,11 @@ process.HambDeepCSV.Jets.BTagAlgoSubTypeA = "pfDeepCSVJetTags:probb"
 process.HambDeepCSV.Jets.BTagAlgoSubTypeB = "pfDeepCSVJetTags:probbb"
 process.HambDeepCSV.Jets.BTagWeightShapes = True
 process.HambDeepCSV.Jets.BTagWeightNonShapes = True
+
+process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(17.)
+process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
+process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
+
 #process.HambDeepCSV.Jets.BTagUncertainty = 1
 
 process.p2 = cms.Path( process.HambDeepCSV )

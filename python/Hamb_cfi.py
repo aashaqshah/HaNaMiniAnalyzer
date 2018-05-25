@@ -17,8 +17,8 @@ Hamb = cms.EDFilter('TreeHamb',
                                         PUDataFileName = cms.string("pileUpData.root")
                                         ),
                      DiMuon = cms.PSet( Input = cms.InputTag("slimmedMuons"),
-                                        MuonLeadingPtCut = cms.double(24),
-                                        MuonSubLeadingPtCut = cms.double(9),
+                                        MuonLeadingPtCut = cms.double(17),
+                                        MuonSubLeadingPtCut = cms.double(8),
                                         MuonIsoCut = cms.double( 0.15 ),  # VeryTightRelIso=0.10, TightRelIso=0.15, MediumRelIso=0.20,
                                                                           # LooseRelIso=0.25, VeryLooseRelIso=0.4  
                                                                           # LooseRelTkIso=0.10, TightRelTkIso =0.05
@@ -36,7 +36,7 @@ Hamb = cms.EDFilter('TreeHamb',
                                         ),
 
                      MET = cms.PSet( Input = cms.InputTag("slimmedMETs"),
-                                     Cut = cms.double( 40. ),
+                                     Cut = cms.double( 30. ),
                                      Uncertainty = cms.int32(-1)
                                      #http://cmsdoxygen.web.cern.ch/cmsdoxygen/CMSSW_8_4_0_patch2/doc/html/db/deb/classpat_1_1MET.html#a5c8ea7c9575730bedb6f1639140a7422
                                      #enum  	METUncertainty {
@@ -53,7 +53,7 @@ Hamb = cms.EDFilter('TreeHamb',
                                       ApplyJER = cms.bool( False ),
                                       JECUncertainty = cms.int32(0),
                                       JERUncertainty = cms.int32(0),
-                                      JetPtCut = cms.double( 15. ),
+                                      JetPtCut = cms.double( 10. ),
                                       JetEtaCut = cms.double( 2.4 ),
                                       BTagAlgo = cms.string("pfCombinedInclusiveSecondaryVertexV2BJetTags"),
                                       BTagAlgoType = cms.string("CSVv2"),

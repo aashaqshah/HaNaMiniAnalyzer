@@ -498,12 +498,14 @@ class Property:
 			if(bkg.GetBinContent(iBin) == 0):
 				u = -1.
 				continue
+			#print iBin, signal.GetBinContent(iBin) , bkg.GetBinContent(iBin)
 			if(method == 1):
-				u = signal.GetBinContent(iBin) / bkg.GetBinContent(iBin)
+				u = signal.GetBinContent(iBin) /abs(bkg.GetBinContent(iBin))
 			elif(method == 2):
-				u = signal.GetBinContent(iBin) / sqrt(bkg.GetBinContent(iBin))
+                                #print method
+				u = signal.GetBinContent(iBin) / sqrt(abs(bkg.GetBinContent(iBin)))
 			elif(method == 3):
-				u = signal.GetBinContent(iBin) / sqrt(bkg.GetBinContent(iBin) + (bkg.GetBinError(iBin)*bkg.GetBinError(iBin)))
+				u = signal.GetBinContent(iBin) / sqrt(abs(bkg.GetBinContent(iBin) + (bkg.GetBinError(iBin)*bkg.GetBinError(iBin))))
 			elif(method == 4):
 				u = sqrt(2)*sqrt((signal.GetBinContent(iBin)+bkg.GetBinContent(iBin))*log(1+(signal.GetBinContent(iBin)/bkg.GetBinContent(iBin))) - signal.GetBinContent(iBin))
 			elif (method == 5):
