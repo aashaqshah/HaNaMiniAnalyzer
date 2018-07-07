@@ -1,8 +1,10 @@
 #include <sstream>
 void SignalYieldReader(){
-	TFile * f = TFile::Open("/home/nadjieh/cernbox/Hamb13/June06_Full2016_MassProd/Results/out_FinalPlots_temp.root");
+	TFile * f = TFile::Open("../test/out_FinalPlots_defaults.root");
+	//TFile * f = TFile::Open("/home/nadjieh/cernbox/Hamb13/June06_Full2016_MassProd/Results/out_FinalPlots_temp.root");
 	TGraphErrors * g = new TGraphErrors(10);
-	TDirectory * d = (TDirectory*)f->Get("SR/amuMass/signals");
+	//TDirectory * d = (TDirectory*)f->Get("SR/amuMass/signals");
+	TDirectory * d = (TDirectory*)f->Get("PreselectionLL/General/amuMass/signals");
 	d->ls();
 	TList * l = d->GetListOfKeys();
 	double yE;

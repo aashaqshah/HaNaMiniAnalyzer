@@ -76,7 +76,7 @@ using namespace RooFit;
 /*
  * 
  *
-/*SimultaneousFit*/
+SimultaneousFit*/
 
 int main(int argc, char** argv) {
 	std::map< TString, RooRealVar *> inputVars;

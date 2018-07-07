@@ -1,17 +1,37 @@
+//#include <sstream>
+//#include <fstream>
+//#include <iostream>
+//#include <vector>
+
+#ifndef __CINT__
+#include "RooGlobalFunc.h"
+#endif
+#include "RooRealVar.h"
+#include "RooDataSet.h"
+#include "RooGaussian.h"
+#include "TCanvas.h"
+#include "RooPlot.h"
+#include "TAxis.h"
+
 #include <sstream>
 #include <fstream>
 #include <iostream>
 #include <vector>
+using namespace RooFit ;
+using namespace std;
+
+
+
+
 //50:     	RooRealVar sigma("sigma", "sigma",  0.1,0.,10.);  
 
-RooFitResult* fitToSignal(TString Mass, int nbin = 100){
+RooFitResult* fitToSignal(TString Mass, int nbin = 200){
 		TString name = "test";
 	    double bL = 10.;
     	double bH = 70.;
    		TString pf = "4";		
     	RooRealVar aMuMass("aMuMass", "aMuMass", 10, 70);
     	TFile * fsig = new TFile("GGH" + Mass + ".root", "read");
-		 	
     	TTree* hsig = (TTree*) fsig->Get("Hamb/Trees/Events");
     	RooDataSet data("data_dimu", "data", hsig, aMuMass, "");
     	
@@ -40,6 +60,7 @@ RooFitResult* fitToSignal(TString Mass, int nbin = 100){
 		TCanvas C;
 		p->Draw();
 		C.SaveAs("testCBVoig_"+Mass+".C");
+		C.SaveAs("testCBVoig_"+Mass+".png");
 	
 		delete 	hist;	
 		return ret;
@@ -47,8 +68,8 @@ RooFitResult* fitToSignal(TString Mass, int nbin = 100){
 
 
 void SignalModeling(int seed = 37) {
-    using namespace RooFit;
-    using namespace std;
+    //using namespace RooFit;
+    //using namespace std;
     int nbin = 50;
     bool binned = false;
 
