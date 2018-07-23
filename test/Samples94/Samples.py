@@ -84,8 +84,8 @@ MiniAOD94Samples.append(WW94)
 #GGH1594 = Sample( "GGH15", 43.62*1.7*0.0001,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-15_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
 #MiniAOD94Samples.append(GGH1594)
 
-#GGH2094 = Sample( "GGH20", 43.62*1.7*0.0001,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-20_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH2094)
+GGH2094 = Sample( "GGH20", 43.62*1.7*0.0001,False, "/afs/cern.ch/work/a/aashah/mub_analysis/CMSSW_9_4_4/src/Haamm/HaNaMiniAnalyzer/test/Samples94/")
+MiniAOD94Samples.append(GGH2094)
 
 #GGH2594 = Sample( "GGH25",43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-25_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
 #MiniAOD94Samples.append(GGH2594)
