@@ -268,7 +268,7 @@ process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
 
 #process.HambDeepCSV.Jets.BTagUncertainty = 1
 
-#process.p2 = cms.Path( process.HambDeepCSV ) #Uncomment it for CSV
+process.p2 = cms.Path( process.HambDeepCSV ) #Uncomment it for CSV
 
 process.ep = cms.EndPath( process.outp1 )
 
