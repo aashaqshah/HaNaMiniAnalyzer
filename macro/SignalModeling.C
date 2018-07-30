@@ -51,6 +51,7 @@ RooFitResult* fitToSignal(TString Mass, int nbin = 200){
     	RooRealVar frac("frac","frac",0.55);
     	RooAddPdf Voig2("sum", "Gaussian crystal ball and Voig PDF", RooArgList(Voig, CB), RooArgList(frac));
     	RooFitResult * ret = Voig2.fitTo(data,RooFit::Save());
+                //cout<<"============ n1 = "<<n1<<endl;
 		cout<<"============ ret: "<<ret<<endl;
 		RooPlot * p = aMuMass.frame();
 		data.plotOn(p);
@@ -150,11 +151,13 @@ void SignalModeling(int seed = 37) {
     
     for(unsigned int i = 0; i < results.size(); i++){
     	RooRealVar* mean = (RooRealVar*) results[i]->floatParsFinal().find("mean");
+        //cout<<"////////////////////// Alpha is =============> "<<alpha->getVal()<<endl;
     	RooRealVar* sigma = (RooRealVar*) results[i]->floatParsFinal().find("sigma");    
     	RooRealVar* width = (RooRealVar*) results[i]->floatParsFinal().find("width");
     	RooRealVar* mean_cb = (RooRealVar*) results[i]->floatParsFinal().find("mean_cb");
     	RooRealVar* sigma_cb = (RooRealVar*) results[i]->floatParsFinal().find("sigma_cb");    
     	RooRealVar* alpha = (RooRealVar*) results[i]->floatParsFinal().find("alpha");    	
+        //cout<<"////////////////////// Alpha is =============> "<<alpha<<endl;
     	RooRealVar* n = (RooRealVar*) results[i]->floatParsFinal().find("n1");    
     	RooRealVar* frac_ = (RooRealVar*) results[i]->floatParsFinal().find("frac");        	
     	TString append = ", ";

@@ -43,7 +43,7 @@ ci = TColor.GetColor("#996633")
 signalsamples = []
 #signalsamples.append (SampleType( "Signal15" , kAzure+10 , [ GetSample(GGH1594) ] , nTuples , True ))
 #signalsamples.append (SampleType( "Signal20" , kBlue+2 , [ GetSample(GGH2094) ] , nTuples , True ))
-#signalsamples.append (SampleType( "Signal25" , kCyan+2	, [ GetSample(GGH2594) ] , nTuples , True ))
+signalsamples.append (SampleType( "Signal25" , kCyan+2	, [ GetSample(GGH2594) ] , nTuples , True ))
 #signalsamples.append (SampleType( "Signal30" , kTeal+10 , [ GetSample(GGH3094) ] , nTuples , True ))
 #signalsamples.append (SampleType( "Signal35" , kGreen+2 , [ GetSample(GGH3594) ] , nTuples , True ))
 #signalsamples.append (SampleType( "Signal40" , kYellow+2 , [ GetSample(GGH4094) ] , nTuples , True ))
@@ -77,6 +77,7 @@ Cuts = { "HLT":"(passHLT_Mu17Mu8 || passHLT_Mu17Mu8_DZ)",
          #"BasicJetsMu":"passJetSize && passMuSize && passJet1Pt && passJet2Pt && passMu1Pt && passMu2Pt ",
          #"MET":"met < 60 ",
          #"chi2sum":"chi2Sum < 5 ",
+         #"chi2sum":"chi2Sum < 5 ",
          #"TL":"passTL" ,
          #"TM":"passTM" ,
          #"TT":"passTT" ,
@@ -88,17 +89,17 @@ Cuts = { "HLT":"(passHLT_Mu17Mu8 || passHLT_Mu17Mu8_DZ)",
          #"chi2sum":"chi2Sum < 5 ",
          #"LL" : "nLooseNotMed+nMedNotTight+nTight > 1", ##Loose Loose (one way)
          #"TL":"(nLooseNotMed+nMedNotTight+nTight == 2) && (nTight>0)",
-         "LL" : "(jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.1522)", #For DeepCSV
-         "MM" : "(jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.4941)", #For DeepCSV
+         #"LL" : "(jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.1522)", #For DeepCSV
+         #"MM" : "(jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.4941)", #For DeepCSV
          #"TM" : "((jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.4941)) || ((jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.8001))",
-         "TT" : "(jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.8001)", #For DeepCSV
+         #"TT" : "(jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.8001)", #For DeepCSV
 
-         #"LL" : "(jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.5803)", #For CSVv2
-         #"ML" : "((jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.8838)) ",
-         #"TL" : "((jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.9693))",
-         #"MM" : "(jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.8838)",
-         #"TM" : "((jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.8838)) || ((jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.9693))",
-         #"TT" : "(jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.9693)",
+         "LL" : "(jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.5803)", #For CSVv2
+         "ML" : "((jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.8838)) ",
+         "TL" : "((jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.9693))",
+         "MM" : "(jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.8838)",
+         "TM" : "((jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.8838)) || ((jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.9693))",
+         "TT" : "(jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.9693)",
          #"TLFormula":"Max$(jetsBtag) > 0.9535 && Sum$( jetsBtag > 0.5426 ) > 1",
          #"invchi2sum":"chi2Sum > 5 && chi2Sum < 11",
          #"mHDiff25":"abs(higgsMass - 125) < 25",
@@ -111,10 +112,10 @@ Cuts = { "HLT":"(passHLT_Mu17Mu8 || passHLT_Mu17Mu8_DZ)",
          }
 
 cPreselectionLL = CutInfo( "PreselectionLL" , "&&".join( [Cuts[ss] for ss in ["HLT" , "LL"]] ) , "Weight*bWs.W2L" )
-#cPreselectionML = CutInfo( "PreselectionML" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "ML"]] ) , "Weight*bWs.W1L1M" , title="2#mu, medium-loose b-jets"  )
-#cPreselectionTL = CutInfo( "PreselectionTL" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL"]] ) , "Weight*bWs.W1L1T" , title="2#mu, tight-loose b-jets"  )
+cPreselectionML = CutInfo( "PreselectionML" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "ML"]] ) , "Weight*bWs.W1L1M" , title="2#mu, medium-loose b-jets"  )
+cPreselectionTL = CutInfo( "PreselectionTL" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL"]] ) , "Weight*bWs.W1L1T" , title="2#mu, tight-loose b-jets"  )
 cPreselectionMM = CutInfo( "PreselectionMM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "MM"]] ) , "Weight*bWs.W2M" , title="2#mu, medium-medium b-jets"  )
-#cPreselectionTM = CutInfo( "PreselectionTM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TM"]] ) , "Weight*bWs.W1M1T" , title="2#mu, tight-medium b-jets"  )
+cPreselectionTM = CutInfo( "PreselectionTM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TM"]] ) , "Weight*bWs.W1M1T" , title="2#mu, tight-medium b-jets"  )
 cPreselectionTT = CutInfo( "PreselectionTT" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TT"]] ) , "Weight*bWs.W2T" , title="2#mu, tight-tight b-jets"  )
 
 
@@ -143,9 +144,9 @@ cTLInvChi2Sum = CutInfo( "CRChi2Sum" , "&&".join( [Cuts[ss] for ss in ["HLT", "B
 """
 
 #cuts = [cPreselectionTL, cPreselectionLL , cTLMet , cSR , cSRBlind, cTLMetBlind, cTLChi2Sum, cTLInvChi2Sum ]
-#cuts = [cPreselectionLL, cPreselectionML, cPreselectionTL, cPreselectionMM, cPreselectionTM, cPreselectionTT]
+cuts = [cPreselectionLL, cPreselectionML, cPreselectionTL, cPreselectionMM, cPreselectionTM, cPreselectionTT]
 #cuts = [cPreselectionLL,  cPreselectionMM, cPreselectionTT]
-cuts = [cPreselectionLL]
+#cuts = [cPreselectionLL, cPreselectionMM]
 
 """
 #Categories for more sensitivity
@@ -175,10 +176,10 @@ for cut in cuts :
         #cut.AddHist( "amuMass" , "aMu.mass", 200 , 10 , 200 , Title="#mu#mu mass" , dirName="MuMu")
         #cut.AddHist( "abPt" , "aBjetPtOrdered.pt" , 30 , 0. , 300., False , Title="p_{T}^{bb}" , dirName="bb")
         #cut.AddHist( "abMass" , "aBjetPtOrdered.mass" , 24, 10. , 250., False , Title="m_{bb}" , dirName="bb")
-        #cut.AddHist( "Mu1Pt" , "muPt[0]" , 50 , 0 , 500 , False , Title="p_{T}^{#mu} (leading)"  , dirName="Mus" )
-        #cut.AddHist( "Mu2Pt" , "muPt[1]" , 50 , 0 , 500 , False , Title="p_{T}^{#mu} (sub-leading)" , dirName="Mus")
-        #cut.AddHist( "Jet1Pt" , "jetsPt[0]" , 50 , 0 , 500 , False , Title="p_{T}^{jet} (leading)" , dirName="Jets")
-        #cut.AddHist( "Jet2Pt" , "jetsPt[1]" , 50 , 0 , 500 , False , Title="p_{T}^{jet} (sub-leading)", dirName="Jets")
+        cut.AddHist( "Mu1Pt" , "muPt[0]" , 200 , 0 , 500 , False , Title="p_{T}^{#mu} (leading)"  , dirName="Mus" )
+        cut.AddHist( "Mu2Pt" , "muPt[1]" , 200, 0 , 500 , False , Title="p_{T}^{#mu} (sub-leading)" , dirName="Mus")
+        cut.AddHist( "Jet1Pt" , "jetsPt[0]" , 200 , 0 , 500 , False , Title="p_{T}^{jet} (leading)" , dirName="Jets")
+        cut.AddHist( "Jet2Pt" , "jetsPt[1]" , 200 , 0 , 500 , False , Title="p_{T}^{jet} (sub-leading)", dirName="Jets")
         #cut.AddHist( "Mu1Eta" , "muEta[0]" , 10 , -2.5 , 2.5 , False , Title="#mu_{lead.} #eta" , dirName="Mus")
         #cut.AddHist( "Mu2Eta" , "muEta[1]" , 10 , -2.5 , 2.5 , False , Title="#mu_{sub-lead.} #eta" , dirName="Mus" )
         #cut.AddHist( "Jet1Eta" , "jetsEta[0]" , 10 ,-2.5 , 2.5 , False , Title="jet_{lead.} #eta" , dirName="Jets")
