@@ -24,6 +24,8 @@ JetReader::JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector &
   MaxNBJets( iConfig.getParameter<int>( "MaxNBJets" ) ),
   rndJER(new TRandom3( 13611360 ) )
 {
+
+ 
   BTagCuts = iConfig.getParameter<std::vector<int> > ( "BTagCuts" );
   if(BTagCuts.size() > 2){
     std::cout<<"FATAL ERROR: The current code accepts up to two WP's, one for selection one for veto"<<std::endl;
@@ -57,13 +59,17 @@ JetReader::JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector &
   if( BTagWeightShapes ){
       BTagWeighterShape = new BTagWeight(BTagAlgoType , BTagAlgo, SetupDir );
     }
-
     t_Rho_ = (iC.consumes<double>( edm::InputTag( "fixedGridRhoFastjetAll" ) ) );
     resolution = JME::JetResolution( SetupDir + "/MCJetPtResolution.txt" );
     resolution_sf = JME::JetResolutionScaleFactor(SetupDir + "/MCJetSF.txt");
    //For JEC uncertainties
    //jecUnc = new JetCorrectionUncertainty(SetupDir + "/JECUncertainties.txt");
 
+    //For JEC uncertainties
+    //jecUnc = new JetCorrectionUncertainty(SetupDir + "/JECUncertainties.txt");
+    if( !IsData ) jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017_V8_MC_Uncertainty_AK4PF.txt");
+    else
+     jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017B_V6_DATA_Uncertainty_AK4PF.txt");
   }
 }
 
@@ -94,23 +100,20 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
 
   for ( pat::Jet j : *handle) {
     if( !IsData && ApplyJER ){
-      float pt = JER(j , Rho);
+      float pt = JER(j , Rho, jerunc);
       reco::Candidate::LorentzVector tmp(j.p4());
       tmp.SetPx( tmp.X()*pt/tmp.Pt() );
       tmp.SetPy( tmp.Y()*pt/tmp.Pt() );
       j.setP4(tmp);
     }
-
-  double jetPt = j.pt();
+    double jetPt = j.pt();
     if (!IsData && unc != 0 ){
       jecUnc->setJetEta(j.eta());
       jecUnc->setJetPt(j.pt()); // here you must use the CORRECTED jet pt
       double uncVal = jecUnc->getUncertainty(true);
       jetPt = jetPt * (1+uncVal*unc) ; // unc = +1(up), or -1(down)
     }
-
     if (jetPt < JetPtCut) continue;
-    //if (j.pt() < JetPtCut) continue;
     if ( fabs(j.eta() ) > JetEtaCut ) continue;
     //if ( !JetLooseID( j ) ) continue;
     if ( !JetTightID( j ) ) continue;
@@ -158,19 +161,17 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
   if(  selectedBJets.size() < MinNBJets ) return JetReader::NotEnoughBJets;
   if(!IsData){
     if( BTagWeightNonShapes ){
-        for(int iComb = 0; iComb < 9; iComb++)
+      for(int iComb = 0; iComb < 9; iComb++)
 	if(iComb < 3 || iComb > 5){
-	//cout<<"-- "<<iComb <<", weight"<<endl;
-	weights[iComb] = weighters[iComb]->weight(selectedJets);
+	  //cout<<"-- "<<iComb <<", weight"<<endl;
+	  weights[iComb] = weighters[iComb]->weight(selectedJets);
 	} else {
-	//cout<<"-- "<<iComb <<", weightExclusive"<<endl;
-	weights[iComb] = weighters[iComb]->weightExclusive(selectedJets);
+	  //cout<<"-- "<<iComb <<", weightExclusive"<<endl;
+	  weights[iComb] = weighters[iComb]->weightExclusive(selectedJets);
 	}
-   }
-
+    }
     if( BTagWeightShapes ){
       shape_weights[0]=BTagWeighterShape->weightShape(selectedJets , 0);
-      //cout << "btagunc" << btagunc << endl;
       if( btagunc != 0){
 	for( int isyst = 1 ; isyst < 10 ; isyst ++){
 	  shape_weights[isyst*2-1]=BTagWeighterShape->weightShape(selectedJets , isyst);
@@ -178,8 +179,6 @@ JetReader::SelectionStatus JetReader::Read( const edm::Event& iEvent , pat::DiOb
 	}
       }
     }
-
-
   }
   return JetReader::Pass;
 }

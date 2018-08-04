@@ -7,7 +7,6 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "BaseEventReader.h"
 
 #include "CondFormats/BTauObjects/interface/BTagCalibration.h"
 #include "CondTools/BTau/interface/BTagCalibrationReader.h"
@@ -40,9 +39,6 @@ class BTagWeight
     int syst, minTagL, maxTagL;
     float bTagMapCSVv2[3];
   public:
-
-    BTagWeight( edm::ParameterSet const& iConfig) ;
-
     BTagWeight(string algorithm, int WPt, string setupDir, int mintag, int maxtag, double BLCut = 0.460, double BMCut = 0.800, 
 	       double BTCut = 0.935, int WPl = -1, int systematics = 0, int mintagl = -1, int maxtagl = -1): 
       algo(algorithm), WPT(WPt), WPL(WPl), minTag(mintag), maxTag(maxtag), syst(systematics), minTagL(mintagl), maxTagL(maxtagl), readerExc(0),readerCentExc(0)
@@ -80,11 +76,11 @@ class BTagWeight
 
 	}
 
-     };
+    };
 
-   BTagWeight(string fileweights , string algorithm,  string setupDir): 
-       algo(algorithm), WPT(-100), WPL(-1), minTag(-1), maxTag(-1), syst(-1), minTagL(-1), maxTagL(-1), readerExc(0),readerCentExc(0)
-     {
+  BTagWeight(string fileweights , string algorithm,  string setupDir): 
+      algo(algorithm), WPT(-100), WPL(-1), minTag(-1), maxTag(-1), syst(-1), minTagL(-1), maxTagL(-1), readerExc(0),readerCentExc(0)
+    {
 	//for reshaping 
 	Systs[0] = "central";
 	Systs[-1] = "down_hfstats1";
@@ -114,12 +110,12 @@ class BTagWeight
 	cout<< "Working in "+ setupDir+"/"+ " directory and using "+algo + " algorithm"<<endl;
 	cout << setupDir+"/"+fileweights+string(".csv") << endl;
 	calib = new BTagCalibration(algo /*"CSVv2"*/, setupDir+"/"+fileweights+string(".csv"));
-
 	//formula: https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSPhysicsObjectSchoolVertBTag#Exercise_I_applying_the_BTV_scal
 	reader = new BTagCalibrationReader( BTagEntry::OP_RESHAPING, "central" , allSystNames );
 	reader->load(*calib, BTagEntry::FLAV_B, "iterativefit");
 	reader->load(*calib, BTagEntry::FLAV_C, "iterativefit");
 	reader->load(*calib, BTagEntry::FLAV_UDSG, "iterativefit");
+
 	/* Sanity checks
 	 * std::cout<< "---- BTag WPs ----\n\t" <<bTagMapCSVv2[0] <<",\t"<<bTagMapCSVv2[1] <<",\t"<<bTagMapCSVv2[2]
 	 *	 <<"\n---- WPs to select ----\n\t"<<bTagMapCSVv2[WPT]
@@ -129,7 +125,6 @@ class BTagWeight
 	 * End Sanity Checks
 	 */
     };
-
 
       bool isSystMatchFlavor(int flavor, int syst){ // only for reshaping
 	if (syst == 0) return false;
@@ -148,42 +143,40 @@ class BTagWeight
 	}
 	return false;
       }
-
-    inline bool filter(int t){
+      inline bool filter(int t){
 	if(maxTag != -1)
 	  return (t >= minTag && t <= maxTag);
 	else
 	  return (t >= minTag);
       }
-     inline bool filter(int tight, int looseNonTight){
+      inline bool filter(int tight, int looseNonTight){
         bool OK = false;
 	if(maxTag != -1)
-         OK = (tight >= minTag && tight <= maxTag);
+	  OK = (tight >= minTag && tight <= maxTag);
 	else
-	 OK = (tight >= minTag);
+	  OK = (tight >= minTag);
         if(maxTagL != -1)
-	 OK = (OK && (looseNonTight >= minTagL && looseNonTight <= maxTagL));
+	  OK = (OK && (looseNonTight >= minTagL && looseNonTight <= maxTagL));
 	else
-	 OK = (OK && (looseNonTight >= minTagL));
+	  OK = (OK && (looseNonTight >= minTagL));
 	return OK;
-    }
-
-    float weight(pat::JetCollection jets);
-    float weight(pat::JetCollection jets, int);
-    float weightShape(pat::JetCollection , int);
-    float weightExclusive(pat::JetCollection jetsTags);
-    float TagScaleFactor(pat::Jet jet, bool LooseWP = false);
-    float MCTagEfficiency(pat::Jet jet, int WP);
-    std::map<int, string> Systs;
-    BTagCalibration * calib;
-    BTagCalibrationReader * reader;
-    BTagCalibrationReader * readerCent;
-    BTagCalibrationReader * readerExc;
-    BTagCalibrationReader * readerCentExc;
-    BTagCalibrationReader * readerLight;
-    BTagCalibrationReader * readerCentLight;
-    BTagCalibrationReader * readerExcLight;
-    BTagCalibrationReader * readerCentExcLight;
+      }
+      float weight(pat::JetCollection jets);
+      float weight(pat::JetCollection jets, int);
+      float weightShape(pat::JetCollection , int);
+      float weightExclusive(pat::JetCollection jetsTags);
+      float TagScaleFactor(pat::Jet jet, bool LooseWP = false);
+      float MCTagEfficiency(pat::Jet jet, int WP);
+      std::map<int, string> Systs;
+      BTagCalibration * calib;
+      BTagCalibrationReader * reader;
+      BTagCalibrationReader * readerCent;
+      BTagCalibrationReader * readerExc;
+      BTagCalibrationReader * readerCentExc;
+      BTagCalibrationReader * readerLight;
+      BTagCalibrationReader * readerCentLight;
+      BTagCalibrationReader * readerExcLight;
+      BTagCalibrationReader * readerCentExcLight;
   };
 #endif
 

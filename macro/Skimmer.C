@@ -62,13 +62,16 @@ int main(int argc, char** argv) {
   TString Mode = "";
   TString dir ="";
   bool blind = false;
+  bool isZ = false;
+  TString Cat = "";
   for (int f = 1; f < argc; f++) {
     std::string arg_fth(*(argv + f));
     if (arg_fth == "mc") {
       f++;
       std::string out(*(argv + f));
       //TFile * fdata = TFile::Open((string("eos_cb/user/a/ajafari/Hamb13/Oct14_8020_Opt/Trees/")+out).c_str());
-      TFile * fdata = TFile::Open(out.c_str());            
+      TFile * fdata = TFile::Open(out.c_str());
+      cout<< dir+treename <<endl;
       rds = new HambTree((TTree*) fdata->Get(dir+treename));
       int pos = out.find(".root");
       names = (out.substr(0, pos).c_str());
@@ -84,7 +87,14 @@ int main(int argc, char** argv) {
       f++;
       std::string out(*(argv + f));
       dir = out.c_str();       
-    }
+    } else if(arg_fth == "isZ"){
+      f++;
+      isZ = true;
+	} else if(arg_fth == "Cat"){
+      f++;
+	  std::string out(*(argv + f));
+      Cat = out.c_str();
+	}  
   }
 
   
@@ -156,7 +166,8 @@ int main(int argc, char** argv) {
 		    rds->muEta->at(myIndex),
 		    rds->muPhi->at(myIndex),0);                   
     a = m1+m2;       
-    if (a.M() < 15 || a.M() > 70) continue;
+	if(!isZ && (a.M() < 15 || a.M() > 70))
+    	continue;
     
     if(Mode == "Opt"){
       if (rds->muPt->size() <  2)  continue;
@@ -317,12 +328,30 @@ int main(int argc, char** argv) {
       
       //amuMass = rds->aMu_mass;
       //according to optimization of Dec. 2016
-      if(rds->jetsPt->at(0) < 20) continue;
-      //
-      amuMass = a.M();
-      bWTL = rds->bWs_W1L1T;
-      bWLL = rds->bWs_W2L;
-      newTree->Fill();			
+      //if(rds->jetsPt->at(1) < 20) continue;
+      //if(rds->jetsPt->size() !=2 ) continue;
+      //amuMass = a.M();
+      //bWTL = rds->bWs_W1L1T;
+      //bWLL = rds->bWs_W2L;
+
+
+	  ////////////////////
+	  // For Unblinding //
+	  ////////////////////
+	  bool passFinal = (rds->passHLT_Mu17Mu8 || rds->passHLT_Mu17Mu8_DZ);
+	  passFinal = (passFinal && rds->passJetSize && rds->passMuSize && rds->passJet1Pt && rds->passJet2Pt && rds->passMu1Pt && rds->passMu2Pt);
+	  passFinal = (passFinal && (rds->met < 60));
+	  passFinal = (passFinal && (rds->chi2Sum < 5));
+
+	  if (Cat == "TLexc"){
+		passFinal = (passFinal && rds->passTL && !rds->passTM && !rds->passTT);
+	  } else if (Cat == "TMexc"){
+		passFinal = (passFinal && rds->passTM && !rds->passTT);
+	  } else if (Cat == "TT"){
+		passFinal = (passFinal && rds->passTT);
+	  }
+	  if(passFinal)
+      	newTree->Fill();			
     }
   }
   newTree->Write();
@@ -334,3 +363,5 @@ int main(int argc, char** argv) {
   
   return 1;
 }
+
+

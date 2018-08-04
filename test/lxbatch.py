@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-nFilesPerJob=5
+nFilesPerJob=2 #used for signal systematics on March 02 and before
+#nFilesPerJob=3
+
 CheckFailedJobs=True
 #CheckFailedJobs=False
 hname = "Hamb/CutFlowTable/CutFlowTable"
@@ -46,16 +48,20 @@ call(["voms-proxy-init" , "--out" , "./%s/.x509up_u%d" % ( workingdir , os.getui
 FailedJobs = {}
 if CheckFailedJobs:
     for sample in samples:
-        #if not sample.Name in ["DoubleMuH2"] :
-        #    continue
-    	#if not sample.Name.count("GGH") :
-        #    continue
+    	if not sample.Name.count("GGH") : #for signal sample systs 
+        #if not sample.Name.count("DYMG"): #for signal sample systs 
+            continue
+
         ListOfFailedJobs = []
         for job_ in sample.Jobs :
             outfile = job_.Output
             job = job_.Index + 1
             if isfile( outfile ) :
                 ff = TFile.Open(outfile)
+                if not ff :
+                    ListOfFailedJobs.append( str(job) )
+                    print job, outfile, "File exist, but can not be opened"
+                    continue
                 h = ff.Get("%s_%s_0"% ( hname , sample.Name) )
                 if not h == None :
                     ntotal = h.GetBinContent(1)
@@ -80,18 +86,15 @@ if CheckFailedJobs:
 file = open("%s/submit.sh" % (workingdir) , "w" )
 for sample in samples:
 
-    #if not sample.Name in ["DoubleMuH2"] :
-    #    continue
-    #if not sample.Name.count("GGH") :
-    #    continue
+    if not sample.Name.count("GGH") :                                                                                                                                                              
+    #if not sample.Name.count("DYMG"):
+        continue
+
 
     if CheckFailedJobs:
         if len(FailedJobs[ sample.Name ]) > 0:
             #command = 'bsub -q 8nh -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            #command = 'bsub -q 2nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            #command = 'bsub -M 10 -q 2nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            #command = 'bsub -R "pool>6000"-q 2nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            command = 'bsub -c 9999 -q 2nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            command = 'bsub -c 9999 -q 1nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
                 "vomsaddress":"`pwd`/.x509up_u%d" % (os.getuid()) ,
                 "scram":os.getenv("SCRAM_ARCH") ,
                 "cmsver":os.getenv("CMSSW_VERSION"),
@@ -117,7 +120,7 @@ for sample in samples:
         for i in range( 0 , len(steps)-1):
             #command = 'bsub -q 8nh -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
             #command = 'bsub -R "pool>6000" -q 2nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            command = 'bsub -c 9999 -q 2nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            command = 'bsub -c 9999 -q 1nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
                 "vomsaddress":"`pwd`/.x509up_u%d" % (os.getuid()) ,
                 "scram":os.getenv("SCRAM_ARCH") ,
                 "cmsver":os.getenv("CMSSW_VERSION"),
@@ -138,4 +141,5 @@ file.close()
 print "to submit the jobs, you have to run the following commands :"
 print "cd %s" % (workingdir)
 print "source submit.sh"
+
 

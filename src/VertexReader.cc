@@ -8,7 +8,7 @@ VertexReader::VertexReader( edm::ParameterSet const& iPS, edm::ConsumesCollector
     PileupToken_ = iC.consumes<std::vector<PileupSummaryInfo>>(iPS.getParameter<edm::InputTag>("pileupSrc")) ;
     PUDataFileName = iPS.getParameter< std::string >("PUDataFileName");
     LumiWeights_ = edm::LumiReWeighting( SetupDir + "/pileUpMC.root" ,
-					 SetupDir + "/" + PUDataFileName,  
+					 SetupDir + "/" + PUDataFileName, 
 					 std::string("pileup"), std::string("pileup") );
   }
 }

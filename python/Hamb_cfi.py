@@ -70,8 +70,8 @@ Hamb = cms.EDFilter('TreeHamb',
                                       MinNBJets = cms.uint32( 0 ),
                                       #MinNBJets = cms.uint32( 2 ),
 				      MaxNBJets = cms.int32( -1 ),
-                                      BTagWeightShapes = cms.bool( False ),
-                                      BTagWeightNonShapes = cms.bool( True )
+                                      BTagWeightShapes = cms.bool( True ),
+                                      BTagWeightNonShapes = cms.bool( False )
                                       ),
                      
                      sample = cms.string("WJetsMG"),

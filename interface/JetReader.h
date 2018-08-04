@@ -39,7 +39,6 @@ public:
   pat::JetCollection selectedJets;
   pat::JetCollection selectedJetsSortedByB;
   pat::JetCollection selectedBJets;
-
   double W;
   float weights[9];
   float shape_weights[19];
@@ -72,26 +71,25 @@ public:
   float nMedNotTight;
   float nTight;
 
-   bool BTagWeightShapes;
-   bool BTagWeightNonShapes;
-
+  bool BTagWeightShapes;
+  bool BTagWeightNonShapes;
 private:
   unsigned int MinNBJets; 
   int MaxNBJets ;
+
   /* b-JET SELECTION PARAMS */
 
   /* JET TOOLS */
   JME::JetResolution resolution;
   JME::JetResolutionScaleFactor resolution_sf;
   TRandom3* rndJER;
-
-//https://github.com/cms-sw/cmssw/blob/09c3fce6626f70fd04223e7dacebf0b485f73f54/CondFormats/JetMETObjects/interface/JetResolutionObject.h
-//enum class Variation {
-//  NOMINAL = 0,
-//  DOWN = 1,
-//  UP = 2
-//};
-
+  
+  //https://github.com/cms-sw/cmssw/blob/09c3fce6626f70fd04223e7dacebf0b485f73f54/CondFormats/JetMETObjects/interface/JetResolutionObject.h
+  //enum class Variation {
+  //  NOMINAL = 0,
+  //  DOWN = 1,
+  //  UP = 2
+  //};
   float JER( pat::Jet jet , double rho , int syst = 0 );
   //bool JetLooseID( pat::Jet j );
   bool JetTightID( pat::Jet j );

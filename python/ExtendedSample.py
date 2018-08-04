@@ -1,4 +1,4 @@
-from ROOT import TDirectory, TFile, TCanvas , TH1D , TH1 , THStack, TList, gROOT, TLegend, TPad, TLine, gStyle, TTree , TObject , gDirectory, TChain
+from ROOT import TDirectory, TFile, TCanvas , TH1D , TH1 , THStack, TList, gROOT, TLegend, TPad, TLine, gStyle, TTree , TObject , gDirectory, TChain , Double
 
 import os
 import sys
@@ -6,6 +6,7 @@ import Sample
 import fnmatch
 
 from Sample import *
+from Plotter import *
 
 class ExtendedSample: #extend the sample object to store histograms
     def __init__( self , sample , additionalCut = None  ):
@@ -107,6 +108,15 @@ class ExtendedSample: #extend the sample object to store histograms
             self.FriendTree = self.FriendFile.Get( self.FriendTreeName )
             self.Tree.AddFriend( self.FriendTree )
             
+
+    def CutYields( self , cut , weight , treeName = "Hamb/Trees/Events" ):
+        cut = CutInfo( "CutTest" , cut , weight )
+        cut.AddHist( "ONE" , "1" , 1 , -1 , 5 )
+        self.DrawTreeHistos( [cut], treeName )
+        hret = self.AllHists["CutTest_ONE"][0]
+        err = Double(0)
+        integral = hret.IntegralAndError( 0 , 100 , err )
+        return integral, err
         
     def DrawTreeHistos( self , treeselections ,  treeName = "Hamb/Trees/Events"):
     #def DrawTreeHistos( self , treeselections ,  treeName = "HambDeepCSV/Trees/Events"):
@@ -144,6 +154,7 @@ class ExtendedSample: #extend the sample object to store histograms
             else:
                 print "File %d of sample %s doesn't exist, skip it , %s" % (Job.Index , self.Name , finame)
                 continue
+            print "looking ofr" , dirName
             dir = ff.GetDirectory(dirName)
             if not dir :
                 print "File %d of sample %s is not valid, skip it , %s" % (Job.Index , self.Name , finame)

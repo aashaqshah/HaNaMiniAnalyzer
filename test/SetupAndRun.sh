@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export X509_USER_PROXY=$1
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 voms-proxy-info
@@ -5,6 +7,7 @@ voms-proxy-info
 export SCRAM_ARCH=$2
 scramv1 project CMSSW $3
 cd $3/src/
+export SCRAM_ARCH=$2
 eval `scramv1 runtime -sh`
 scram b
 mkdir Haamm/

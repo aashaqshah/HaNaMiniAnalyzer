@@ -8,15 +8,15 @@ METReader::METReader( edm::ParameterSet const& iPS, edm::ConsumesCollector && iC
   MetCut( iPS.getParameter<double>( "Cut" ) )
 {
   ReadOldJets = false;
+  Uncertainty = -1;
   if(!isData){
     if (iPS.exists( "oldjets" )){
       oldjetToken_= iC.consumes<pat::JetCollection>(iPS.getParameter<edm::InputTag>("oldjets")) ;
       ReadOldJets = true;
     }
-   Uncertainty = iPS.getParameter< int> ("Uncertainty");
+    Uncertainty = iPS.getParameter< int> ("Uncertainty");
   }
-  else
-    Uncertainty = -1;
+  
   reRunMetSig = iPS.exists("metsig");
   if(iPS.exists("metsig")){
     metsigToken_ = iC.consumes<double>(iPS.getParameter<edm::InputTag>("metsig"));

@@ -2,7 +2,9 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("HaNa")
 process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 100000
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
+#process.MessageLogger.cerr.FwkReport.reportEvery = 10000
+
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.Services_cff')
@@ -54,15 +56,13 @@ process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring()
 )
 process.load("Haamm.HaNaMiniAnalyzer.Hamb_cfi")
-#process.TTH 
 
-def AddSystematics( Name , Object , Property , NewValue ):
-    setattr( process , "Hamb" + Name , process.Hamb.clone() )
-    hamb_syst = getattr( process , "Hamb" +Name)
+def AddSystematics( Name , Object , Property , NewValue , mod_name = "Hamb" ):
+    setattr( process , mod_name + Name , getattr(process , mod_name).clone() )
+    hamb_syst = getattr( process , mod_name +Name)
     obj = getattr ( hamb_syst , Object )
     prop = setattr( obj , Property , NewValue )
-
-    setattr( process , "PathSyst" + Name , cms.Path( hamb_syst ) )
+    setattr( process , "PathSyst" + mod_name + Name , cms.Path( hamb_syst ) )
 
 import FWCore.ParameterSet.VarParsing as opts
 options = opts.VarParsing ('analysis')
@@ -151,7 +151,6 @@ if theSample.IsData :
     
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
-    #process.GlobalTag.globaltag = '80X_dataRun2_Prompt_ICHEP16JEC_v0'
     process.GlobalTag.globaltag = '94X_dataRun2_ReReco_EOY17_v2' #Has to be added for 2017 data
 
     #Applying Jet Energy Corrections to Data
@@ -222,30 +221,39 @@ else :
 	process.Hamb.HLT_Mu17Mu8_DZ.Input = cms.InputTag( "TriggerResults","","HLT2" )
 	process.Hamb.HLT_Mu17Mu8.Input = cms.InputTag( "TriggerResults","","HLT2" )
 
+    #if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
+    #    AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root")
+    #    AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root")
+    #    AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1)
 
-    if theSample.Name.count("GGH2016") :
-        AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root")
-        AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root")
-        AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1)
-        process.HambJECUP.MET.Uncertainty = 2
-        AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1)
-        process.HambJECDOWN.MET.Uncertainty = 3
+    #    process.HambJECUP.MET.Uncertainty = 2
+    #    #process.HambDeepCSVJECUP.MET.Uncertainty = 2
 
-        AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
-        AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
+    #    AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1)
+    #    process.HambJECDOWN.MET.Uncertainty = 3
 
-        AddSystematics( "BUP"  , "Jets" , "BTagUncertainty"  , 1)
-        AddSystematics( "BDOWN"  , "Jets" , "BTagUncertainty"  , -1)
-
-        AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11)
-        AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10)
+    #    #https://github.com/cms-sw/cmssw/blob/CMSSW_7_6_X/CondFormats/JetMETObjects/interface/JetResolutionObject.h#L25-L29
+    #    AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
+    #    AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
 
 
-        AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
-        AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1)
+    #    AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11)
+    #    AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10)
 
-        AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
 
+    #    AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
+    #    AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1)
+
+    #    AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
+
+    #if theSample.Name.count("DYMGInclusive"):
+        #process.Hamb.LHE.cutOnNGenJets = 0
+        #for nJ in range(1,10):
+            #setattr( process , "Hamb%dJ" % nJ , process.Hamb.clone() )
+            #getattr( process , "Hamb%dJ" % nJ ).LHE.cutOnNGenJets=nJ
+            #setattr( process , "Path%dJ" % nJ , cms.Path( getattr( process , "Hamb%dJ" % nJ ) ) )
+
+        
 process.outp1=cms.OutputModule("PoolOutputModule",
    outputCommands = cms.untracked.vstring('keep *'), 
    fileName = cms.untracked.string(job.Output2),
@@ -266,9 +274,9 @@ process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(17.)
 process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
 process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
 
-#process.HambDeepCSV.Jets.BTagUncertainty = 1
+#AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1 , "HambDeepCSV")
 
-process.p2 = cms.Path( process.HambDeepCSV ) #Uncomment it for CSV
+process.p2 = cms.Path( process.HambDeepCSV ) #comment it when only CSV is required
 
 process.ep = cms.EndPath( process.outp1 )
 

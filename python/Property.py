@@ -54,6 +54,35 @@ class Property:
 		self.isLnSoSqrtSBdB = False
 		self.SigSignificance = []
 		
+	@staticmethod
+	def FromDir( dir , GRE = True ):
+		name = dir.GetName()
+		ret = Property( name , OrderedDict() , None , [] , [] , GRE )
+        
+		cats_dir = dir.GetDirectory("cats")
+		for cat_ in cats_dir.GetListOfKeys() :
+			cat = cat_.GetName()
+			if cat.endswith("_Data"):
+				gROOT.cd()
+				ret.Data = cats_dir.Get( cat ).Clone()
+			elif cat != "SumMC" :
+				gROOT.cd()
+				ret.Bkg[cat.split("_")[-1]] =  cats_dir.Get( cat ).Clone()
+
+		sigs_dir = dir.GetDirectory("signals")
+		if sigs_dir :
+			for sig_ in sigs_dir.GetListOfKeys() :
+				sig = sig_.GetName()
+				gROOT.cd()
+				ret.Signal.append( sigs_dir.Get(sig).Clone() )
+
+		samples_dir = dir.GetDirectory("samples")
+		for sam_ in samples_dir.GetListOfKeys() :
+			sam = sam_.GetName()
+			gROOT.cd()
+			ret.Samples.append( samples_dir.Get(sam).Clone() )
+            
+		return ret
 
 	@staticmethod
 	def AddOFUF(h):
@@ -385,10 +414,12 @@ class Property:
 		propdir.cd()
 		catdir = propdir.mkdir( "cats" )
 		catdir.cd()
-		self.Data.Write()
+		if hasattr( self , "Data" ) and self.Data :
+			self.Data.Write()
 		for bkg in self.Bkg :
 			self.Bkg[bkg].Write()
-		self.GetStack(normtodata).GetStack().Last().Write("SumMC")
+		if len(self.Bkg) > 0 :
+			self.GetStack(normtodata).GetStack().Last().Write("SumMC")
 
 		if self.Signal :
 			sigdir = propdir.mkdir( "signals" )

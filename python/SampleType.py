@@ -53,9 +53,8 @@ class SampleType:
             print "\tSample %s is loading :" % (s.Name)
             if s.LoadHistos( dirName , cftName , [] , Indices ):
                 if len(treeHistos):
-                    #print "%s/Trees/Events" %(dirName)
-                    #s.DrawTreeHistos( treeHistos, "%s/Trees/Events" %(dirName) )
-                    s.DrawTreeHistos( treeHistos )
+                    print "%s/Trees/Events" %(dirName)
+                    s.DrawTreeHistos( treeHistos, "%s/Trees/Events" %(dirName) )
                 s.NormalizeHistos( lumi )
                 print "\tAll Loaded and normalized, now they are being organized"
             for propname in s.AllHists:
@@ -110,7 +109,7 @@ class SampleType:
                             self.AllHists[propname] = hhh
                         
                         self.AllOtherHists[propname][i] = hhh
-                        print "\t%s[%d] is created for %s : (%d, %.2f, %.2f)" % (propname , i , self.Name , hhh.GetNbinsX() , hhh.GetBinLowEdge(1) , hhh.GetBinLowEdge( hhh.GetNbinsX() ) + hhh.GetBinWidth( hhh.GetNbinsX() ) )
+                        print "\t%s[%d] is created for %s : (%d, %.2f, %.2f)" % (propname , i , self.Name , hhh.GetNbinsX() , hhh.GetXaxis().GetBinLowEdge(1) , hhh.GetXaxis().GetBinLowEdge( hhh.GetNbinsX() ) + hhh.GetXaxis().GetBinWidth( hhh.GetNbinsX() ) )
     def SetMass(self):
     	m = self.Name[len(self.Name)-2:len(self.Name)]
     	self.Mass = locale.atof(m)

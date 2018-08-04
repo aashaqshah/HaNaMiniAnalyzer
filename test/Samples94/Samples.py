@@ -81,33 +81,48 @@ MiniAOD94Samples.append(WZ94)
 WW94 = Sample( "WW" ,  118.7, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM")
 MiniAOD94Samples.append(WW94)
 
-#GGH1594 = Sample( "GGH15", 43.62*1.7*0.0001,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-15_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH1594)
+GGH1594 = Sample( "GGH15", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M20_Tomumubb/")
+MiniAOD94Samples.append(GGH1594)
 
-GGH2094 = Sample( "GGH20", 43.62*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/")
+GGH2094 = Sample( "GGH20", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M20_Tomumubb/")
 MiniAOD94Samples.append(GGH2094)
 
-#GGH2594 = Sample( "GGH25",43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-25_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH2594)
+GGH2594 = Sample( "GGH25",48.5800*1.7*0.0001 ,False,  "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M25_Tomumubb/")
+MiniAOD94Samples.append(GGH2594)
 
-#GGH3094 = Sample( "GGH30", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-30_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH3094)
+GGH3094 = Sample( "GGH30", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M30_Tomumubb/")
+MiniAOD94Samples.append(GGH3094)
 
-#GGH3594 = Sample( "GGH35", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-35_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH3594)
+GGH3594 = Sample( "GGH35", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M35_Tomumubb/")
+MiniAOD94Samples.append(GGH3594)
 
-#GGH4094 = Sample( "GGH40", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-40_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH4094)
+GGH4094 = Sample( "GGH40", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M40_Tomumubb/")
+MiniAOD94Samples.append(GGH4094)
 
-#GGH4594 = Sample( "GGH45", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-45_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH4594)
+GGH4594 = Sample( "GGH45", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M45_Tomumubb/")
+MiniAOD94Samples.append(GGH4594)
 
-#GGH5094 = Sample( "GGH50", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-50_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH5094)
+GGH5094 = Sample( "GGH50", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M50_Tomumubb/")
+MiniAOD94Samples.append(GGH5094)
 
-#GGH5594 = Sample( "GGH55", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-55_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH5594)
+GGH5594 = Sample( "GGH55", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M55_Tomumubb/")
+MiniAOD94Samples.append(GGH5594)
 
-#GGH6094 = Sample( "GGH60", 43.62*1.7*0.0001 ,False, "/SUSYGluGluToHToAA_AToMuMu_AToBB_M-60_TuneCUETP8M1_13TeV_madgraph_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v2/MINIAODSIM")
-#MiniAOD94Samples.append(GGH6094)
+GGH6094 = Sample( "GGH60", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M60_Tomumubb/")
+MiniAOD94Samples.append(GGH6094)
+
+VBF2094 = Sample( "VBF20", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M20_Tomumubb/")
+MiniAOD94Samples.append(VBF2094)
+
+VBF3094 = Sample( "VBF30", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M30_Tomumubb/")
+MiniAOD94Samples.append(VBF3094)
+
+VBF4094 = Sample( "VBF40", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M40_Tomumubb/")
+MiniAOD94Samples.append(VBF4094)
+
+VBF5094 = Sample( "VBF50", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M50_Tomumubb/")
+MiniAOD94Samples.append(VBF5094)
+
+VBF6094 = Sample( "VBF60", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M60_Tomumubb/")
+MiniAOD94Samples.append(VBF6094)
 

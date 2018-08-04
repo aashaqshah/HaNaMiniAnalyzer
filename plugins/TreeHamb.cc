@@ -55,6 +55,9 @@ protected:
   std::vector<float> muIsoNeutralHadronEt;
   std::vector<float> muIsoPhotonEt;
   std::vector<float> muPUPt;
+
+  int nGenJets ;
+
   TTree* theSelectionResultTree;
   unsigned int nHistos;
   bool MakeTree,forOptimization;
@@ -117,9 +120,8 @@ protected:
 
     for(unsigned int i=0 ; i < 9 ; i++)
       bSelWeights[i] = 1;
-    
     for(unsigned int i=0 ; i <  19 ; i++)
-        bShapeSelWeights[i] = 1;
+      bShapeSelWeights[i] = 1;
 
     puWeight = met = metPhi = metSig = -999;
 
@@ -145,6 +147,7 @@ protected:
     muIsoNeutralHadronEt.clear();
     muIsoPhotonEt.clear();
     muPUPt.clear();
+    nGenJets = 0;
     particleinfo tmp;
     aMu = aBjetPtOrdered =  higgsjetPtOrdered = aBjetBtagOrdered = higgsjetBtagOrdered = tmp ;
     hltWeights tmp2;
@@ -198,11 +201,12 @@ void TreeHamb::beginJob()
         theSelectionResultTree->Branch("nVertices" , &nVertices);
 	theSelectionResultTree->Branch("Weight", Weight , weightLeafList.c_str() );
 	theSelectionResultTree->Branch("puWeight", &puWeight);
-       if( jetReader->BTagWeightNonShapes )
-	 theSelectionResultTree->Branch("bWs", bSelWeights , "W1L:W1M:W1T:W1L1M:W1L1T:W1M1T:W2L:W2M:W2T");
-       if( jetReader->BTagWeightShapes && jetReader->btagunc != 0 )
-          theSelectionResultTree->Branch("bWsShape", bShapeSelWeights , "central:up_hfstats1:down_hfstats1:up_hfstats2:down_hfstats2:up_lfstats1:down_lfstats1:up_lfstats2:down_lfstats2:up_jes:down_jes:up_lf:down_lf:up_cferr1:down_cferr1:up_cferr2:down_cferr2:up_hf:down_hf");
-       else if(jetReader->BTagWeightShapes)
+
+	if( jetReader->BTagWeightNonShapes )
+	  theSelectionResultTree->Branch("bWs", bSelWeights , "W1L:W1M:W1T:W1L1M:W1L1T:W1M1T:W2L:W2M:W2T");
+	if( jetReader->BTagWeightShapes && jetReader->btagunc != 0 )
+	  theSelectionResultTree->Branch("bWsShape", bShapeSelWeights , "central:up_hfstats1:down_hfstats1:up_hfstats2:down_hfstats2:up_lfstats1:down_lfstats1:up_lfstats2:down_lfstats2:up_jes:down_jes:up_lf:down_lf:up_cferr1:down_cferr1:up_cferr2:down_cferr2:up_hf:down_hf");
+	else if(jetReader->BTagWeightShapes)
 	  theSelectionResultTree->Branch("bWsShape", bShapeSelWeights , "central");
 
 	theSelectionResultTree->Branch("hltWeights", &hltWs , "mu17mu8:mu17mu8dz");
@@ -223,6 +227,7 @@ void TreeHamb::beginJob()
     	theSelectionResultTree->Branch("muPUPt",(&muPUPt));
     }
 
+    theSelectionResultTree->Branch("nGenJets", &nGenJets);
     theSelectionResultTree->Branch("met", &met);
     theSelectionResultTree->Branch("metSig", &metSig);
 
@@ -266,15 +271,18 @@ bool TreeHamb::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
   
-  if( nHistos > 1 && SampleName == "Signal" ) {
-    LHEReader->Read( iEvent );
-    //W = LHEReader->ExtractWeightsInRange( 446 , 495 ); // To be checked for HiggsExo
-  }
-
   stepEventSelection = 0;
 
-  if( geninfoReader )
+  if( geninfoReader ){
     W *= geninfoReader->Read( iEvent );
+
+    double passLHECuts = LHEReader->Read( iEvent );
+    if( passLHECuts == 0.0 )
+      return false;
+    nGenJets = LHEReader->NGenJets;
+    cout << "event with " << nGenJets << " passed the criteria" << endl;
+    //W = LHEReader->ExtractWeightsInRange( 446 , 495 ); // To be checked for HiggsExo
+  }
   hCutFlowTable->Fill( ++stepEventSelection , W );
 
 //---------- HLT --------
@@ -394,7 +402,7 @@ bool TreeHamb::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
   }
 
   for(int i = 0; i < 19; i++){
-        bShapeSelWeights[i] = jetReader->shape_weights[i];
+	bShapeSelWeights[i] = jetReader->shape_weights[i];
   }
 
   nTight = jetReader->nTight;

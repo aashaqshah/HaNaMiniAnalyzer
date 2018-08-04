@@ -152,7 +152,7 @@ class CutInfo:
     def LoadHistos( self , samplename , isdata , tree , indices=[0] , additionalCut = None ):
         UseEventList = gROOT.GetVersionInt() > 60000
         
-        #print UseEventList, gROOT.GetVersionCode()
+        #print UseEventList, gROOT.GetVersionInt()
         if UseEventList :
             tree.SetEventList( None )
         else:
