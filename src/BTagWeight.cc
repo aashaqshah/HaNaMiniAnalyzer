@@ -7,17 +7,17 @@ float BTagWeight::weightShape(pat::JetCollection jets , int syst){
   float csvWgtHF = 1., csvWgtLF = 1., csvWgtC = 1.;
   //cout << "In the weightShape method -----------------"<<endl;
   for( unsigned int iJet=0; iJet<jets.size(); iJet++ ){ 
-    bool doubleUnc = false;
-    float csv = jets[iJet].bDiscriminator(algo);
-    float jetPt = jets[iJet].pt();
-    // if(jetPt < 20){
-    //   doubleUnc = true;
-    // }
+    //bool doubleUnc = false;
+
+    float csv = 0.0;
+     if (algo == "CSVv2") 
+         csv = jets[iJet].bDiscriminator(algo);
+      else 
+         csv = jets[iJet].bDiscriminator("pfDeepCSVJetTags:probb") + jets[iJet].bDiscriminator("pfDeepCSVJetTags:probbb");
+     float jetPt = jets[iJet].pt();
+
     float jetAbsEta = fabs(jets[iJet].eta());
     int flavor = jets[iJet].hadronFlavour();
-    //cout <<"Jet number "<<iJet+1 <<" >>>>>>>>>>>>>> Syst: "<< Systs[syst]<<endl;
-    //cout<<"csv\tjetPt\tjetAbsEta\tflavor"<<endl;
-    //cout<<csv<<"\t"<<jetPt<<"\t"<<jetAbsEta<<"\t"<<flavor<<endl;
     
     if (abs(flavor) == 5 ){    //HF  
       float iCSVWgtHF = 1;
@@ -25,10 +25,8 @@ float BTagWeight::weightShape(pat::JetCollection jets , int syst){
 	iCSVWgtHF = reader->eval_auto_bounds(Systs[syst],BTagEntry::FLAV_B, jetAbsEta, jetPt, csv);  
       else
 	iCSVWgtHF = reader->eval_auto_bounds(Systs[0],BTagEntry::FLAV_B, jetAbsEta, jetPt, csv);  
-      // if(doubleUnc && syst != 0 ){
-      // 	float centralSF = reader->eval_auto_bounds(Systs[0],BTagEntry::FLAV_B, jetAbsEta, jetPt, csv);
-      // 	iCSVWgtHF = iCSVWgtHF-centralSF+iCSVWgtHF;
-      // }
+
+
       if( iCSVWgtHF!=0 ) csvWgtHF *= iCSVWgtHF;
     } else if( abs(flavor) == 4 ){  //C
       float iCSVWgtC = 1;
@@ -36,9 +34,6 @@ float BTagWeight::weightShape(pat::JetCollection jets , int syst){
 	iCSVWgtC = reader->eval_auto_bounds(Systs[syst],BTagEntry::FLAV_C, jetAbsEta, jetPt, csv);
       else
 	iCSVWgtC = reader->eval_auto_bounds(Systs[0],BTagEntry::FLAV_C, jetAbsEta, jetPt, csv);
-      // if(doubleUnc && syst != 0 ){
-      // 	float centralSF = reader->eval_auto_bounds(Systs[0],BTagEntry::FLAV_C, jetAbsEta, jetPt, csv);
-      // 	iCSVWgtC = iCSVWgtC-centralSF+iCSVWgtC;
       // }
       if( iCSVWgtC!=0 ) csvWgtC *= iCSVWgtC;   
     } else { //LF
@@ -47,15 +42,11 @@ float BTagWeight::weightShape(pat::JetCollection jets , int syst){
 	iCSVWgtLF = reader->eval_auto_bounds(Systs[syst],BTagEntry::FLAV_UDSG, jetAbsEta, jetPt, csv);
       else
 	iCSVWgtLF = reader->eval_auto_bounds(Systs[0],BTagEntry::FLAV_UDSG, jetAbsEta, jetPt, csv);
-      // if(doubleUnc && syst != 0 ){
-      // 	float centralSF = reader->eval_auto_bounds(Systs[0],BTagEntry::FLAV_UDSG, jetAbsEta, jetPt, csv);
-      // 	iCSVWgtLF = iCSVWgtLF-centralSF+iCSVWgtLF;
       // }
 
       if( iCSVWgtLF!=0 ) csvWgtLF *= iCSVWgtLF;
     }
     //cout<<"bf\tcf\tlf"<<endl;
-    //cout<<csvWgtHF <<"\t"<< csvWgtC <<"\t"<< csvWgtLF<<endl;
   }
   //if((csvWgtHF * csvWgtC * csvWgtLF)>5)throw 1000;
 
@@ -67,8 +58,6 @@ float BTagWeight::weight(pat::JetCollection jets/*, int ntag*/){
   if( WPT == -100 )
     return -100;
 	//if (!filter(ntag)){
-      		//   std::cout << "nThis event should not pass the selection, what is it doing here?" << std::endl;
-        //	return 0;
 	//}
 	int njetTags = jets.size();
 	int comb = 1 << njetTags;
@@ -91,7 +80,6 @@ float BTagWeight::weight(pat::JetCollection jets/*, int ntag*/){
 			} else {
 			        mc*=(1-eff);
                 		data*=(1-sf*eff);
-				//mc *= (1. - jetTags[j].eff);
 				//data *= (1. - jetTags[j].eff * jetTags[j].sf);
             		}
         	}
@@ -193,58 +181,33 @@ float BTagWeight::MCTagEfficiency(pat::Jet jet, int WP){
 }
 
 float BTagWeight::TagScaleFactor(pat::Jet jet, bool LooseWP ){
-
-	float MinJetPt = 20.;
-	float MaxBJetPt = 670., MaxLJetPt = 1000.;
-        float JetPt = jet.pt(); bool DoubleUncertainty = false;
+        float JetPt = jet.pt();
+      //  float JetPt = jet.pt(); bool DoubleUncertainty = false;
 	int flavour = fabs(jet.hadronFlavour());
 	if(flavour == 5) flavour = BTagEntry::FLAV_B;
 	else if(flavour == 4) flavour = BTagEntry::FLAV_C;
 	else flavour = BTagEntry::FLAV_UDSG;
 	
-	// if(flavour != BTagEntry::FLAV_UDSG){
-	//    if (JetPt>MaxBJetPt)  { // use MaxLJetPt for  light jets
-        // 	JetPt = MaxBJetPt; 
-        // 	DoubleUncertainty = true;
-      	//    }
-	// } else {
-	//    if (JetPt>MaxLJetPt)  { // use MaxLJetPt for  light jets
-        //         JetPt = MaxBJetPt;
-        //         DoubleUncertainty = true;
-        //    }
-	// }
-	// if(JetPt<MinJetPt){
-	//    JetPt = MinJetPt;
-	//    DoubleUncertainty = true;
 	// }
 
 	float jet_scalefactor = 1;
-	float jet_scalefactorCent = 1;
+	//float jet_scalefactorCent = 1;
 
 	if((BTagEntry::JetFlavor)flavour != BTagEntry::FLAV_UDSG){
 	  jet_scalefactor = reader->eval_auto_bounds( Systs[syst], BTagEntry::FLAV_B, jet.eta(), JetPt); 
-	  // if(DoubleUncertainty && syst != 0)
-	  //   jet_scalefactorCent = reader->eval_auto_bounds( Systs[0], BTagEntry::FLAV_B, jet.eta(), JetPt);
+
 	  if(LooseWP){
 		  jet_scalefactor = readerExc->eval_auto_bounds( Systs[syst], BTagEntry::FLAV_B, jet.eta(), JetPt);
-		  // if(DoubleUncertainty && syst != 0)
-		  //   jet_scalefactorCent= readerExc->eval_auto_bounds( Systs[0], BTagEntry::FLAV_B, jet.eta(), JetPt);
 	  }
 	} else {
-	  jet_scalefactor = reader->eval_auto_bounds(Systs[syst], BTagEntry::FLAV_UDSG, jet.eta(), JetPt);
-	  // if(DoubleUncertainty && syst != 0)
-	  //   jet_scalefactorCent = reader->eval_auto_bounds( Systs[0], BTagEntry::FLAV_UDSG, jet.eta(), JetPt);
+
 	  if(LooseWP){
 		  jet_scalefactor = readerExc->eval_auto_bounds(Systs[syst], BTagEntry::FLAV_UDSG, jet.eta(), JetPt);
-		  // if(DoubleUncertainty && syst != 0)
 		  //   jet_scalefactorCent = readerExc->eval_auto_bounds( Systs[0], BTagEntry::FLAV_UDSG, jet.eta(), JetPt);
 	  }
 	}
 
 
-	// if(DoubleUncertainty && syst != 0){
-	//   jet_scalefactor = jet_scalefactor - jet_scalefactorCent + jet_scalefactor; 
-	// }
 	return jet_scalefactor;
 }
 

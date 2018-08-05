@@ -221,30 +221,29 @@ else :
 	process.Hamb.HLT_Mu17Mu8_DZ.Input = cms.InputTag( "TriggerResults","","HLT2" )
 	process.Hamb.HLT_Mu17Mu8.Input = cms.InputTag( "TriggerResults","","HLT2" )
 
-    #if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
-    #    AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root")
-    #    AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root")
-    #    AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1)
+    if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
+        AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root")
+        AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root")
+        AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1)
 
-    #    process.HambJECUP.MET.Uncertainty = 2
-    #    #process.HambDeepCSVJECUP.MET.Uncertainty = 2
+        process.HambJECUP.MET.Uncertainty = 2
 
-    #    AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1)
-    #    process.HambJECDOWN.MET.Uncertainty = 3
+        AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1)
+        process.HambJECDOWN.MET.Uncertainty = 3
 
-    #    #https://github.com/cms-sw/cmssw/blob/CMSSW_7_6_X/CondFormats/JetMETObjects/interface/JetResolutionObject.h#L25-L29
-    #    AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
-    #    AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
-
-
-    #    AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11)
-    #    AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10)
+        #https://github.com/cms-sw/cmssw/blob/CMSSW_7_6_X/CondFormats/JetMETObjects/interface/JetResolutionObject.h#L25-L29
+        AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
+        AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
 
 
-    #    AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
-    #    AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1)
+        AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11)
+        AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10)
 
-    #    AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
+
+        AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
+        AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1)
+
+        AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
 
     #if theSample.Name.count("DYMGInclusive"):
         #process.Hamb.LHE.cutOnNGenJets = 0
@@ -274,7 +273,29 @@ process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(17.)
 process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
 process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
 
-#AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1 , "HambDeepCSV")
+if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
+   AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root", "HambDeepCSV")
+   AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root", "HambDeepCSV")
+   AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1 , "HambDeepCSV")
+
+   process.HambDeepCSVJECUP.MET.Uncertainty = 2
+
+   AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1, "HambDeepCSV")
+   process.HambDeepCSVJECDOWN.MET.Uncertainty = 3
+
+   #https://github.com/cms-sw/cmssw/blob/CMSSW_7_6_X/CondFormats/JetMETObjects/interface/JetResolutionObject.h#L25-L29
+   AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2, "HambDeepCSV")
+   AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1, "HambDeepCSV")
+
+
+   AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11, "HambDeepCSV")
+   AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10 , "HambDeepCSV")
+
+   AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
+   AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1 , "HambDeepCSV" )
+
+   #AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
+   AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1 , "HambDeepCSV")
 
 process.p2 = cms.Path( process.HambDeepCSV ) #comment it when only CSV is required
 
