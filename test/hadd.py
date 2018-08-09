@@ -21,7 +21,7 @@ for sample in samples:
     #    print sample.Name 
     #else:
     #sample.MakeJobs( 5 , "eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Oct14_8020_MassProd" , "out" ) ) 
-    sample.MakeJobs( 15 , "/eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Out_CMSSW_94X" , "out" ) ) 
+    sample.MakeJobs( 2 , "/eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Out_CMSSW_94X" , "out" ) ) 
 
 from Haamm.HaNaMiniAnalyzer.ExtendedSample import *
 for sample in samples:

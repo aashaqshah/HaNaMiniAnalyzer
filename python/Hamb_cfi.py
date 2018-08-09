@@ -24,7 +24,7 @@ Hamb = cms.EDFilter('TreeHamb',
                                                                           # LooseRelTkIso=0.10, TightRelTkIso =0.05
                                                                           #Cut based have not been defined yet for 2017 data.
                                         MuonEtaCut = cms.double( 2.4 ),
-                                        DiMuLowMassCut = cms.double(15  ),  # Remove the dimu lower bound
+                                        DiMuLowMassCut = cms.double(8.0),  # Remove the dimu lower bound
                                         DiMuCharge = cms.int32( -1 ),
                                         MuonID = cms.int32( 2 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
                                                                             # 5:HighPt, 6:MediumPrompt, 7:TrkHighPt 

@@ -126,3 +126,30 @@ MiniAOD94Samples.append(VBF5094)
 VBF6094 = Sample( "VBF60", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M60_Tomumubb/")
 MiniAOD94Samples.append(VBF6094)
 
+#Za0194 = Sample( "Za01", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za0194)
+#
+#Za0394 = Sample( "Za03", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za0394)
+#
+#Za0694 = Sample( "Za06", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za0694)
+#
+#Za0994 = Sample( "Za09", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za0994)
+#
+#Za1294 = Sample( "Za12", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za1294)
+#
+#Za1594 = Sample( "Za15", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za1594)
+#
+#Za2094 = Sample( "Za20", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za2094)
+#
+#Za2594 = Sample( "Za25", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za2594)
+#
+#Za3094 = Sample( "Za30", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
+#MiniAOD94Samples.append(Za3094)
+#
