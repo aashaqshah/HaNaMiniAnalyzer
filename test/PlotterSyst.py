@@ -3,21 +3,22 @@ from ROOT import gROOT, TLatex, TCanvas, TFile, gROOT, TColor
 import math
 import string
 
-LUMI=35900
+LUMI=41860
+#LUMI=35900
 LOCATION = "/eos/user/a/ajafari/"
 #LOCATION = "/home/ajafari/cernbox/"
 
 
 gROOT.SetBatch(True)
 
-from Samples80.Samples import *
+from Samples94.Samples import *
 samples = None
 runOnOutsOfAnotherJob = False
 if runOnOutsOfAnotherJob :
     samples = samples24june
     samples += sampleswith24juneonly
 else :
-    samples = MiniAOD80Samples
+    samples = MiniAOD94Samples
 
 def GetSample( s ):
     if runOnOutsOfAnotherJob:
@@ -29,8 +30,9 @@ def GetSample( s ):
         return s
 
 
-nTuples = "%s/Hamb13/June06_Full2016_MassProd/withSelVariables/withMoreBtags/" %(LOCATION)
-nSystTuples = "%s/Hamb13/March02_Full2016_MassProd_CorrectBtag/withSelVariables/withMoreBtags/" %(LOCATION)
+#nTuples = "%s/Hamb13/June06_Full2016_MassProd/withSelVariables/withMoreBtags/" %(LOCATION)
+nTuples = "/eos/cms/store/user/aashah/Out_CMSSW_94X/Trees"
+nSystTuples = "/eos/cms/store/user/aashah/Out_CMSSW_94X/Trees"
 #nSystTuples = "%s/Hamb13/March02_Full2016_MassProd_CorrectBtag/withSelVariables/withMoreBtags/2jets/" %(LOCATION)
 
 #nSystTuples = "%s/Hamb13/June06_Full2016_MassProd/SystSignal27Feb/withSelVariables/withMoreBtags/" %(LOCATION)
@@ -39,11 +41,11 @@ nSystTuples = "%s/Hamb13/March02_Full2016_MassProd_CorrectBtag/withSelVariables/
 from Haamm.HaNaMiniAnalyzer.SampleType import *
 from ROOT import kGray, kGreen, kOrange, kRed, kBlack, kCyan, kBlue, kAzure, kTeal, kPink, kYellow
 ci = TColor.GetColor("#ff6666")
-DYSamples = SampleType("DY" , ci , [ GetSample(DYJets80) , GetSample(DYJetsLowMass80), GetSample(WJetsMG80)] , nTuples )
+DYSamples = SampleType("DY" , ci , [ GetSample(DYJets94) , GetSample(DYJetsLowMass94), GetSample(WJetsMG94)] , nTuples )
 ci = TColor.GetColor("#ffff66")
-TopSamples = SampleType("Top" , ci , [ GetSample(TTBar80) , GetSample(TW80), GetSample(TbarW80) , GetSample(TChannelTbar80) , GetSample( TChannelT80 ) ] , nTuples )
+TopSamples = SampleType("Top" , ci , [ GetSample(TTBar94) , GetSample(TW94), GetSample(TbarW94) , GetSample(TChannelTbar94) , GetSample( TChannelT94 ) ] , nTuples )
 ci = 38
-DiBosonSamples = SampleType("DiBoson" , ci , [ GetSample(ZZ80) , GetSample(WZ80), GetSample(WW80) ] , nTuples )
+DiBosonSamples = SampleType("DiBoson" , ci , [ GetSample(ZZ94) , GetSample(WZ94), GetSample(WW94) ] , nTuples )
 ci = TColor.GetColor("#996633")
 
 
@@ -68,31 +70,31 @@ if len(sys.argv) == 3:
 
 
 signalsamples = []
-#signalsamples.append (SampleType( "Signal15" , kAzure+10 , [ GetSample(GGH1580) ] , nTuples , True ))
-# signalsamples.append (SampleType( "Signal20" , kBlue+2 , [ GetSample(GGH2080) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal25" , kCyan+2	, [ GetSample(GGH2580) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal30" , kTeal+10 , [ GetSample(GGH3080) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal40" , kYellow+2 , [ GetSample(GGH4080) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal45" , kOrange-2 , [ GetSample(GGH4580) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal50" , kOrange+10 , [ GetSample(GGH5080) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal55" , kRed+2 , [ GetSample(GGH5580) ] , nSystTuples , True ))
-# signalsamples.append (SampleType( "Signal60" , kPink+10 , [ GetSample(GGH6080) ] , nSystTuples , True ))
-signalsamples.append (SampleType( "Signalmmtt20" , kBlue+2 , [ GetSample(GGHmmtt2080) ] , nSystTuples , True ))
-signalsamples.append (SampleType( "Signalmmtt40" , kYellow+2 , [ GetSample(GGHmmtt4080) ] , nSystTuples , True ))
-signalsamples.append (SampleType( "Signalmmtt60" , kPink+10 , [ GetSample(GGHmmtt6080) ] , nSystTuples , True ))
-signalsamples.append (SampleType( "Signalbbtt20" , kOrange-2 , [ GetSample(GGHbbtt2080) ] , nSystTuples , True ))
-signalsamples.append (SampleType( "Signalbbtt40" , kOrange+10 , [ GetSample(GGHbbtt4080) ] , nSystTuples , True ))
-signalsamples.append (SampleType( "Signalbbtt60" , kRed+2 , [ GetSample(GGHbbtt6080) ] , nSystTuples , True ))
+#signalsamples.append (SampleType( "Signal15" , kAzure+10 , [ GetSample(GGH1594) ] , nTuples , True ))
+# signalsamples.append (SampleType( "Signal20" , kBlue+2 , [ GetSample(GGH2094) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal25" , kCyan+2	, [ GetSample(GGH2594) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal30" , kTeal+10 , [ GetSample(GGH3094) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal40" , kYellow+2 , [ GetSample(GGH4094) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal45" , kOrange-2 , [ GetSample(GGH4594) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal50" , kOrange+10 , [ GetSample(GGH5094) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal55" , kRed+2 , [ GetSample(GGH5594) ] , nSystTuples , True ))
+# signalsamples.append (SampleType( "Signal60" , kPink+10 , [ GetSample(GGH6094) ] , nSystTuples , True ))
+signalsamples.append (SampleType( "Signalmmtt20" , kBlue+2 , [ GetSample(GGHmmtt2094) ] , nSystTuples , True ))
+signalsamples.append (SampleType( "Signalmmtt40" , kYellow+2 , [ GetSample(GGHmmtt4094) ] , nSystTuples , True ))
+signalsamples.append (SampleType( "Signalmmtt60" , kPink+10 , [ GetSample(GGHmmtt6094) ] , nSystTuples , True ))
+signalsamples.append (SampleType( "Signalbbtt20" , kOrange-2 , [ GetSample(GGHbbtt2094) ] , nSystTuples , True ))
+signalsamples.append (SampleType( "Signalbbtt40" , kOrange+10 , [ GetSample(GGHbbtt4094) ] , nSystTuples , True ))
+signalsamples.append (SampleType( "Signalbbtt60" , kRed+2 , [ GetSample(GGHbbtt6094) ] , nSystTuples , True ))
 
 nTotals = {}
             
 from Haamm.HaNaMiniAnalyzer.Plotter import *
 plotter = Plotter()
-listofdata = [GetSample(s) for s in MiniAOD80Samples if s.IsData]
+listofdata = [GetSample(s) for s in MiniAOD94Samples if s.IsData]
 dataSamples2 = SampleType("Data" , kBlack , listofdata  , nTuples  ) # , additionalCut="(higgsMass > 135 || higgsMass < 115)"
 #allSTs = [ dataSamples2 , DiBosonSamples, TopSamples, DYSamples ]
 #if(len(sys.argv) == 3):
-allSTs = [ dataSamples2, SampleType( "Signalmmtt2000" , kBlue+2 , [ GetSample(GGHmmtt2080) ] , nSystTuples , True )]#DiBosonSamples, TopSamples, DYSamples ]
+allSTs = [ dataSamples2, SampleType( "Signalmmtt2000" , kBlue+2 , [ GetSample(GGHmmtt2094) ] , nSystTuples , True )]#DiBosonSamples, TopSamples, DYSamples ]
 
 allSTs.extend(signalsamples)
 for st in allSTs :

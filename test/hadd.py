@@ -2,7 +2,7 @@
 from ROOT import gROOT
 gROOT.SetBatch(True)
 
-toAddSamples = ["TChannel" ]
+#toAddSamples = ["TChannel" ]
 
 #from Samples80.Samples import *
 from Samples94.Samples import *
@@ -15,19 +15,19 @@ else :
     samples = MiniAOD94Samples
 
 for sample in samples:
-    if sample.Name in toAddSamples:
-	continue;
+    #if sample.Name in toAddSamples:
+	#continue;
         #job is already created : sample.MakeJobs( 20 , "%s/%s" % (OutPath24June , prefix) )
     #    print sample.Name 
     #else:
     #sample.MakeJobs( 5 , "eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Oct14_8020_MassProd" , "out" ) ) 
-    sample.MakeJobs( 2 , "/eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Out_CMSSW_94X" , "out" ) ) 
+    sample.MakeJobs( 1 , "/eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Out_CMSSW_94X" , "out" ) ) 
 
 from Haamm.HaNaMiniAnalyzer.ExtendedSample import *
 for sample in samples:
     print "Processing input Sample " + sample.Name
-    if sample.Name in toAddSamples:
-	continue
+    #if sample.Name in toAddSamples:
+    #	continue
     #    print "skipping " + sample.Name
     #    continue
     ss = ExtendedSample(sample)

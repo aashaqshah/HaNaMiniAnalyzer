@@ -2,17 +2,17 @@
 nFilesPerJob=1 #used for signal systematics on March 02 and before
 #nFilesPerJob=3
 
-#CheckFailedJobs=True
-CheckFailedJobs=False
+CheckFailedJobs=True
+#CheckFailedJobs=False
 hname = "Hamb/CutFlowTable/CutFlowTable"
 prefix = "out"
 
 from ROOT import TFile, TH1
 
 import os
-command = "export XRD_NETWORKSTACK=IPv4"
-print command
-os.system(command)
+#command = "export XRD_NETWORKSTACK=IPv4"
+#print command
+#os.system(command)
 
 import sys
 import getpass
@@ -39,7 +39,7 @@ while os.path.isdir( "./%s" % (workingdir) ):
     workingdir += "_"
 os.mkdir( workingdir )
 
-copy( "SetupAndRun.sh" , "./%s/" % (workingdir) )
+copy( "SetupAndRun_lxbatch.sh" , "./%s/" % (workingdir) )
 
 from subprocess import call
 call(["voms-proxy-init" , "--out" , "./%s/.x509up_u%d" % ( workingdir , os.getuid()) , "--voms" , "cms" , "--valid" , "2000:0"])
@@ -48,9 +48,9 @@ call(["voms-proxy-init" , "--out" , "./%s/.x509up_u%d" % ( workingdir , os.getui
 FailedJobs = {}
 if CheckFailedJobs:
     for sample in samples:
-    	if not sample.Name.count("GGH") : #for signal sample systs 
+    	#if not sample.Name.count("GGH") : #for signal sample systs 
         #if not sample.Name.count("DYMG"): #for signal sample systs 
-            continue
+        #    continue
 
         ListOfFailedJobs = []
         for job_ in sample.Jobs :
@@ -86,15 +86,15 @@ if CheckFailedJobs:
 file = open("%s/submit.sh" % (workingdir) , "w" )
 for sample in samples:
 
-    if not sample.Name.count("GGH") :                                                                                                                                                              
+    #if not sample.Name.count("GGH") :                                                                                                                                                              
     #if not sample.Name.count("DYMG"):
-        continue
+     #   continue
 
 
     if CheckFailedJobs:
         if len(FailedJobs[ sample.Name ]) > 0:
-            #command = 'bsub -q 8nh -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            command = 'bsub -q 2nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            #command = 'bsub -q 8nh -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun_lxbatch.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            command = 'bsub -q 2nw -J "%(sample)s%(countor)s[%(list)s]"  -o %(sample)s%%I.out `pwd`/SetupAndRun_lxbatch.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
                 "vomsaddress":"`pwd`/.x509up_u%d" % (os.getuid()) ,
                 "scram":os.getenv("SCRAM_ARCH") ,
                 "cmsver":os.getenv("CMSSW_VERSION"),
@@ -118,9 +118,9 @@ for sample in samples:
         print "%s : %d"% ( sample.Name , initlen )
         print steps
         for i in range( 0 , len(steps)-1):
-            #command = 'bsub -q 8nh -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            #command = 'bsub -R "pool>6000" -q 2nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
-            command = 'bsub -q 2nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            #command = 'bsub -q 8nh -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun_lxbatch.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            #command = 'bsub -R "pool>6000" -q 2nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun_lxbatch.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
+            command = 'bsub -q 2nw -J "%(sample)s%(countor)d[%(init)d-%(nfiles)d]" -o %(sample)s%%I.out `pwd`/SetupAndRun_lxbatch.sh %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d' % {
                 "vomsaddress":"`pwd`/.x509up_u%d" % (os.getuid()) ,
                 "scram":os.getenv("SCRAM_ARCH") ,
                 "cmsver":os.getenv("CMSSW_VERSION"),

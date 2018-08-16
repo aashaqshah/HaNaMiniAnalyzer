@@ -1,21 +1,19 @@
 #!/bin/bash
-
-export X509_USER_PROXY=$1
+export X509_USER_PROXY=$2
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 voms-proxy-info
 
-export SCRAM_ARCH=$2
-scramv1 project CMSSW $3
-cd $3/src/
-export SCRAM_ARCH=$2
+export SCRAM_ARCH=$3
+scramv1 project CMSSW $4
+cd $4/src/
+export SCRAM_ARCH=$3
 eval `scramv1 runtime -sh`
 scram b
 mkdir Haamm/
 cd Haamm
-#git clone -b $4 https://github.com/nadjieh/HaNaMiniAnalyzer/
-git clone -b $4 https://github.com/aashaqshah/HaNaMiniAnalyzer/
+git clone -b $5 https://github.com/aashaqshah/HaNaMiniAnalyzer/
 cd HaNaMiniAnalyzer/
-git checkout $4
+git checkout $5
 scram b
 cd test
 if [ ! -z "$LSB_JOBINDEX" ];
@@ -28,62 +26,79 @@ else
     then
 	export FILEID=$CONDORJOBID
 	echo $FILEID
-    fi
+        if [[ "$1" == "SUBMIT" ]] ; then
+         echo $FILEID
+        else
+         FailedJobIDs=$1
+         fileNumber=$FILEID
+         counter=-1;
+         values=$(echo $FailedJobIDs | tr "," "\n")
+         for value in $values
+          do
+           counter=$[$counter +1]
+           if [ "$fileNumber" -eq "$counter" ];then
+             echo "fileNumber = $fileNumber";
+             echo "counter = $counter";
+             echo "value = $value";
+             FILEID=$value;
+           fi
+          done
+        fi
+     fi
 fi
 
+echo cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
+cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
 
-echo cmsRun Hamb_cfg.py sample=$5 job=$FILEID output=$6 maxEvents=-1 nFilesPerJob=$8
-cmsRun Hamb_cfg.py sample=$5 job=$FILEID output=$6 maxEvents=-1 nFilesPerJob=$8
-
-outfilename=`ls $6*$5*.root`
-outfilenames=`ls *$6*$5*.root`
+outfilename=`ls $7*$6*.root`
+outfilenames=`ls *$7*$6*.root`
 
 ls -l $outfilenames
 
 
-if [[ $7 == eos* ]] ;
+#if [[ $7 == eos* ]] ;
+if [[ $8 == eos* ]] ;
 then
     #first try to copy to /eos
     if [[ -d "/eos" && -x "/eos" ]]; then
-	mkdir -p /$7
+	mkdir -p /$8
 
-	if [ -f  /$7/$outfilename ]; then
+	if [ -f  /$8/$outfilename ]; then
 	    echo "the file exists, is being renamed"
-	    rm -f /$7/${outfilename}_
-		rm -f /$7/$outfilename
+	    rm -f /$8/${outfilename}_
+		rm -f /$8/$outfilename
 	fi
 
 	COUNTER2=0
-	while [ ! -f  /$7/$outfilename ]
+	while [ ! -f  /$8/$outfilename ]
 	do
 	    if [ $COUNTER2 -gt 20 ]; then
 		break
 	    fi
-	    cp $outfilenames /$7/
+	    cp $outfilenames /$8/
 	    let COUNTER2=COUNTER2+1
 	    echo ${COUNTER2}th Try
 	    sleep 10
 	done
 
-	if [ -f  /$7/$outfilename ]; then
+	if [ -f  /$8/$outfilename ]; then
 	    echo "The file was copied succesfully via the /eos mounting point on machine"
 	    rm $outfilenames
 	    exit 0
 	fi
     fi
 
-    #second try to copy via eoscp command
-    eos mkdir -p /$7
+    eos mkdir -p /$8
     if [ $? -eq 0 ] || [ $? -eq 17 ] ;
     then
-	for file in *$6*$5*.root; do
-	    eoscp  $file /$7/$file
+	for file in *$7*$6*.root; do
+	    eoscp  $file /$8/$file
 	done 
     fi
 
     COPIED=0
-    for file in *$6*$5*.root; do
-	eos ls /$7/$file
+    for file in *$7*$6*.root; do
+	eos ls /$8/$file
 	if [ $? -ne 0 ];
 	then
 	    echo $file is not copied via the eoscp method
@@ -123,27 +138,27 @@ then
 	exit 1
     fi
 
-    mkdir -p $7
+    mkdir -p $8
 
-    if [ -f  $7/$outfilename ]; then
+    if [ -f  $8/$outfilename ]; then
 	echo "the file exists, is being renamed"
-	rm -f $7/${outfilename}_
-	mv $7/$outfilename $7/${outfilename}_
+	rm -f $8/${outfilename}_
+	mv $8/$outfilename $8/${outfilename}_
     fi
 
     COUNTER2=0
-    while [ ! -f  $7/$outfilename ]
+    while [ ! -f  $8/$outfilename ]
     do
 	if [ $COUNTER2 -gt 20 ]; then
 	    break
 	fi
-	cp $outfilenames $7/
+	cp $outfilenames $8/
 	let COUNTER2=COUNTER2+1
 	echo ${COUNTER2}th Try
 	sleep 10
     done
 
-    if [ ! -f  $7/$outfilename ]; then
+    if [ ! -f  $8/$outfilename ]; then
 	echo "The file was not copied to destination after 20 tries"
 	exit 1
     fi
@@ -152,28 +167,28 @@ then
     /afs/cern.ch/project/eos/installation/0.3.84-aquamarine/bin/eos.select -b fuse umount eos
     rm -rf eos
 else
-    mkdir -p $7
+    mkdir -p $8
 
 
-    if [ -f  $7/$outfilename ]; then
+    if [ -f  $8/$outfilename ]; then
 	echo "the file exists, is being renamed"
-	rm -f $7/${outfilename}_
-	mv $7/$outfilename $7/${outfilename}_
+	rm -f $8/${outfilename}_
+	mv $8/$outfilename $8/${outfilename}_
     fi
 
     COUNTER2=0
-    while [ ! -f  $7/$outfilename ]
+    while [ ! -f  $8/$outfilename ]
     do
 	if [ $COUNTER2 -gt 20 ]; then
 	    break
 	fi
-	cp $outfilenames $7/
+	cp $outfilenames $8/
 	let COUNTER2=COUNTER2+1
 	echo ${COUNTER2}th Try
 	sleep 10
     done
 
-    if [ ! -f  $7/$outfilename ]; then
+    if [ ! -f  $8/$outfilename ]; then
 	echo "The file was not copied to destination after 20 tries"
 	exit 1
     fi

@@ -342,8 +342,6 @@ class ExtendedSample: #extend the sample object to store histograms
             # merge objects
             l = TList()
             for o in [of.Get(obj_path[1:]) for of in otherfiles]:
-                if o is None:
-                   continue
                 l.Add(o)
             obj.Merge(l)
 
