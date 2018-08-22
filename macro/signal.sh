@@ -8,7 +8,7 @@
 ./analyzetree input GGH50.root
 ./analyzetree input GGH55.root
 ./analyzetree input GGH60.root
-./analyzetree input DYBB1070.root
-./analyzetree input TTbar.root
-./analyzetree input DYJets.root
-./analyzetree input DYJetsLowMass.root
+#./analyzetree input DYBB1070.root
+#./analyzetree input TTbar.root
+#./analyzetree input DYJets.root
+#./analyzetree input DYJetsLowMass.root

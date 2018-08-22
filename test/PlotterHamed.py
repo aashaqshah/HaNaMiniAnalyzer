@@ -3,14 +3,7 @@ from ROOT import gROOT, TLatex, TCanvas, TFile, gROOT, TColor
 import math
 import string
 
-#<<<<<<< HEAD
 LUMI=41860
-##=======
-#LUMI=35900
-#LOCATION = "/eos/user/a/ajafari/"
-##LOCATION = "/home/ajafari/cernbox/"
-#>>>>>>> nadjieh/80X_201705
-#
 gROOT.SetBatch(True)
 
 from Samples94.Samples import *
@@ -84,7 +77,8 @@ nTotals = {}
             
 from Haamm.HaNaMiniAnalyzer.Plotter import *
 plotter = Plotter()
-<<<<<<< HEAD
+
+#<<<<<<< HEAD
 listofdata = [GetSample(s) for s in MiniAOD94Samples if s.IsData]
 dataSamples2 = SampleType("Data" , kBlack , listofdata  , nTuples  ) # , additionalCut="(higgsMass > 135 || higgsMass < 115)"
 allSTs = [ dataSamples2 , DiBosonSamples, TopSamples, DYSamples ]

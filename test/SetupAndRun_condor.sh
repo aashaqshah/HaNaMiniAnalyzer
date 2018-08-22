@@ -26,21 +26,24 @@ else
     then
 	export FILEID=$CONDORJOBID
 	echo $FILEID
+
         if [[ "$1" == "SUBMIT" ]] ; then
          echo $FILEID
         else
          FailedJobIDs=$1
          fileNumber=$FILEID
          counter=-1;
-         values=$(echo $FailedJobIDs | tr "," "\n")
-         for value in $values
+         file_zero=0;
+         Ids=$(echo $FailedJobIDs | tr "," "\n")
+         for Id in $Ids
           do
            counter=$[$counter +1]
            if [ "$fileNumber" -eq "$counter" ];then
-             echo "fileNumber = $fileNumber";
-             echo "counter = $counter";
-             echo "value = $value";
-             FILEID=$value;
+              echo "fileNumber = $fileNumber";
+              echo "counter = $counter";
+              echo "Id = $Id";
+              FILEID=$[$Id -1];
+              echo "Failed File Id is $FILEID"
            fi
           done
         fi

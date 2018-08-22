@@ -7,7 +7,6 @@ print Sample.WD
 MiniAOD94Samples = []
 
 #Data
-
 #B data sets
 DoubleMuB94 = Sample("DoubleMuB" , 0 , False ,  "/DoubleMuon/Run2017B-17Nov2017-v1/MINIAOD" )
 MiniAOD94Samples.append( DoubleMuB94 )
@@ -32,7 +31,7 @@ MiniAOD94Samples.append( DoubleMuF94 )
 
 #WJetsMG94 = Sample( "WJetsMG" , 61526.7 , True , "/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext2-v1/MINIAODSIM" )
 #MiniAOD94Samples.append( WJetsMG94 )
-
+#
 #WJetsToLNu94 = Sample( "WJetsLNu" , 1, True , "/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIIFall17NanoAOD-PUMoriond17_94X_mcRun2_asymptotic_v2_ext2-v1/NANOAODSIM" )
 #MiniAOD94Samples.append( WJetsToLNu94 )
 
