@@ -126,10 +126,13 @@ process.Hamb.sample = theSample.Name
 process.Hamb.LHE.useLHEW = theSample.LHEWeight
 process.Hamb.isData = theSample.IsData
 process.Hamb.Jets.BTagCuts = cms.vint32(0,-1)
-process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(17.)
+#process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(17.)
+process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(20.)
 process.Hamb.DiMuon.DiMuLowMassCut = cms.double(10.)
-process.Hamb.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
-process.Hamb.Jets.JetPtCut = cms.double( 10.)
+#process.Hamb.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
+process.Hamb.DiMuon.MuonSubLeadingPtCut = cms.double(10.)
+#process.Hamb.Jets.JetPtCut = cms.double( 10.)
+process.Hamb.Jets.JetPtCut = cms.double( 15.)
 process.Hamb.Jets.BTagWeightShapes = True
 process.Hamb.Jets.BTagWeightNonShapes = True
 
@@ -270,10 +273,13 @@ process.HambDeepCSV.Jets.BTagAlgoSubTypeB = "pfDeepCSVJetTags:probbb"
 process.HambDeepCSV.Jets.BTagWeightShapes = True
 process.HambDeepCSV.Jets.BTagWeightNonShapes = True
 
-process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(17.)
-process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
+#process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(17.)
+process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(20.)
+#process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(8.)
+process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(10.)
 process.HambDeepCSV.DiMuon.DiMuLowMassCut = cms.double(10.)
-process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
+process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
+#process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
 
 if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
    AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root", "HambDeepCSV")
