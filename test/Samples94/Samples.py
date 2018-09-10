@@ -135,10 +135,10 @@ GGHbbtt6094 = Sample( "GGHbbtt60", 48.5800*1.7*0.0001,False, "/eos/uscms/store/u
 MiniAOD94Samples.append(GGHbbtt6094)
 
 GGHmmtt2094 = Sample( "GGHmmtt20", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M20_Tomumutautau/")
-MiniAOD94Samples.append(GGHbbtt2094)
+MiniAOD94Samples.append(GGHmmtt2094)
 
 GGHmmtt4094 = Sample( "GGHmmtt40", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M40_Tomumutautau/")
-MiniAOD94Samples.append(GGHbbtt4094)
+MiniAOD94Samples.append(GGHmmtt4094)
 
 GGHmmtt6094 = Sample( "GGHmmtt60", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M60_Tomumutautau/")
 MiniAOD94Samples.append(GGHmmtt6094)
