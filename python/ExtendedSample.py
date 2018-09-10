@@ -109,7 +109,8 @@ class ExtendedSample: #extend the sample object to store histograms
             self.Tree.AddFriend( self.FriendTree )
             
 
-    def CutYields( self , cut , weight , treeName = "Hamb/Trees/Events" ):
+    #def CutYields( self , cut , weight , treeName = "Hamb/Trees/Events" ):
+    def CutYields( self , cut , weight , treeName = "HambDeepCSV/Trees/Events" ):
         cut = CutInfo( "CutTest" , cut , weight )
         cut.AddHist( "ONE" , "1" , 1 , -1 , 5 )
         self.DrawTreeHistos( [cut], treeName )

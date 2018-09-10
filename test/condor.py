@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-nFilesPerJob=1
+import ROOT as root
+nFilesPerJob=3
 import sys
 import getpass
 from ROOT import TFile, TH1
@@ -48,6 +49,10 @@ if CheckFailedJobs:
             outfile = job_.Output
             job = job_.Index + 1
             if isfile( outfile ) :
+                #fileOpen = root.TFile(outfile).IsOpen()
+                #if fileOpen:
+                #   root.TFile(outfile).Close()
+                #   print "===> file %s closed succesfully"%(outfile)
                 ff = TFile.Open(outfile)
                 if not ff :
                     ListOfFailedJobs.append( str(job) )
@@ -65,6 +70,7 @@ if CheckFailedJobs:
                     ListOfFailedJobs.append(str( job ))
                     print job
                     print outfile + " : Exists, without histogram"
+                ff.Close()
             else :
                 ListOfFailedJobs.append( str(job))
                 print job

@@ -14,7 +14,7 @@ MiniAOD94Samples.append( DoubleMuB94 )
 #C data Sets
 DoubleMuC94 = Sample("DoubleMuC" , 0 , False ,  "/DoubleMuon/Run2017C-17Nov2017-v1/MINIAOD" )
 MiniAOD94Samples.append( DoubleMuC94 )
-
+#
 #D data Sets
 DoubleMuD94 = Sample("DoubleMuD" , 0 , False ,  "/DoubleMuon/Run2017D-17Nov2017-v1/MINIAOD" )
 MiniAOD94Samples.append( DoubleMuD94 )
@@ -42,10 +42,10 @@ W4JetsToLNu94 = Sample( "W4JetsToLNu" , 524.2, True , "/W4JetsToLNu_TuneCP5_13Te
 MiniAOD94Samples.append( W4JetsToLNu94 )
 
 
-DYJetsLowMass94 = Sample( "DYJetsLowMass" , 18610, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v2/MINIAODSIM" )
+DYJetsLowMass94 = Sample( "DYJetsLowMass" , 18610*3.39, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v2/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsLowMass94 )
 
-DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
+DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181*0.65, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsHighMass94 )
 
 ##TTbar94 = Sample( "TTbar" , 72.1 , True ,  "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
@@ -54,7 +54,7 @@ MiniAOD94Samples.append( DYJetsHighMass94 )
 #
 TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 72.1 , True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append( TTTo2L2Nu94 )
-
+#
 #ZZTo2L2Nu94 = Sample( "ZZTo2L2Nu" , 0.6008 , True ,  "/ZZTo2L2Nu_13TeV_powheg_pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 #MiniAOD94Samples.append( ZZTo2L2Nu94 )
 
@@ -125,30 +125,45 @@ MiniAOD94Samples.append(VBF5094)
 VBF6094 = Sample( "VBF60", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M60_Tomumubb/")
 MiniAOD94Samples.append(VBF6094)
 
-#Za0194 = Sample( "Za01", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za0194)
-#
-#Za0394 = Sample( "Za03", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za0394)
-#
-#Za0694 = Sample( "Za06", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za0694)
-#
-#Za0994 = Sample( "Za09", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za0994)
-#
-#Za1294 = Sample( "Za12", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za1294)
-#
-#Za1594 = Sample( "Za15", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za1594)
-#
-#Za2094 = Sample( "Za20", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za2094)
-#
-#Za2594 = Sample( "Za25", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za2594)
-#
-#Za3094 = Sample( "Za30", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M01_Tomumubb/")
-#MiniAOD94Samples.append(Za3094)
-#
+GGHbbtt2094 = Sample( "GGHbbtt20", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M20_Tobbtautau/")
+MiniAOD94Samples.append(GGHbbtt2094)
+
+GGHbbtt2094 = Sample( "GGHbbtt40", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M40_Tobbtautau/")
+MiniAOD94Samples.append(GGHbbtt2094)
+
+GGHbbtt2094 = Sample( "GGHbbtt60", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M60_Tobbtautau/")
+MiniAOD94Samples.append(GGHbbtt2094)
+
+GGHmmtt2094 = Sample( "GGHmmtt20", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M20_Tomumutautau/")
+MiniAOD94Samples.append(GGHbbtt2094)
+
+GGHmmtt2094 = Sample( "GGHmmtt40", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M40_Tomumutautau/")
+MiniAOD94Samples.append(GGHbbtt2094)
+
+GGHmmtt2094 = Sample( "GGHmmtt60", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M60_Tomumutautau/")
+MiniAOD94Samples.append(GGHmmtt2094)
+
+Za0394 = Sample( "Za03", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M03_Tomumubb")
+MiniAOD94Samples.append(Za0394)
+
+Za0694 = Sample( "Za06", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M06_Tomumubb")
+MiniAOD94Samples.append(Za0694)
+
+Za0994 = Sample( "Za09", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M09_Tomumubb")
+MiniAOD94Samples.append(Za0994)
+
+Za1294 = Sample( "Za12", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M12_Tomumubb")
+MiniAOD94Samples.append(Za1294)
+
+Za1594 = Sample( "Za15", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M15_Tomumubb")
+MiniAOD94Samples.append(Za1594)
+
+Za2094 = Sample( "Za20", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M20_Tomumubb")
+MiniAOD94Samples.append(Za2094)
+
+Za2594 = Sample( "Za25", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M25_Tomumubb")
+MiniAOD94Samples.append(Za2594)
+
+Za3094 = Sample( "Za30", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_ToZa01_M91M30_Tomumubb")
+MiniAOD94Samples.append(Za3094)
+

@@ -281,14 +281,16 @@ class Property:
 				self.Canvas = gPad
 			self.Canvas.cd()
 			self.Pad1 =  TPad(pad1name ,pad1name,0,0.25,1,1)
-			self.Pad1.SetBottomMargin(0.1)
+			self.Pad1.SetBottomMargin(0.13)
 			self.Pad1.Draw()
+			self.Pad1.SetLogy()
 
 			self.Canvas.cd()
 
 			self.Pad2 = TPad( pad2name,pad2name,0,0,1,0.24)
 			self.Pad2.SetTopMargin(0.1)
-			self.Pad2.SetBottomMargin(0.1)
+			self.Pad2.SetBottomMargin(0.13)
+			self.Pad2.SetGridy()
 			self.Pad2.Draw()
 
 		if padid == 0:
@@ -304,8 +306,11 @@ class Property:
 	def GetLegend(self):
 		legendname = "%s_legend" % (self.Name)
 		if not hasattr(self , "Legend"):
-			self.Legend = TLegend(0.7,0.6,0.9,0.9,"","brNDC") 
+			#self.Legend = TLegend(0.7,0.6,0.9,0.9,"","brNDC") 
+			self.Legend = TLegend(0.7249284,0.6146273,0.8982808,0.8818565,"","brNDC") 
 			self.Legend.SetName( legendname )
+			self.Legend.SetFillColor(0)
+			self.Legend.SetBorderSize(0)
 			self.Legend.AddEntry( self.Data , "Data" , "lp" )
 			for st in reversed( self.Bkg.keys() ):
 				self.Legend.AddEntry( self.Bkg[st] , st , "f" )
@@ -315,7 +320,13 @@ class Property:
 	def GetSLegend(self):
 		legendname = "%s_Slegend" % (self.Name)
 		if not hasattr(self , "SLegend"):
-			self.SLegend = TLegend(0.6,0.6,0.7,0.9,"","brNDC") 
+			self.SLegend = TLegend(0.4426934,0.6343179,0.717765,0.8931083,"","brNDC")
+			#self.SLegend = TLegend(0.6,0.6,0.7,0.9,"","brNDC")
+                        self.SLegend.SetNColumns(2)
+                        self.SLegend.SetTextFont(12) 
+                        self.SLegend.SetTextSize(0.038) 
+                        self.SLegend.SetFillColor(0)
+                        self.SLegend.SetBorderSize(0) 
 			self.SLegend.SetName( legendname )
 			for st in self.Signal:
 				self.SLegend.AddEntry( st , st.GetTitle() , "l" )
@@ -337,11 +348,12 @@ class Property:
 			self.Ratio.GetYaxis().SetTitle("Data / MC")
 			self.Ratio.GetXaxis().SetTitleSize(0.2) 
 			self.Ratio.GetXaxis().SetTitleOffset(0.25)
-			self.Ratio.GetYaxis().SetLabelSize(0.1)
+			self.Ratio.GetYaxis().SetLabelSize(0.156)
 			self.Ratio.GetXaxis().SetTickLength(0.09)
-			self.Ratio.GetYaxis().SetTitleSize(0.18)
+			self.Ratio.GetYaxis().SetTitleSize(0.166)
 			self.Ratio.GetYaxis().SetNdivisions(509)
-			self.Ratio.GetYaxis().SetTitleOffset(0.25)
+			self.Ratio.GetYaxis().SetTitleOffset(0.22)
+			self.Ratio.GetYaxis().SetDecimals()
 			self.Ratio.SetFillStyle(3001)
 			
 		return self.Ratio
@@ -357,14 +369,15 @@ class Property:
 				self.RatioUncert.GetXaxis().SetBinLabel(i , "")
 			self.RatioUncert.GetYaxis().SetRangeUser(0,2)
 			self.RatioUncert.GetYaxis().SetTitle("Data / MC")
-			self.RatioUncert.GetXaxis().SetTitleSize(0.2) 
+			self.RatioUncert.GetXaxis().SetTitleSize(0.21) 
 			self.RatioUncert.GetXaxis().SetTitleOffset(0.25)
-			self.RatioUncert.GetYaxis().SetLabelSize(0.1)
+			self.RatioUncert.GetYaxis().SetLabelSize(0.16)
 			self.RatioUncert.GetXaxis().SetTickLength(0.09)
                         self.RatioUncert.GetXaxis().SetTitle("")
-			self.RatioUncert.GetYaxis().SetTitleSize(0.18)
+			self.RatioUncert.GetYaxis().SetTitleSize(0.156)
 			self.RatioUncert.GetYaxis().SetNdivisions(509)
-			self.RatioUncert.GetYaxis().SetTitleOffset(0.25)
+			self.RatioUncert.GetYaxis().SetTitleOffset(0.22)
+			self.RatioUncert.GetYaxis().SetDecimals()
 			self.RatioUncert.SetFillStyle(3001)
 			self.RatioUncert.SetFillColor(1)
 			
@@ -385,14 +398,42 @@ class Property:
                 if not hasattr(self , "TitleBox"):
                         self.TitleBox = TLatex()
                         self.TitleBox.SetNDC()
-                        self.TitleBox.SetTextSize(0.06)
-                        self.TitleBox.DrawLatex(0.6,0.943,title)
+                        self.TitleBox.SetTextSize(0.055)
+                        self.TitleBox.DrawLatex(0.125,0.8396624,"#bf{%s}"%(title))
                 return self.TitleBox
+
+        def GetCMSTag(self):
+                CMSTagTitle = "CMS #it{#bf{Preliminary}}"
+                if not hasattr(self , "CMSTag"):
+                        self.CMSTag = TLatex()
+                        self.CMSTag.SetNDC()
+                        self.CMSTag.SetTextSize(0.050)
+                        self.CMSTag.DrawLatex(0.1189112,0.9156118,CMSTagTitle)
+                return self.CMSTag
+
+        def GetLumiBox(self):
+                LumiTitle = "#bf{41.8 fb^{-1} (13 TeV)}"
+                if not hasattr(self , "LumiTitleBox"):
+                        self.LumiTitleBox = TLatex()
+                        self.LumiTitleBox.SetNDC()
+                        self.LumiTitleBox.SetTextSize(0.055)
+                        self.LumiTitleBox.DrawLatex(0.6962751,0.9212377,LumiTitle)
+                return self.LumiTitleBox
 
 	def Draw(self, normalizetodata = False , padOrCanvas = 0 ):
 		gStyle.SetOptTitle(0)
 		self.GetCanvas(1, padOrCanvas)
-                self.Data.GetYaxis().SetRangeUser( 0.000001 , 2*self.Data.GetMaximum() )
+                self.Data.GetYaxis().SetRangeUser( 0.1 , 7000*self.Data.GetMaximum() )
+                #self.Data.GetYaxis().SetRangeUser( 0.000001 , 2*self.Data.GetMaximum() )
+                self.Data.GetYaxis().SetTitle("Events/10 GeV" )
+                self.Data.GetYaxis().CenterTitle()
+                self.Data.GetXaxis().CenterTitle()
+                self.Data.GetYaxis().SetTitleSize(0.056)
+                self.Data.GetXaxis().SetTitleSize(0.053)
+                self.Data.GetYaxis().SetLabelSize(0.051)
+                self.Data.GetXaxis().SetLabelSize(0.048)
+                self.Data.GetYaxis().SetTitleOffset(0.77)
+                self.Data.GetXaxis().SetTitleOffset(0.98)
                 self.Data.SetMarkerStyle(20)
 		self.Data.Draw("E")
 		self.GetStack(normalizetodata).Draw("HIST SAME")
@@ -403,6 +444,8 @@ class Property:
 			self.GetSLegend().Draw()
 		self.GetLegend().Draw()
 		self.GetTitleBox().Draw()
+		self.GetLumiBox().Draw()
+		self.GetCMSTag().Draw()
 		self.GetCanvas(2)
 		self.GetRatioUnc().Draw("E2")
 		self.GetRatioPlot().Draw("ep same")
