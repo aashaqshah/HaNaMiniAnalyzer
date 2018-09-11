@@ -225,7 +225,8 @@ else :
 	process.Hamb.HLT_Mu17Mu8_DZ.Input = cms.InputTag( "TriggerResults","","HLT2" )
 	process.Hamb.HLT_Mu17Mu8.Input = cms.InputTag( "TriggerResults","","HLT2" )
 
-    if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
+    #if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
+    if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.count("Za") or theSample.Name.count("GGHbbtt") or theSample.Name.count("GGHmmtt"):
         AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root")
         AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root")
         AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1)
@@ -281,7 +282,7 @@ process.HambDeepCSV.DiMuon.DiMuLowMassCut = cms.double(10.)
 #process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
 process.HambDeepCSV.Jets.JetPtCut = cms.double( 10.)
 
-if theSample.Name.count("GGH") or theSample.Name.count("VBF") :
+if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.count("Za") or theSample.Name.count("GGHbbtt") or theSample.Name.count("GGHmmtt") :
    AddSystematics( "PUUp"  , "Vertex" , "PUDataFileName" , "pileUpDataUp.root", "HambDeepCSV")
    AddSystematics( "PUDown"  , "Vertex" , "PUDataFileName" , "pileUpDataDown.root", "HambDeepCSV")
    AddSystematics( "JECUP"  , "Jets" , "JECUncertainty"  , 1 , "HambDeepCSV")
