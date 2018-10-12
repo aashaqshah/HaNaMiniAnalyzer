@@ -17,16 +17,16 @@ Hamb = cms.EDFilter('TreeHamb',
                                         PUDataFileName = cms.string("pileUpData.root")
                                         ),
                      DiMuon = cms.PSet( Input = cms.InputTag("slimmedMuons"),
-                                        MuonLeadingPtCut = cms.double(17),
-                                        MuonSubLeadingPtCut = cms.double(8),
-                                        MuonIsoCut = cms.double( 0.15 ),  # VeryTightRelIso=0.10, TightRelIso=0.15, MediumRelIso=0.20,
+                                        MuonLeadingPtCut = cms.double(18),
+                                        MuonSubLeadingPtCut = cms.double(9),
+                                        MuonIsoCut = cms.double( 0.25 ),  # VeryTightRelIso=0.10, TightRelIso=0.15, MediumRelIso=0.20,
                                                                           # LooseRelIso=0.25, VeryLooseRelIso=0.4  
                                                                           # LooseRelTkIso=0.10, TightRelTkIso =0.05
                                                                           #Cut based have not been defined yet for 2017 data.
                                         MuonEtaCut = cms.double( 2.4 ),
-                                        DiMuLowMassCut = cms.double(8.0),  # Remove the dimu lower bound
+                                        DiMuLowMassCut = cms.double(10.0),  # Remove the dimu lower bound
                                         DiMuCharge = cms.int32( -1 ),
-                                        MuonID = cms.int32( 2 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
+                                        MuonID = cms.int32( 1 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
                                                                             # 5:HighPt, 6:MediumPrompt, 7:TrkHighPt 
                                         DiMuZMassWindow = cms.double( 200 ), # 70-->Remove the dimu upper bound 
                                         #DiMuZMassWindow = cms.double( 70 ), # 70-->Remove the dimu upper bound 
@@ -36,7 +36,7 @@ Hamb = cms.EDFilter('TreeHamb',
                                         ),
 
                      MET = cms.PSet( Input = cms.InputTag("slimmedMETs"),
-                                     Cut = cms.double( 30. ),
+                                     Cut = cms.double(100.),
                                      Uncertainty = cms.int32(-1)
                                      #http://cmsdoxygen.web.cern.ch/cmsdoxygen/CMSSW_8_4_0_patch2/doc/html/db/deb/classpat_1_1MET.html#a5c8ea7c9575730bedb6f1639140a7422
                                      #enum  	METUncertainty {
@@ -53,7 +53,7 @@ Hamb = cms.EDFilter('TreeHamb',
                                       ApplyJER = cms.bool( False ),
                                       JECUncertainty = cms.int32(0),
                                       JERUncertainty = cms.int32(0),
-                                      JetPtCut = cms.double( 10. ),
+                                      JetPtCut = cms.double( 12. ),
                                       JetEtaCut = cms.double( 2.4 ),
                                       BTagAlgo = cms.string("pfCombinedInclusiveSecondaryVertexV2BJetTags"),
                                       BTagAlgoType = cms.string("CSVv2"),
@@ -79,4 +79,4 @@ Hamb = cms.EDFilter('TreeHamb',
                      SetupDir = cms.string("Setup94"),
 		     		 StoreEventNumbers = cms.bool( True ),
 		     		 forOptimization = cms.untracked.bool(False)
-                     )
+)

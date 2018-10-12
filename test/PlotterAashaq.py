@@ -32,11 +32,15 @@ from Haamm.HaNaMiniAnalyzer.SampleType import *
 from ROOT import kGray, kGreen, kOrange, kRed, kBlack, kCyan, kBlue, kAzure, kTeal, kPink, kYellow
 ci = TColor.GetColor("#ff6666")
 
+
+#DYSamples = SampleType("DY" , ci , [ ] , nTuples )
 DYSamples = SampleType("DY" , ci , [ GetSample(DYJetsLowMass94) , GetSample(DYJetsHighMass94)] , nTuples )
 ci = TColor.GetColor("#ffff66")
+#TopSamples = SampleType("Top" , ci , [ GetSample(TTTo2L2Nu94) ] , nTuples )
 TopSamples = SampleType("Top" , ci , [ GetSample(TTTo2L2Nu94) , GetSample(TW94), GetSample(TbarW94) , GetSample(TChannelTbar94) , GetSample( TChannelT94 ) ] , nTuples )
 ci = 38
 DiBosonSamples = SampleType("DiBoson" , ci , [ GetSample(ZZ94) , GetSample(WZ94), GetSample(WW94), GetSample(W4JetsToLNu94), GetSample(W3JetsToLNu94) ] , nTuples )
+#DiBosonSamples = SampleType("DiBoson" , ci , [  ] , nTuples )
 ci = TColor.GetColor("#996633")
 
 #bWeightLL = "bWeightLL"
@@ -56,29 +60,57 @@ ci = TColor.GetColor("#996633")
 #    bWeightMM = bW
 
 signalsamples = []
-signalsamples.append (SampleType( "Signal15" , kAzure+10 ,  [ GetSample(GGH1594) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal20" , kBlue+2 ,    [ GetSample(GGH2094) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal25" , kCyan+2	,   [ GetSample(GGH2594) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal30" , kTeal+10 ,   [ GetSample(GGH3094) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal35" , kGreen+2 ,   [ GetSample(GGH3594) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal40" , kYellow+2 ,  [ GetSample(GGH4094) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal45" , kOrange-2 ,  [ GetSample(GGH4594) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal50" , kOrange+10 , [ GetSample(GGH5094) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal55" , kRed+2 ,     [ GetSample(GGH5594) ] , nTuples , True ))
-signalsamples.append (SampleType( "Signal60" , kPink+10 ,   [ GetSample(GGH6094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal15" , kAzure+10 ,  [ GetSample(GGH1594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal20" , kBlue+2 ,    [ GetSample(GGH2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal25" , kCyan+2	,   [ GetSample(GGH2594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal30" , kTeal+10 ,   [ GetSample(GGH3094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal35" , kGreen+2 ,   [ GetSample(GGH3594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal40" , kYellow+2 ,  [ GetSample(GGH4094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal45" , kOrange-2 ,  [ GetSample(GGH4594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal50" , kOrange+10 , [ GetSample(GGH5094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal55" , kRed+2 ,     [ GetSample(GGH5594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signal60" , kPink+10 ,   [ GetSample(GGH6094) ] , nTuples , True ))
+#
+###For Final Plotting
+#signalsamples.append (SampleType( "m_{a} = 20 " , kBlue+2 ,    [ GetSample(GGH2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 30 " , kTeal+10 ,   [ GetSample(GGH3094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 40 " , kYellow+2 ,  [ GetSample(GGH4094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 50 " , kOrange+10 , [ GetSample(GGH5094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 60 " , kAzure+10 ,  [ GetSample(GGH6094) ] , nTuples , True ))
 
-signalsamples.append (SampleType( "SignalVBF20" , kBlue+2 ,     [ GetSample(VBF2094) ] , nTuples , True ))
-signalsamples.append (SampleType( "SignalVBF30" , kTeal+10 ,    [ GetSample(VBF3094) ] , nTuples , True ))
-signalsamples.append (SampleType( "SignalVBF40" , kYellow+2 ,   [ GetSample(VBF4094) ] , nTuples , True ))
-signalsamples.append (SampleType( "SignalVBF50" , kOrange+10 ,  [ GetSample(VBF5094) ] , nTuples , True ))
-signalsamples.append (SampleType( "SignalVBF60" , kPink+10 ,    [ GetSample(VBF6094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalVBF20" , kBlue+2 ,     [ GetSample(VBF2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalVBF30" , kTeal+10 ,    [ GetSample(VBF3094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalVBF40" , kYellow+2 ,   [ GetSample(VBF4094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalVBF50" , kOrange+10 ,  [ GetSample(VBF5094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalVBF60" , kPink+10 ,    [ GetSample(VBF6094) ] , nTuples , True ))
+#
+#signalsamples.append (SampleType( "Signalmmtt20" , kBlue+2 ,   [ GetSample(GGHmmtt2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signalmmtt40" , kYellow+2 , [ GetSample(GGHmmtt4094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signalmmtt60" , kPink+10 ,  [ GetSample(GGHmmtt6094) ] , nTuples , True ))
+#
+#signalsamples.append (SampleType( "Signalbbtt20" , kBlue+2 ,   [ GetSample(GGHbbtt2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signalbbtt40" , kYellow+2 , [ GetSample(GGHbbtt4094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "Signalbbtt60" , kPink+10 ,  [ GetSample(GGHbbtt6094) ] , nTuples , True ))
 
-#signalsamples.append (SampleType( "Signalmmtt20" , kBlue+2 , [ GetSample(GGHmmtt2080) ] , nTuples , True ))
-#signalsamples.append (SampleType( "Signalmmtt40" , kYellow+2 , [ GetSample(GGHmmtt4080) ] , nTuples , True ))
-#signalsamples.append (SampleType( "Signalmmtt60" , kPink+10 , [ GetSample(GGHmmtt6080) ] , nTuples , True ))
-#signalsamples.append (SampleType( "Signalbbtt20" , kOrange-2 , [ GetSample(GGHbbtt2080) ] , nTuples , True ))
-#signalsamples.append (SampleType( "Signalbbtt40" , kOrange+10 , [ GetSample(GGHbbtt4080) ] , nTuples , True ))
-#signalsamples.append (SampleType( "Signalbbtt60" , kRed+2 , [ GetSample(GGHbbtt6080) ] , nTuples , True ))
+
+#signalsamples.append (SampleType( "SignalZa03" , kAzure+10 ,  [ GetSample(Za0394) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalZa06" , kBlue+2 ,    [ GetSample(Za0694) ] , nTuples , True ))
+##signalsamples.append (SampleType( "SignalZa09" , kCyan+2 ,    [ GetSample(Za0994) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalZa12" , kTeal+10 ,   [ GetSample(Za1294) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalZa15" , kGreen+2 ,   [ GetSample(Za1594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalZa20" , kYellow+2 ,  [ GetSample(Za2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalZa25" , kOrange-2 ,  [ GetSample(Za2594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "SignalZa30" , kOrange+10 , [ GetSample(Za3094) ] , nTuples , True ))
+
+
+##For Plotting
+#signalsamples.append (SampleType( "m_{a} = 12" , kTeal+10 ,   [ GetSample(Za1294) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 15" , kGreen+2 ,   [ GetSample(Za1594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 20" , kYellow+2 ,  [ GetSample(Za2094) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 25" , kOrange-2 ,  [ GetSample(Za2594) ] , nTuples , True ))
+#signalsamples.append (SampleType( "m_{a} = 30" , kOrange+10 , [ GetSample(Za3094) ] , nTuples , True ))
+
+
 
 nTotals = {}
 #passLL = True
@@ -89,6 +121,7 @@ plotter = Plotter()
 listofdata = [GetSample(s) for s in MiniAOD94Samples if s.IsData]
 dataSamples2 = SampleType("Data" , kBlack , listofdata  , nTuples  ) # , additionalCut="(higgsMass > 135 || higgsMass < 115)"
 allSTs = [ dataSamples2 , DiBosonSamples, TopSamples, DYSamples ]
+#allSTs = [dataSamples2, TopSamples]
 
 allSTs.extend(signalsamples)
 for st in allSTs :
@@ -103,26 +136,29 @@ for st in allSTs :
 
 
 Cuts = { "HLT":"(passHLT_Mu17Mu8 || passHLT_Mu17Mu8_DZ)",
-         #"BasicJetsMu":"passJetSize && passMuSize && passJet1Pt && passJet2Pt && passMu1Pt && passMu2Pt ",
-         #"TL":"passTL" ,
-         #"TM":"passTM" ,
-         #"TT":"passTT" ,
-         #"MM":"passMM" ,
-         #"LL" : "1==1",
-         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (jetsPt[0] > 15) && (jetsPt[1]> 15) && (muPt[0]> 20) && (muPt[1] > 20)",
-         "BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass<70.0) && (jetsPt[0] > 15) && (jetsPt[1]> 15) && (muPt[0]> 20) && (muPt[1] > 10)",
+         #For h->aa
+         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass>15.0) && (aMu.mass<70.0) && (aBjetPtOrdered.mass>15.0) && (jetsPt[0] > 19) && (jetsPt[1]> 13) && (muPt[0]> 21) && (muPt[1] > 10)",
+         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass>15.0) && (aMu.mass<70.0) && (aBjetPtOrdered.mass>15.0) && (jetsPt[0] > 10) && (jetsPt[1]> 10) && (muPt[0]> 17) && (muPt[1] > 8)", #for aa optimization
+         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass>15.0) && (aMu.mass<70.0) && (jetsPt[0] > 10) && (jetsPt[1]> 10) && (muPt[0]> 17) && (muPt[1] > 8)", #HLT Level Cuts
+         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass>15.0)  && (jetsPt[0] > 21) && (jetsPt[1]> 15) && (muPt[0]> 26) && (muPt[1] > 10)",
+
+         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass>15.0) && (aMu.mass<70.0) && (jetsPt[0] > 25) && (jetsPt[1]> 20) && (muPt[0]> 25) && (muPt[1] > 10)",
+         "BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass>15.0) && (jetsPt[0] > 25) && (jetsPt[1]> 20) && (muPt[0]> 25) && (muPt[1] > 10)",
+         #For h->Za
+         #"BasicJetsMu":"(@jetsPt.size() >= 2) && (@muPt.size()>= 2) && (aMu.mass<40.0) && (jetsPt[0] > 24) && (jetsPt[1]> 12) && (muPt[0]> 18) && (muPt[1] > 9)",
          "MET":"met < 60 ",
+         "JetFlavour":"abs(jetsFlavour[0]) == 5 && abs(jetsFlavour[1]) == 5",
          #"chi2sum":"chi2Sum < 5 ",
          #"LL" : "nLooseNotMed+nMedNotTight+nTight > 1", ##Loose Loose (one way)
          #"TL":"(nLooseNotMed+nMedNotTight+nTight == 2) && (nTight>0)",
-         #For DeepCSV
+         ##For DeepCSV
          "LL" : "(jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.1522)",
          "ML" : "(jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.1522) || (jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.4941)",
          "TL" : "(jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.1522) || (jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.8001)",
          "MM" : "(jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.4941)",
          "TM" : "((jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.4941)) || ((jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.8001))",
          "TT" : "(jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.8001)",
-         #For CSVv2
+         ##For CSVv2
          #"LL" : "(jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.5803)",
          #"ML" : "((jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.8838)) ",
          #"TL" : "((jetsBtag[0] > 0.9693) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.9693))",
@@ -140,12 +176,12 @@ Cuts = { "HLT":"(passHLT_Mu17Mu8 || passHLT_Mu17Mu8_DZ)",
 
          }
 
-cPreselectionLL = CutInfo( "PreselectionLL" , "&&".join( [Cuts[ss] for ss in ["HLT" , "LL"]] ) , "Weight*bWs.W2L" )
-cPreselectionML = CutInfo( "PreselectionML" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "ML"]] ) , "Weight*bWs.W1L1M" , title="2#mu, medium-loose b-jets"  )
-cPreselectionTL = CutInfo( "PreselectionTL" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL"]] ) , "Weight*bWs.W1L1T" , title="2#mu, tight-loose b-jets"  )
-cPreselectionMM = CutInfo( "PreselectionMM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "MM"]] ) , "Weight*bWs.W2M" , title="2#mu, medium-medium b-jets"  )
-cPreselectionTM = CutInfo( "PreselectionTM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TM"]] ) , "Weight*bWs.W1M1T" , title="2#mu, tight-medium b-jets"  )
-cPreselectionTT = CutInfo( "PreselectionTT" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TT"]] ) , "Weight*bWs.W2T" , title="2#mu, tight-tight b-jets"  )
+cPreselectionLL = CutInfo( "PreselectionLL" , "&&".join( [Cuts[ss] for ss in ["HLT" ,"BasicJetsMu", "MET", "LL" ]] ) , "Weight*bWs.W2L", title="2#mu2loose-bjets" )
+cPreselectionML = CutInfo( "PreselectionML" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu", "MET", "ML" ]] ) , "Weight*bWs.W1L1M" , title="2#mu, medium-loose b-jets"  )
+cPreselectionTL = CutInfo( "PreselectionTL" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu", "MET", "TL" ]] ) , "Weight*bWs.W1L1T" , title="2#mu, tight-loose b-jets"  )
+cPreselectionMM = CutInfo( "PreselectionMM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu", "MET", "MM" ]] ) , "Weight*bWs.W2M" , title="2#mu, medium-medium b-jets"  )
+cPreselectionTM = CutInfo( "PreselectionTM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu", "MET", "TM" ]] ) , "Weight*bWs.W1M1T" , title="2#mu, tight-medium b-jets"  )
+cPreselectionTT = CutInfo( "PreselectionTT" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu", "MET", "TT" ]] ) , "Weight*bWs.W2T" , title="2#mu, tight-tight b-jets"  )
 
 
 """
@@ -174,8 +210,7 @@ cTLInvChi2Sum = CutInfo( "CRChi2Sum" , "&&".join( [Cuts[ss] for ss in ["HLT", "B
 
 #cuts = [cPreselectionTL, cPreselectionLL , cTLMet , cSR , cSRBlind, cTLMetBlind, cTLChi2Sum, cTLInvChi2Sum ]
 #cuts = [cPreselectionLL, cPreselectionML, cPreselectionTL, cPreselectionMM, cPreselectionTM, cPreselectionTT]
-#cuts = [cPreselectionLL,  cPreselectionMM, cPreselectionTT]
-cuts = [cPreselectionTT]
+cuts = [cPreselectionLL]
 
 """
 #Categories for more sensitivity
@@ -192,71 +227,55 @@ cCRTT = CutInfo("CRTT", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "
 
 cuts = [cPreselectionTL, cPreselectionTM, cPreselectionTT, cPreselectionMM, cPreselectionLL , cTLMet , cSRTL , cSRTM, cSRTT, cSRMM, cSRTLBlind, cTLMetBlind, cTLChi2Sum, cTLInvChi2Sum, cSRTLmHDiff25, cSRTLmHDiff10,  cSRLowMET,cSRHighMET, cCRLowMET,cCRHighMET, cSRTLexc, cSRTMexc,cCRTLexc, cCRTMexc, cCRTT ]
 """
-#cTLMetBlind = CutInfo( "TLMetBlind" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET"]] ) , "Weight*%s" %(bWeightTL) , title="2#mu, tight-loose b-jets, met>60 (blind)" , blind=True  )
-#cSRTLBlind = CutInfo( "SRTLBlind" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "chi2sum"]] ) , "Weight*%s" %(bWeightTL) , title="Signal Region (blind)" , blind=True )
-#
-#cSRTL = CutInfo( "SRTL" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "chi2sum"]] ) , "Weight*%s" %(bWeightTL) , title="Signal Region - TL"  )
-#cSRTM = CutInfo( "SRTM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TM" , "MET" , "chi2sum"]] ) , "Weight*%s" %(bWeightTM) , title="Signal Region - TM"  )
-#cSRTT = CutInfo( "SRTT" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TT" , "MET" , "chi2sum"]] ) , "Weight*%s" %(bWeightTT) , title="Signal Region - TT"  )
-#cSRMM = CutInfo( "SRMM" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "MM" , "MET" , "chi2sum"]] ) , "Weight*%s" %(bWeightMM) , title="Signal Region - MM"  )
-#cSRTLmHDiff25 = CutInfo( "SRTLmHDiff25" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "mHDiff25"]] ) , "Weight*%s" %(bWeightTL) , title="Signal Region - TL (mH 25)"  )
-#cSRTLmHDiff10 = CutInfo( "SRTLmHDiff10" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "mHDiff10"]] ) , "Weight*%s" %(bWeightTL) , title="Signal Region - TL (mH 10)"  )
-#
-#cTLMet = CutInfo( "TLMet" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET"]] ) , "Weight*%s" %(bWeightTL) , title="2#mu, tight-loose b-jets, met>60"   )
-#cTLChi2Sum = CutInfo( "TLChi2Sum" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "chi2sum"]] ) , "Weight*%s" %(bWeightTL) , title="2#mu, tight-loose b-jets, chi2sum<5"   )
-#cTLInvChi2Sum = CutInfo( "CRChi2Sum" , "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET", "invchi2sum"]] ) , "Weight*%s" %(bWeightTL) , title="2#mu, tight-loose b-jets, 11>chi2sum>5"   )
-#
-##Categories for more sensitivity
-#cSRLowMET = CutInfo("SRLowMET", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "chi2sum", "lowmet"]] ), "Weight*%s" %(bWeightTL) , title="SR+MET<30"   )
-#cSRHighMET = CutInfo("SRHighMET", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "chi2sum", "highmet"]] ), "Weight*%s" %(bWeightTL) , title="SR+MET>30"   )
-#cCRLowMET = CutInfo("CRLowMET", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "invchi2sum", "lowmet"]] ), "Weight*%s" %(bWeightTL) , title="CR+MET<30"   )
-#cCRHighMET = CutInfo("CRHighMET", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TL" , "MET" , "invchi2sum", "highmet"]]), "Weight*%s" %(bWeightTL) , title="CR+MET>30"   )
-#
-#cSRTLexc = CutInfo("SRTLexc", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TLexc" , "MET" , "chi2sum"]] ), "Weight*%s" %(bWeightTL) , title="SR+TLexc"   )
-#cSRTMexc = CutInfo("SRTMexc", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TMexc" , "MET" , "chi2sum"]] ), "Weight*%s" %(bWeightTM) , title="SR+TMexc"   )
-#cCRTLexc = CutInfo("CRTLexc", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TLexc" , "MET" , "invchi2sum"]] ), "Weight*%s" %(bWeightTL) , title="CR+TLexc"   )
-#cCRTMexc = CutInfo("CRTMexc", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TMexc" , "MET" , "invchi2sum"]]), "Weight*%s" %(bWeightTM) , title="CR+TMexc"   )
-#cCRTT = CutInfo("CRTT", "&&".join( [Cuts[ss] for ss in ["HLT", "BasicJetsMu" , "TT" , "MET" , "invchi2sum"]]), "Weight*%s" %(bWeightTT) , title="CR+TT"   )
-#
-#cuts = [cPreselectionTL, cPreselectionTM, cPreselectionTT, cPreselectionMM, cPreselectionLL , cTLMet , cSRTL , cSRTM, cSRTT, cSRMM, cSRTLBlind, cTLMetBlind, cTLChi2Sum, cTLInvChi2Sum, cSRTLmHDiff25, cSRTLmHDiff10,  cSRLowMET,cSRHighMET, cCRLowMET,cCRHighMET, cSRTLexc, cSRTMexc,cCRTLexc, cCRTMexc, cCRTT ]
 
 for cut in cuts :
     if "Blind" not in cut.Name :
-        #cut.AddHist( "nTruebJets" , "(abs(jetsFlavour[0]) == 5) + (abs(jetsFlavour[1])==5)", 6 , 0 , 6, False , Title="#true b-jets" , dirName="Jets" )
-        cut.AddHist( "nJets" , "@jetsPt.size()",          10 , 0.0 , 10,   False , Title="#jets" , dirName="Jets" )
-        cut.AddHist( "nVertices" , "nVertices" ,          70 , 0.0,  70.,  False , Title="No. of Primary Vertices" , dirName="General" )
-        cut.AddHist( "metPhi" , "abs(metPhi)" ,           20 , 0.0,  3.2,  False , Title="#phi" , dirName="MET" )
-        cut.AddHist( "metSig" , "metSig" ,                25 , 0.0,  50,   False , Title="Met Significance" , dirName="MET" )
-        met = cut.AddHist( "met" , "met" ,                30 , 0.0,  300,  False , Title="met" , dirName="MET")
-        #cut.AddHist( "amuPt" , "aMu.pt" ,                 30 , 0.0,  300., False , Title="p_{T}^{#mu#mu} (GeV)" , dirName="MuMu")
-        #cut.AddHist( "amuMass" , "aMu.mass",             200, 10. , 200 , Title="m_{#mu#mu} (GeV)" , dirName="MuMu")
-        cut.AddHist( "amuMass" , "aMu.mass",              30 , 10 ,  70 ,  Title="m_{#mu#mu} (GeV)" , dirName="MuMu")
-        cut.AddHist( "abPt" , "aBjetPtOrdered.pt" ,       40 , 0. ,  300., False , Title="p_{T}^{bb} (GeV)" , dirName="bb")
-        cut.AddHist( "abMass" , "aBjetPtOrdered.mass" ,   40,  10. , 250., False , Title="m_{bb} (GeV)" , dirName="bb")
-        cut.AddHist( "Mu1Pt" , "muPt[0]" ,                150, 0 ,   350 , False , Title="p_{T}^{#mu} (leading) (GeV)"  , dirName="Mus" )
-        cut.AddHist( "Mu2Pt" , "muPt[1]" ,                100, 0 ,   250 , False , Title="p_{T}^{#mu} (sub-leading) (GeV)" , dirName="Mus")
-        cut.AddHist( "Jet1Pt" , "jetsPt[0]" ,             200 ,0 ,   400 , False , Title="p_{T}^{jet} (leading) (GeV)" , dirName="Jets")
-        cut.AddHist( "Jet2Pt" , "jetsPt[1]" ,             200 ,0 ,   400 , False , Title="p_{T}^{jet} (sub-leading) (GeV)", dirName="Jets")
-        cut.AddHist( "Mu1Eta" , "muEta[0]" ,              20 , -2.5, 2.5 , False , Title="#eta of #mu_{leading}" , dirName="Mus")
-        cut.AddHist( "Mu2Eta" , "muEta[1]" ,              20 , -2.5, 2.5 , False , Title="#eta of #mu_{sub-leading}" , dirName="Mus" )
-        cut.AddHist( "Jet1Eta" , "jetsEta[0]" ,           20 , -2.5, 2.5 , False , Title="jet_{leading} #eta" , dirName="Jets")
-        cut.AddHist( "Jet2Eta" , "jetsEta[1]" ,           20 , -2.5, 2.5 , False , Title="jet_{sub-leading} #eta" , dirName="Jets"  )
-    ##chi2sum = cut.AddHist( "chi2Sum" , "chi2Sum",       25 , 0. ,  50.,  False , Title="#chi^{2}_{H}+#chi^{2}_{a#rightarrowbb}", dirName="Jets")
-    #amuMass = cut.AddHist( "amuMass" , "aMu.mass",       200 ,10 ,  200 , Title="m_{#mu#mu} (GeV)" , dirName="General")
-    amuMass = cut.AddHist( "amuMass" , "aMu.mass",        25 , 10 ,  70 ,  Title="m_{#mu#mu} (GeV)" , dirName="General")
-    amuPt = cut.AddHist( "amuPt" , "aMu.pt" ,             30 , 0. ,  300., False , Title="p_{T}^{#mu#mu} (GeV)" , dirName="General")
-    ##amuMass = cut.AddHist( "amuMass" , "aMu.mass",      200 ,0 ,   200 , Title="#mu#mu mass" , dirName="General") #More bins for just K-factor extraction
-    ##cut.AddHist( "HiggsMass" , "higgsMass" ,            46 , 75 ,  305,  False , Title="m_{#mu#mubb}" , dirName="MuMU" )
-    cut.AddHist( "HiggsMass" , "higgsjetPtOrdered.mass" , 50 , 75 ,  305,  False , Title="m_{#mu#mubb} (GeV)" , dirName="MuMubb" )
-    ##cut.AddHist( "HiggsPt" , "higgsPt" ,                30 , 0. ,  300., False , Title="p_{T}^{#mu#mubb} (GeV)", dirName="MuMubb")
-    cut.AddHist( "HiggsPt" , "higgsjetPtOrdered.pt" ,     30 , 0. ,  300., False , Title="p_{T}^{#mu#mubb} (GeV)", dirName="MuMubb")
-    ##cut.AddHist( "chi2B" , "chi2B",                     25 , 0. ,  50.,  False , Title="#chi^{2}_{a#rightarrowbb}" , dirName="bb")
-    ##cut.AddHist( "chi2H" , "chi2H",                     25 , 0. ,  50.,  False , Title="#chi^{2}_{H#rightarrowbb#mu#mu}" , dirName="MuMubb" )
-    #cut.AddHist( "chi2SUM" , "chi2Sum",                  25 , 0. ,  50.,  False , Title="Sum #chi^{2}" , dirName="MuMubb" )
-    #cut.AddHist( "HiggsMDiff", "abs(higgsMass - 125.0)", 20 , 0. ,  100., False , Title="|mass_{#mu#mubb}-125.0|" , dirName="MuMubb" )
-    cut.AddHist( "HiggsMDiff", "abs((higgsjetPtOrdered.mass) - 125.0)", 20 , 0. , 100., False , Title="|mass_{#mu#mubb}-125.0| (GeV)" , dirName="MuMubb" )
-    ##cut.AddHist( amuMass , chi2sum )
-    ##cut.AddHist( amuMass , met )
+    #    #cut.AddHist( "nTruebJets" , "(abs(jetsFlavour[0]) == 5) + (abs(jetsFlavour[1])==5)", 6 , 0 , 6, False , Title="#true b-jets" , dirName="Jets" )
+    #    #cut.AddHist( "nJets" , "@jetsPt.size()",          10 , 0.0 , 10,   False , Title="#jets" , dirName="Jets" )
+    #    cut.AddHist( "nVertices" , "nVertices" ,          24 , 0.0,  72.,  False , Title="No. of Primary Vertices" , dirName="General" )
+    #    cut.AddHist( "metPhi" , "abs(metPhi)" ,           12 , 0.0,  3.2,  False , Title="#phi" , dirName="MET" )
+    #    #cut.AddHist( "metSig" , "metSig" ,                15 , 0.0,  50,   False , Title="Met Significance" , dirName="MET" )
+    #    #met = cut.AddHist( "met" , "met" ,                15 , 0.0,  300,  False , Title="met" , dirName="MET")
+
+    #    cut.AddHist( "metSig" , "metSig" ,                10 , 0.0,  30,   False , Title="Met Significance" , dirName="MET" )
+    #    met = cut.AddHist( "met" , "met" ,                10 , 0.0,  60,  False , Title="met" , dirName="MET")
+    #    #cut.AddHist( "amuPt" , "aMu.pt" ,                 30 , 10.0,  160., False , Title="p_{T}^{#mu#mu} (GeV)" , dirName="MuMu")
+    #    #cut.AddHist( "amuMass" , "aMu.mass",             200, 10. , 200 , Title="m_{#mu#mu} (GeV)" , dirName="MuMu")
+    #    #cut.AddHist( "amuMass" , "aMu.mass",              30 , 10 ,  70 ,  Title="m_{#mu#mu} (GeV)" , dirName="MuMu")
+    #    #For Za
+        cut.AddHist( "amuMass" , "aMu.mass",              40 , 26. ,  70 ,  Title="m_{#mu#mu} (GeV)" , dirName="MuMu")
+    #    cut.AddHist( "abPt" , "aBjetPtOrdered.pt" ,       12 , 0. ,  160., False , Title="p_{T}^{bb} (GeV)" , dirName="bb")
+    #    cut.AddHist( "abMass" , "aBjetPtOrdered.mass" ,   12,  15. , 250., False , Title="m_{bb} (GeV)" , dirName="bb")
+    #    #cut.AddHist( "Mu1Pt" , "muPt[0]" ,                15, 0 ,   270 , False , Title="p_{T}^{#mu} (leading) (GeV)"  , dirName="Mus" )
+    #    #cut.AddHist( "Mu2Pt" , "muPt[1]" ,                15, 0 ,   170 , False , Title="p_{T}^{#mu} (sub-leading) (GeV)" , dirName="Mus")
+
+    #    cut.AddHist( "Mu1Pt" , "muPt[0]" ,                15,  18 ,   120 , False , Title="p_{T}^{#mu} (leading) (GeV)"  , dirName="Mus" )
+    #    cut.AddHist( "Mu2Pt" , "muPt[1]" ,                12,  9 ,    60 , False , Title="p_{T}^{#mu} (sub-leading) (GeV)" , dirName="Mus")
+    #    cut.AddHist( "Jet1Pt" , "jetsPt[0]" ,             15,  20 ,   180 , False , Title="p_{T}^{jet} (leading) (GeV)" , dirName="Jets")
+    #    cut.AddHist( "Jet2Pt" , "jetsPt[1]" ,             15,  15 ,   110 , False , Title="p_{T}^{jet} (sub-leading) (GeV)", dirName="Jets")
+    #    cut.AddHist( "Mu1Eta" , "muEta[0]" ,              12 , -2.5, 2.5 , False , Title="#eta of #mu_{leading}" , dirName="Mus")
+    #    cut.AddHist( "Mu2Eta" , "muEta[1]" ,              12 , -2.5, 2.5 , False , Title="#eta of #mu_{sub-leading}" , dirName="Mus" )
+    #    cut.AddHist( "Jet1Eta" , "jetsEta[0]" ,           12 , -2.5, 2.5 , False , Title="jet_{leading} #eta" , dirName="Jets")
+    #    cut.AddHist( "Jet2Eta" , "jetsEta[1]" ,           12 , -2.5, 2.5 , False , Title="jet_{sub-leading} #eta" , dirName="Jets"  )
+  #  ##chi2sum = cut.AddHist( "chi2Sum" , "chi2Sum",       25 , 0. ,  50.,  False , Title="#chi^{2}_{H}+#chi^{2}_{a#rightarrowbb}", dirName="Jets")
+  #  #amuMass = cut.AddHist( "amuMass" , "aMu.mass",       100 ,10 ,  200 , Title="m_{#mu#mu} (GeV)" , dirName="General")
+  #  #For aa
+  #  #amuMass = cut.AddHist( "amuMass" , "aMu.mass",        200 , 10 ,  40 ,  Title="m_{#mu#mu} (GeV)" , dirName="General")
+  #  ##For h->Za
+    amuMass = cut.AddHist( "amuMass" , "aMu.mass",        80 , 26 ,  200. ,  Title="m_{#mu#mu} (GeV)" , dirName="General")
+  #  amuPt = cut.AddHist( "amuPt" , "aMu.pt" ,             15 , 10. ,150., False , Title="p_{T}^{#mu#mu} (GeV)" , dirName="General")
+  #  #cut.AddHist( "HiggsMass" , "higgsMass" ,            46 , 75 ,  305,  False , Title="m_{#mu#mubb}" , dirName="MuMU" )
+  #  cut.AddHist( "HiggsMass" , "higgsjetPtOrdered.mass" , 18 , 75 ,  305,  False , Title="m_{#mu#mubb} (GeV)" , dirName="MuMubb" )
+  #  #cut.AddHist( "HiggsMass" , "higgsjetPtOrdered.mass" , 14 , 75 ,  300,  False , Title="m_{#mu#mubb} (GeV)" , dirName="MuMubb" )
+  #  #cut.AddHist( "HiggsPt" , "higgsPt" ,                30 , 0. ,  300., False , Title="p_{T}^{#mu#mubb} (GeV)", dirName="MuMubb")
+  #  cut.AddHist( "HiggsPt" , "higgsjetPtOrdered.pt" ,     14 , 0. ,  160., False , Title="p_{T}^{#mu#mubb} (GeV)", dirName="MuMubb")
+  #  #cut.AddHist( "chi2B" , "chi2B",                     25 , 0. ,  50.,  False , Title="#chi^{2}_{a#rightarrowbb}" , dirName="bb")
+  #  #cut.AddHist( "chi2H" , "chi2H",                     25 , 0. ,  50.,  False , Title="#chi^{2}_{H#rightarrowbb#mu#mu}" , dirName="MuMubb" )
+  #  #cut.AddHist( "chi2SUM" , "chi2Sum",                  25 , 0. ,  50.,  False , Title="Sum #chi^{2}" , dirName="MuMubb" )
+  #  #cut.AddHist( "HiggsMDiff", "abs(higgsMass - 125.0)", 20 , 0. ,  100., False , Title="|mass_{#mu#mubb}-125.0|" , dirName="MuMubb" )
+  #  cut.AddHist( "HiggsMDiff", "abs((higgsjetPtOrdered.mass) - 125.0)", 12 , 0. , 100., False , Title="|m_{#mu#mubb}-125.0| (GeV)" , dirName="MuMubb" )
+  #  #cut.AddHist( amuMass , chi2sum )
+  #  #cut.AddHist( amuMass , met )
     
 for c in cuts :
     plotter.AddTreePlots( c )

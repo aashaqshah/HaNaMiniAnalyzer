@@ -51,8 +51,9 @@ MiniAOD94Samples.append( DYJetsHighMass94 )
 ##TTbar94 = Sample( "TTbar" , 72.1 , True ,  "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 ##MiniAOD94Samples.append( TTbar94 ) # alternative inclusive sample available
 #
-#
+
 TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 72.1 , True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
+#TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 831 , True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append( TTTo2L2Nu94 )
 #
 #ZZTo2L2Nu94 = Sample( "ZZTo2L2Nu" , 0.6008 , True ,  "/ZZTo2L2Nu_13TeV_powheg_pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
@@ -79,8 +80,8 @@ MiniAOD94Samples.append(WZ94)
 #WW94 = Sample( "WW" ,  63.21 , False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM")
 WW94 = Sample( "WW" ,  118.7, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM")
 MiniAOD94Samples.append(WW94)
-
-GGH1594 = Sample( "GGH15", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M20_Tomumubb/")
+#
+GGH1594 = Sample( "GGH15", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M15_Tomumubb/")
 MiniAOD94Samples.append(GGH1594)
 
 GGH2094 = Sample( "GGH20", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M20_Tomumubb/")
@@ -143,27 +144,31 @@ MiniAOD94Samples.append(GGHmmtt4094)
 GGHmmtt6094 = Sample( "GGHmmtt60", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M60_Tomumutautau/")
 MiniAOD94Samples.append(GGHmmtt6094)
 
-Za0394 = Sample( "Za03", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M03_Tomumubb")
-MiniAOD94Samples.append(Za0394)
+#Crossection h->Za->2m2b
+#h->Za = 10 %, Z->bb = 15% benchmark, a->mm = 3 * 10^-3 (from BR plotter (basically model dependent) 
+# so 48.5 *0.10 *0.15* 3*0.001 = 0.0021
 
-Za0694 = Sample( "Za06", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M06_Tomumubb")
-MiniAOD94Samples.append(Za0694)
+#Za0394 = Sample( "Za03", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M03_Tomumubb")
+#MiniAOD94Samples.append(Za0394)
+#
+#Za0694 = Sample( "Za06", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M06_Tomumubb")
+#MiniAOD94Samples.append(Za0694)
+#
+#Za0994 = Sample( "Za09", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M09_Tomumubb")
+#MiniAOD94Samples.append(Za0994)
 
-Za0994 = Sample( "Za09", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M09_Tomumubb")
-MiniAOD94Samples.append(Za0994)
-
-Za1294 = Sample( "Za12", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M12_Tomumubb")
+Za1294 = Sample( "Za12", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M12_Tomumubb")
 MiniAOD94Samples.append(Za1294)
 
-Za1594 = Sample( "Za15", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M15_Tomumubb")
+Za1594 = Sample( "Za15", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M15_Tomumubb")
 MiniAOD94Samples.append(Za1594)
 
-Za2094 = Sample( "Za20", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M20_Tomumubb")
+Za2094 = Sample( "Za20", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M20_Tomumubb")
 MiniAOD94Samples.append(Za2094)
 
-Za2594 = Sample( "Za25", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M25_Tomumubb")
+Za2594 = Sample( "Za25", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M25_Tomumubb")
 MiniAOD94Samples.append(Za2594)
 
-Za3094 = Sample( "Za30", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M30_Tomumubb")
+Za3094 = Sample( "Za30", 48.5800*0.10*0.15*3*0.001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_ToZa01_M91M30_Tomumubb")
 MiniAOD94Samples.append(Za3094)
 
