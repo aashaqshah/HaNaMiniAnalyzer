@@ -311,7 +311,7 @@ if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.
    AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1 , "HambDeepCSV")
 
 process.p2 = cms.Path( process.HambMediumMuID )
-process.p3 = cms.Path( process.HambDeepCSV ) #comment it when only CSV is required
+#process.p3 = cms.Path( process.HambDeepCSV ) #comment it when only CSV is required
 
 process.ep = cms.EndPath( process.outp1 )
 
