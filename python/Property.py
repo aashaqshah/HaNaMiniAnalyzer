@@ -8,7 +8,6 @@ import Sample
 from array import array
 import string
 from collections import OrderedDict
-
 class Property:
 	@staticmethod
 	def FromDir( dir , GRE = True ):
@@ -320,16 +319,18 @@ class Property:
 	def GetSLegend(self):
 		legendname = "%s_Slegend" % (self.Name)
 		if not hasattr(self , "SLegend"):
-			self.SLegend = TLegend(0.4426934,0.6343179,0.717765,0.8931083,"","brNDC")
+			self.SLegend = TLegend(0.5157593,0.6230661,0.7908309,0.8818565,"","brNDC")
+			#self.SLegend = TLegend(0.4426934,0.6343179,0.717765,0.8931083,"","brNDC")
 			#self.SLegend = TLegend(0.6,0.6,0.7,0.9,"","brNDC")
-                        self.SLegend.SetNColumns(2)
+                        #self.SLegend.SetNColumns(2)
+                        self.SLegend.SetNColumns(1)
                         self.SLegend.SetTextFont(12) 
                         self.SLegend.SetTextSize(0.038) 
                         self.SLegend.SetFillColor(0)
                         self.SLegend.SetBorderSize(0) 
 			self.SLegend.SetName( legendname )
 			for st in self.Signal:
-				self.SLegend.AddEntry( st , st.GetTitle() , "l" )
+				self.SLegend.AddEntry( st , "%s GeV " %(st.GetTitle()) , "l" )
 			
 		return self.SLegend
 	
@@ -393,14 +394,37 @@ class Property:
 
 		return self.LineOne
 
+        def GetAnalysisTittle(self):
+                analysisTitle = "h#rightarrowaa#rightarrow2#mu2b"
+                #analysisTitle = "h#rightarrowZa#rightarrow2#mu2b"
+                if not hasattr(self , "Analysis"):
+                        self.Analysis = TLatex()
+                        self.Analysis.SetNDC()
+                        self.Analysis.SetTextSize(0.050)
+                        self.Analysis.DrawLatex(0.125,0.839, analysisTitle)
+                        #Org self.Tagger.DrawLatex(0.125,0.77,TaggerTitle)
+                return self.Analysis
+
         def GetTitleBox(self):
                 title = self.Samples[0].GetTitle()
                 if not hasattr(self , "TitleBox"):
                         self.TitleBox = TLatex()
                         self.TitleBox.SetNDC()
                         self.TitleBox.SetTextSize(0.055)
-                        self.TitleBox.DrawLatex(0.125,0.8396624,"#bf{%s}"%(title))
+                        self.TitleBox.DrawLatex(0.125,0.77,"#bf{%s}"%(title))
+                        #Org self.TitleBox.DrawLatex(0.125,0.8396624,"#bf{%s}"%(title))
                 return self.TitleBox
+
+        def GetTaggerBox(self):
+                TaggerTitle = "#it{#bf{CSVv2}}"
+                #TaggerTitle = "#it{#bf{DeepCSV}}"
+                if not hasattr(self , "Tagger"):
+                        self.Tagger = TLatex()
+                        self.Tagger.SetNDC()
+                        self.Tagger.SetTextSize(0.050)
+                        self.Tagger.DrawLatex(0.125,0.71,TaggerTitle)
+                        #Orgself.Tagger.DrawLatex(0.125,0.77,TaggerTitle)
+                return self.Tagger
 
         def GetCMSTag(self):
                 CMSTagTitle = "CMS #it{#bf{Preliminary}}"
@@ -423,9 +447,10 @@ class Property:
 	def Draw(self, normalizetodata = False , padOrCanvas = 0 ):
 		gStyle.SetOptTitle(0)
 		self.GetCanvas(1, padOrCanvas)
-                self.Data.GetYaxis().SetRangeUser( 0.1 , 7000*self.Data.GetMaximum() )
+                #self.Data.GetYaxis().SetRangeUser( 0.01 , 6000*self.Data.GetMaximum() ) #For Za analysis
+                self.Data.GetYaxis().SetRangeUser( 0.1 , 7000*self.Data.GetMaximum() ) #For aa analysis
                 #self.Data.GetYaxis().SetRangeUser( 0.000001 , 2*self.Data.GetMaximum() )
-                self.Data.GetYaxis().SetTitle("Events/10 GeV" )
+                self.Data.GetYaxis().SetTitle("Events" )
                 self.Data.GetYaxis().CenterTitle()
                 self.Data.GetXaxis().CenterTitle()
                 self.Data.GetYaxis().SetTitleSize(0.056)
@@ -443,9 +468,11 @@ class Property:
 				s.Draw("E SAME HIST")
 			self.GetSLegend().Draw()
 		self.GetLegend().Draw()
+                self.GetAnalysisTittle().Draw()
 		self.GetTitleBox().Draw()
 		self.GetLumiBox().Draw()
 		self.GetCMSTag().Draw()
+                self.GetTaggerBox().Draw()
 		self.GetCanvas(2)
 		self.GetRatioUnc().Draw("E2")
 		self.GetRatioPlot().Draw("ep same")

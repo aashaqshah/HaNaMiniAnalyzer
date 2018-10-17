@@ -113,3 +113,4 @@ class SampleType:
     def SetMass(self):
     	m = self.Name[len(self.Name)-2:len(self.Name)]
     	self.Mass = locale.atof(m)
+
