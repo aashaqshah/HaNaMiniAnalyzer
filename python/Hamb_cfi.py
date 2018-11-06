@@ -19,14 +19,14 @@ Hamb = cms.EDFilter('TreeHamb',
                      DiMuon = cms.PSet( Input = cms.InputTag("slimmedMuons"),
                                         MuonLeadingPtCut = cms.double(18),
                                         MuonSubLeadingPtCut = cms.double(9),
-                                        MuonIsoCut = cms.double( 0.25 ),  # VeryTightRelIso=0.10, TightRelIso=0.15, MediumRelIso=0.20,
+                                        MuonIsoCut = cms.double( 0.15 ),  # VeryTightRelIso=0.10, TightRelIso=0.15, MediumRelIso=0.20,
                                                                           # LooseRelIso=0.25, VeryLooseRelIso=0.4  
                                                                           # LooseRelTkIso=0.10, TightRelTkIso =0.05
                                                                           #Cut based have not been defined yet for 2017 data.
                                         MuonEtaCut = cms.double( 2.4 ),
                                         DiMuLowMassCut = cms.double(10.0),  # Remove the dimu lower bound
                                         DiMuCharge = cms.int32( -1 ),
-                                        MuonID = cms.int32( 1 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
+                                        MuonID = cms.int32( 2 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
                                                                             # 5:HighPt, 6:MediumPrompt, 7:TrkHighPt 
                                         #DiMuZMassWindow = cms.double( 200 ), # 200-->for only k-Factor calculations 
                                         DiMuZMassWindow = cms.double( 70 ), # 70-->Remove the dimu upper bound 
