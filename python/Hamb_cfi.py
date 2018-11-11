@@ -28,8 +28,8 @@ Hamb = cms.EDFilter('TreeHamb',
                                         DiMuCharge = cms.int32( -1 ),
                                         MuonID = cms.int32( 2 ),            # 0:no id, 1:Loose, 2:Medium, 3:tight, 4:soft, 
                                                                             # 5:HighPt, 6:MediumPrompt, 7:TrkHighPt 
-                                        #DiMuZMassWindow = cms.double( 200 ), # 200-->for only k-Factor calculations 
-                                        DiMuZMassWindow = cms.double( 70 ), # 70-->Remove the dimu upper bound 
+                                        DiMuZMassWindow = cms.double( 150 ), # 200-->for only k-Factor calculations 
+                                        #DiMuZMassWindow = cms.double( 70 ), # 70-->Remove the dimu upper bound 
 					isHamb = cms.bool(True),
 					isSignalStudy = cms.bool(False),
                                         HLTUnc = cms.int32(0)

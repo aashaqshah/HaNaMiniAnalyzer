@@ -39,8 +39,9 @@ class SampleType:
             return False
         return self.Samples[0].IsData
 
-    def LoadHistos(self , lumi , dirName = "Hamb" , cftName = "CutFlowTable" , treeHistos = []):
-    #def LoadHistos(self , lumi , dirName = "HambDeepCSV" , cftName = "CutFlowTable" , treeHistos = []):
+    #def LoadHistos(self , lumi , dirName = "Hamb" , cftName = "CutFlowTable" , treeHistos = []):
+    def LoadHistos(self , lumi , dirName = "HambDeepCSV" , cftName = "CutFlowTable" , treeHistos = []):
+    #def LoadHistos(self , lumi , dirName = "HambMediumMuID" , cftName = "CutFlowTable" , treeHistos = []):
         self.AllHists = {}
         self.GREs = []
         self.AllOtherHists = {}
