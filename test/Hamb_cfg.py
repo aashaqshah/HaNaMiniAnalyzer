@@ -264,6 +264,8 @@ process.outp1=cms.OutputModule("PoolOutputModule",
    SelectEvents = cms.untracked.PSet(  SelectEvents = cms.vstring('p')  )
 )
 
+
+
 process.HambMediumMuID = process.Hamb.clone()
 process.HambMediumMuID.DiMuon.MuonID = 2 #MediumMuID
 
@@ -304,7 +306,7 @@ if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.
    AddSystematics( "METUnClusDOWN"  , "MET" , "Uncertainty"  , 11, "HambDeepCSV")
    AddSystematics( "METUnClusUP"  , "MET" , "Uncertainty"  , 10 , "HambDeepCSV")
 
-   AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1)
+   AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1, "HambDeepCSV")
    AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1 , "HambDeepCSV" )
 
    #AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
