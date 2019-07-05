@@ -3,7 +3,8 @@ from ROOT import gROOT, TLatex, TCanvas, TFile, gROOT, TColor
 import math
 import string
 
-LUMI=41860
+LUMI=59740 #2018
+#LUMI=41530 #2017
 #LUMI=4136
 gROOT.SetBatch(True)
 
@@ -25,8 +26,7 @@ def GetSample( s ):
     else:
         return s
 
-nTuples = "/eos/cms/store/user/aashah/Out_CMSSW_94X/Trees"
-#nTuples = "/eos/cms/store/user/aashah/Out_CMSSW_94X/TreesWithoutCuts" #For Optimization only
+nTuples = "/eos/cms/store/user/aashah/Out_CMSSW_104X/Trees"
 
 from Haamm.HaNaMiniAnalyzer.SampleType import *
 from ROOT import kGray, kGreen, kOrange, kRed, kBlack, kCyan, kBlue, kAzure, kTeal, kPink, kYellow
@@ -152,12 +152,12 @@ Cuts = { "HLT":"(passHLT_Mu17Mu8 || passHLT_Mu17Mu8_DZ)",
          #"LL" : "nLooseNotMed+nMedNotTight+nTight > 1", ##Loose Loose (one way)
          #"TL":"(nLooseNotMed+nMedNotTight+nTight == 2) && (nTight>0)",
          ##For DeepCSV
-         "LL" : "(jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.1522)",
-         "ML" : "(jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.1522) || (jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.4941)",
-         "TL" : "(jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.1522) || (jetsBtag[0] > 0.1522) && (jetsBtag[1]> 0.8001)",
-         "MM" : "(jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.4941)",
-         "TM" : "((jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.4941)) || ((jetsBtag[0] > 0.4941) && (jetsBtag[1]> 0.8001))",
-         "TT" : "(jetsBtag[0] > 0.8001) && (jetsBtag[1]> 0.8001)",
+         "LL" : "(jetsBtag[0] > 0.1241) && (jetsBtag[1]> 0.1241)",
+         "ML" : "(jetsBtag[0] > 0.4184) && (jetsBtag[1]> 0.1241) || (jetsBtag[0] > 0.1241) && (jetsBtag[1]> 0.4184)",
+         "TL" : "(jetsBtag[0] > 0.7527) && (jetsBtag[1]> 0.1241) || (jetsBtag[0] > 0.1241) && (jetsBtag[1]> 0.7527)",
+         "MM" : "(jetsBtag[0] > 0.4184) && (jetsBtag[1]> 0.4184)",
+         "TM" : "((jetsBtag[0] > 0.7527) && (jetsBtag[1]> 0.4184)) || ((jetsBtag[0] > 0.4184) && (jetsBtag[1]> 0.7527))",
+         "TT" : "(jetsBtag[0] > 0.7527) && (jetsBtag[1]> 0.7527)",
          ##For CSVv2
          #"LL" : "(jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.5803)",
          #"ML" : "((jetsBtag[0] > 0.8838) && (jetsBtag[1]> 0.5803)) || ((jetsBtag[0] > 0.5803) && (jetsBtag[1]> 0.8838)) ",

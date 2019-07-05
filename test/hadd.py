@@ -21,7 +21,7 @@ for sample in samples:
     #    print sample.Name 
     #else:
     #sample.MakeJobs( 5 , "eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Oct14_8020_MassProd" , "out" ) ) 
-    sample.MakeJobs( 3 , "/eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Out_CMSSW_94X" , "out" ) ) 
+    sample.MakeJobs( 3 , "/eos/cms/store/user/%s/%s/%s" % (GetUserName(), "Out_CMSSW_104X" , "out" ) ) 
 
 from Haamm.HaNaMiniAnalyzer.ExtendedSample import *
 for sample in samples:
@@ -34,4 +34,4 @@ for sample in samples:
     #export EOS_MGM_URL=root://eosuser.cern.ch
     #eosmount eos_cb
     #ss.fhadd("eos_cb/user/a/ajafari/Hamb13/Oct14_8020_MassProd/Trees/")
-    ss.fhadd("/eos/cms/store/user/aashah/Out_CMSSW_94X/Trees/")
+    ss.fhadd("/eos/cms/store/user/aashah/Out_CMSSW_104X/Trees/")
