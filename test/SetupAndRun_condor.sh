@@ -14,7 +14,8 @@ cd Haamm
 git clone -b $5 https://github.com/aashaqshah/HaNaMiniAnalyzer/
 cd HaNaMiniAnalyzer/
 git checkout $5
-scram b
+scram b --ignore-arch
+#scram b
 cd test
 if [ ! -z "$LSB_JOBINDEX" ];
 then
