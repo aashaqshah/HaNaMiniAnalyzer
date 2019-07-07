@@ -19,7 +19,7 @@ MiniAOD94Samples.append( DoubleMuB94 )
 DoubleMuC94 = Sample("DoubleMuC" , 0 , False ,  "/DoubleMuon/Run2018C-17Sep2018-v1/MINIAOD" )
 MiniAOD94Samples.append( DoubleMuC94 )
 
-
+#D data Sets
 DoubleMuD94 = Sample("DoubleMuD" , 0 , False ,  "/DoubleMuon/Run2018D-PromptReco-v2/MINIAOD" )
 MiniAOD94Samples.append( DoubleMuD94 )
 

@@ -26,7 +26,7 @@ def GetSample( s ):
     else:
         return s
 
-nTuples = "/eos/cms/store/user/aashah/Out_CMSSW_104X/Trees"
+nTuples = "/eos/cms/store/user/aashah/Out_CMSSW_102X/Trees"
 
 from Haamm.HaNaMiniAnalyzer.SampleType import *
 from ROOT import kGray, kGreen, kOrange, kRed, kBlack, kCyan, kBlue, kAzure, kTeal, kPink, kYellow
