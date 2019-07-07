@@ -8,14 +8,14 @@ scramv1 project CMSSW $4
 cd $4/src/
 export SCRAM_ARCH=$3
 eval `scramv1 runtime -sh`
-scram b
+#scram b
 mkdir Haamm/
 cd Haamm
 git clone -b $5 https://github.com/aashaqshah/HaNaMiniAnalyzer/
 cd HaNaMiniAnalyzer/
 git checkout $5
-scram b --ignore-arch
-#scram b
+#scram b --ignore-arch
+scram b
 cd test
 if [ ! -z "$LSB_JOBINDEX" ];
 then
