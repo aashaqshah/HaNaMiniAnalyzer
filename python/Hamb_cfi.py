@@ -77,7 +77,7 @@ Hamb = cms.EDFilter('TreeHamb',
                      sample = cms.string("WJetsMG"),
                      isData = cms.bool( False ),
                      #SetupDir = cms.string("Setup94"),
-                     SetupDir = cms.string("Setup104"),
+                     SetupDir = cms.string("Setup102"),
 		     		 StoreEventNumbers = cms.bool( True ),
 		     		 forOptimization = cms.untracked.bool(False)
 )
