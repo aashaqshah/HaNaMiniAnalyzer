@@ -59,36 +59,36 @@ MiniAOD94Samples = []
 ##WW94 = Sample( "WW" ,  63.21, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM")
 #WW94 = Sample( "WW" ,  118.7, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM")
 #MiniAOD94Samples.append(WW94)
-#
-##GGH1594 = Sample( "GGH15", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M15_Tomumubb/")
-##MiniAOD94Samples.append(GGH1594)
-#
-#GGH2094 = Sample( "GGH20", 48.5800*1.7*0.0001,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M20_Tomumubb/")
-#MiniAOD94Samples.append(GGH2094)
-#
-#GGH2594 = Sample( "GGH25",48.5800*1.7*0.0001 ,False,  "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M25_Tomumubb/")
-#MiniAOD94Samples.append(GGH2594)
-#
-#GGH3094 = Sample( "GGH30", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M30_Tomumubb/")
-#MiniAOD94Samples.append(GGH3094)
-#
-#GGH3594 = Sample( "GGH35", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M35_Tomumubb/")
-#MiniAOD94Samples.append(GGH3594)
-#
-#GGH4094 = Sample( "GGH40", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M40_Tomumubb/")
-#MiniAOD94Samples.append(GGH4094)
-#
-#GGH4594 = Sample( "GGH45", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M45_Tomumubb/")
-#MiniAOD94Samples.append(GGH4594)
-#
-GGH5094 = Sample( "GGH50", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M50_Tomumubb/")
+
+#GGH1594 = Sample( "GGH15", 48.5800*1.7*0.0001,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M15_Tomumubb_2018")
+#MiniAOD94Samples.append(GGH1594)
+
+GGH2094 = Sample( "GGH20", 48.5800*1.7*0.0001,False,  "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M20_Tomumubb_2018")
+MiniAOD94Samples.append(GGH2094)
+
+GGH2594 = Sample( "GGH25",48.5800*1.7*0.0001 ,False,  "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M25_Tomumubb_2018")
+MiniAOD94Samples.append(GGH2594)
+
+GGH3094 = Sample( "GGH30", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M30_Tomumubb_2018")
+MiniAOD94Samples.append(GGH3094)
+
+GGH3594 = Sample( "GGH35", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M35_Tomumubb_2018")
+MiniAOD94Samples.append(GGH3594)
+
+GGH4094 = Sample( "GGH40", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M40_Tomumubb_2018")
+MiniAOD94Samples.append(GGH4094)
+
+GGH4594 = Sample( "GGH45", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M45_Tomumubb_2018")
+MiniAOD94Samples.append(GGH4594)
+
+GGH5094 = Sample( "GGH50", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M50_Tomumubb_2018")
 MiniAOD94Samples.append(GGH5094)
 
-#GGH5594 = Sample( "GGH55", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M55_Tomumubb/")
-#MiniAOD94Samples.append(GGH5594)
+GGH5594 = Sample( "GGH55", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M55_Tomumubb_2018")
+MiniAOD94Samples.append(GGH5594)
 
-#GGH6094 = Sample( "GGH60", 48.5800*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/ggh01_M125_Toa01a01_M60_Tomumubb/")
-#MiniAOD94Samples.append(GGH6094)
+GGH6094 = Sample( "GGH60", 48.5800*1.7*0.0001 ,False, "/eos/uscms/store/user/ashah/FullSimulation/ggh01_M125_Toa01a01_M60_Tomumubb_2018")
+MiniAOD94Samples.append(GGH6094)
 
 #VBF2094 = Sample( "VBF20", 3.7820*1.7*0.0001 ,False, "/eos/cms/store/user/aashah/Samples94/vbfh01_M125_Toa01a01_M20_Tomumubb/")
 #MiniAOD94Samples.append(VBF2094)
