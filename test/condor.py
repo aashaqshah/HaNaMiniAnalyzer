@@ -11,8 +11,8 @@ if not len(sys.argv) == 3 :
     exit()
     #to run ./condor.py in_directory Out_directory
 
-CheckFailedJobs=True
-#CheckFailedJobs=False
+#CheckFailedJobs=True
+CheckFailedJobs=False
 hname = "Hamb/CutFlowTable/CutFlowTable"
 
 prefix = "out"

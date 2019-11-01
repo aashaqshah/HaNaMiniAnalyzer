@@ -4,13 +4,19 @@ source /cvmfs/cms.cern.ch/cmsset_default.sh
 voms-proxy-info
 
 export SCRAM_ARCH=$3
+echo "Given architechture is: ==========================="
+echo $SCRAM_ARCH
 scramv1 project CMSSW $4
 cd $4/src/
 export SCRAM_ARCH=$3
+echo "Given architechture within CMS directory is: ==========================="
+echo $SCRAM_ARCH
 eval `scramv1 runtime -sh`
 scram b
 mkdir Haamm/
 cd Haamm
+echo "Given architechture before cloning git: ==========================="
+echo $SCRAM_ARCH
 git clone -b $5 https://github.com/aashaqshah/HaNaMiniAnalyzer/
 cd HaNaMiniAnalyzer/
 git checkout $5
