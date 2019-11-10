@@ -91,9 +91,9 @@ MiniAOD94Samples.append(ZZ94)
 WZ94 = Sample( "WZ" ,  22.82 , False ,  "/WZ_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
 MiniAOD94Samples.append(WZ94)
 
-#For systematics
-www94 = Sample( "www" ,  118.7, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM")
-MiniAOD94Samples.append(www94)
+##For systematics
+#www94 = Sample( "www" ,  118.7, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM")
+#MiniAOD94Samples.append(www94)
 
 WW94 = Sample( "WW" ,  118.7, False ,  "/WW_TuneCP5_13TeV-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM")
 MiniAOD94Samples.append(WW94)

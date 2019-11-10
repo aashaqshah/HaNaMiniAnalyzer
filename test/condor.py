@@ -97,6 +97,7 @@ for sample in samples:
 	    print >> file, "log                     = $(ClusterId)_$(ProcId).log"
 	    print >> file, '+JobFlavour             = "tomorrow"'
 	    print >> file, "environment             = CONDORJOBID=$(ProcId)"
+	    print >> file, "requirements 	    = (OpSysAndVer =?= \"SLCern6\")"
 	    #print >> file, "environment             = CONDORJOBID = FailedJobs[sample.Name][$(ProcId)]" 
 	    print >> file, "notification            = Error"
 	    #print >> file, "arguments               = %(vomsaddress)s %(scram)s %(cmsver)s %(gitco)s %(sample)s %(out)s %(outdir)s %(nFilesPerJob)d" % { 

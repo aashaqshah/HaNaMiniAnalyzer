@@ -2,7 +2,6 @@
 export X509_USER_PROXY=$2
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 voms-proxy-info
-
 export SCRAM_ARCH=$3
 echo "Given architechture is: ==========================="
 echo $SCRAM_ARCH
