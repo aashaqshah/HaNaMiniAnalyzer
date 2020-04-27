@@ -49,17 +49,17 @@ MiniAOD94Samples.append( DYJetsLowMass94 )
 DYJetsHighMass94 = Sample( "DYJetsHighMass", 6025.2, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsHighMass94 )
 
-##========================new samples
-DYJets094 = Sample( "DYJets0",4758.9, True ,  "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-MiniAOD94Samples.append( DYJets094 )
-
-DYJets194 = Sample( "DYJets1", 929.1, True ,  "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-MiniAOD94Samples.append( DYJets194 )
-
-DYJets294 = Sample( "DYJets2", 337.1, True ,  "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-MiniAOD94Samples.append( DYJets294 )
-
-##==================== new samples
+###========================new samples
+#DYJets094 = Sample( "DYJets0",4758.9, True ,  "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+#MiniAOD94Samples.append( DYJets094 )
+#
+#DYJets194 = Sample( "DYJets1", 929.1, True ,  "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+#MiniAOD94Samples.append( DYJets194 )
+#
+#DYJets294 = Sample( "DYJets2", 337.1, True ,  "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+#MiniAOD94Samples.append( DYJets294 )
+#
+###==================== new samples
 
 #/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM
 #TTbar94 = Sample( "TTbar" , 483.7 , True ,  "/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
