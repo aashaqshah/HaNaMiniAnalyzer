@@ -281,11 +281,8 @@ process.HambDeepCSV.Jets.BTagWeightShapes = True
 process.HambDeepCSV.Jets.BTagWeightNonShapes = True
 
 process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(20.)
-#process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(20.)
 process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(9.)
-#process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(10.)
 process.HambDeepCSV.DiMuon.DiMuLowMassCut = cms.double(10.)
-#process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
 process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
 
 if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.count("Za") or theSample.Name.count("GGHbbtt") or theSample.Name.count("GGHmmtt") :

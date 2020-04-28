@@ -55,8 +55,13 @@ else
      fi
 fi
 
-echo cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
+echo "Running the ntupler"
+
+echo "cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9"
+
 cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
+
+echo "I am not sure if the code ran succesfully"
 
 outfilename=`ls $7*$6*.root`
 outfilenames=`ls *$7*$6*.root`
