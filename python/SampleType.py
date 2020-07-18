@@ -41,7 +41,6 @@ class SampleType:
 
     #def LoadHistos(self , lumi , dirName = "Hamb" , cftName = "CutFlowTable" , treeHistos = []):
     def LoadHistos(self , lumi , dirName = "HambDeepCSV" , cftName = "CutFlowTable" , treeHistos = []):
-    #def LoadHistos(self , lumi , dirName = "HambMediumMuID" , cftName = "CutFlowTable" , treeHistos = []):
         self.AllHists = {}
         self.GREs = []
         self.AllOtherHists = {}

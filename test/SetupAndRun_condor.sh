@@ -2,23 +2,19 @@
 export X509_USER_PROXY=$2
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 voms-proxy-info
+
 export SCRAM_ARCH=$3
-echo "Given architechture is: ==========================="
-echo $SCRAM_ARCH
 scramv1 project CMSSW $4
 cd $4/src/
 export SCRAM_ARCH=$3
-echo "Given architechture within CMS directory is: ==========================="
-echo $SCRAM_ARCH
 eval `scramv1 runtime -sh`
-scram b
+#scram b
 mkdir Haamm/
 cd Haamm
-echo "Given architechture before cloning git: ==========================="
-echo $SCRAM_ARCH
 git clone -b $5 https://github.com/aashaqshah/HaNaMiniAnalyzer/
 cd HaNaMiniAnalyzer/
 git checkout $5
+#scram b --ignore-arch
 scram b
 cd test
 if [ ! -z "$LSB_JOBINDEX" ];
@@ -55,13 +51,9 @@ else
      fi
 fi
 
-echo "Running the ntupler"
-
-echo "cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9"
-
-cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
-
-echo "I am not sure if the code ran succesfully"
+echo cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
+#cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
+python -i Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=5 nFilesPerJob=$0
 
 outfilename=`ls $7*$6*.root`
 outfilenames=`ls *$7*$6*.root`
