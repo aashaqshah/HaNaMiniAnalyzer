@@ -51,9 +51,9 @@ else
      fi
 fi
 
-echo cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
-#cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
-python -i Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=5 nFilesPerJob=$0
+echo "cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9"
+
+cmsRun Hamb_cfg.py sample=$6 job=$FILEID output=$7 maxEvents=-1 nFilesPerJob=$9
 
 outfilename=`ls $7*$6*.root`
 outfilenames=`ls *$7*$6*.root`
