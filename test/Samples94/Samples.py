@@ -69,8 +69,8 @@ MiniAOD94Samples.append( DYJetsHighMass94 )
 TTbar94 = Sample( "TTbar" , 831.80 , True ,  "/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
 MiniAOD94Samples.append(TTbar94 ) # alternative inclusive sample available
 
-TTbar_201694 = Sample( "TTbar_2016" , 831.80 , True ,  "/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-MiniAOD94Samples.append(TTbar_201694 ) # alternative inclusive sample available
+#TTbar_201694 = Sample( "TTbar_2016" , 831.80 , True ,  "/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+#MiniAOD94Samples.append(TTbar_201694 ) # alternative inclusive sample available
 
 ##TTbar Samples
 TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 88.29, True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )

@@ -155,7 +155,7 @@ if theSample.IsData :
     
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
-    process.GlobalTag.globaltag = '102X_dataRun2_v10' #Has to be added for 2018 data
+    process.GlobalTag.globaltag = '94X_dataRun2_ReReco_EOY17_v2' #Has to be added for 2017 data
 
     #Applying Jet Energy Corrections to Data
     from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
@@ -192,7 +192,7 @@ else :
     process.Hamb.MET.Input = "slimmedMETs"
 
     process.Hamb.Jets.ApplyJER = True
-    process.GlobalTag.globaltag = '102X_upgrade2018_realistic_v18'
+    process.GlobalTag.globaltag = '94X_mc2017_realistic_v13'
 
     # Applying Jet Energy Corrections to MC
     from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
@@ -236,6 +236,7 @@ else :
         AddSystematics( "JECDOWN"  , "Jets" , "JECUncertainty"  , -1)
         process.HambJECDOWN.MET.Uncertainty = 3
 
+        #https://github.com/cms-sw/cmssw/blob/CMSSW_7_6_X/CondFormats/JetMETObjects/interface/JetResolutionObject.h#L25-L29
         AddSystematics( "JERUP"  , "Jets" , "JERUncertainty"  , 2)
         AddSystematics( "JERDOWN"  , "Jets" , "JERUncertainty"  , 1)
 
@@ -270,9 +271,9 @@ process.HambMediumMuID.DiMuon.MuonID = 2 #MediumMuID
 
 process.HambDeepCSV = process.Hamb.clone()
 process.HambDeepCSV.Jets.BTagAlgo = "pfDeepCSVJetTags:probb + pfDeepCSVJetTags:probbb"
-process.HambDeepCSV.Jets.BTagWPL = 0.1241
-process.HambDeepCSV.Jets.BTagWPM = 0.4184
-process.HambDeepCSV.Jets.BTagWPT = 0.7527
+process.HambDeepCSV.Jets.BTagWPL = 0.1522
+process.HambDeepCSV.Jets.BTagWPM = 0.4941
+process.HambDeepCSV.Jets.BTagWPT = 0.8001
 process.HambDeepCSV.Jets.BTagAlgoType = "DeepCSV"
 process.HambDeepCSV.Jets.BTagAlgoSubTypeA = "pfDeepCSVJetTags:probb"
 process.HambDeepCSV.Jets.BTagAlgoSubTypeB = "pfDeepCSVJetTags:probbb"
@@ -280,11 +281,8 @@ process.HambDeepCSV.Jets.BTagWeightShapes = True
 process.HambDeepCSV.Jets.BTagWeightNonShapes = True
 
 process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(20.)
-#process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(20.)
 process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(9.)
-#process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(10.)
 process.HambDeepCSV.DiMuon.DiMuLowMassCut = cms.double(10.)
-#process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
 process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
 
 if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.count("Za") or theSample.Name.count("GGHbbtt") or theSample.Name.count("GGHmmtt") :
@@ -308,6 +306,7 @@ if theSample.Name.count("GGH") or theSample.Name.count("VBF") or theSample.Name.
    AddSystematics( "HLTUP"  , "DiMuon" , "HLTUnc"  , 1, "HambDeepCSV")
    AddSystematics( "HLTDOWN"  , "DiMuon" , "HLTUnc"  , -1 , "HambDeepCSV" )
 
+   #AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1)
    AddSystematics( "BShape"  , "Jets" , "BTagUncertainty"  , -1 , "HambDeepCSV")
 
 #process.p2 = cms.Path( process.HambMediumMuID )
