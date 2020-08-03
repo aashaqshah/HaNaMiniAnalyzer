@@ -63,9 +63,11 @@ JetReader::JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector &
     resolution_sf = JME::JetResolutionScaleFactor(SetupDir + "/MCJetSF.txt");
    //For JEC uncertainties for MC
     //jecUnc = new JetCorrectionUncertainty(SetupDir + "/JECUncertainties.txt");
-    jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017_V32_MC_Uncertainty_AK4PFchs.txt");
+   // jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017_V32_MC_Uncertainty_AK4PFchs.txt");
   }
-  if (SampleName == "DoubleMuB")      jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017B_V32_DATA_Uncertainty_AK4PFchs.txt");
+
+  if( !IsData ) jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017_V32_MC_Uncertainty_AK4PFchs.txt"); 
+  else if (SampleName == "DoubleMuB") jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017B_V32_DATA_Uncertainty_AK4PFchs.txt");
   else if (SampleName == "DoubleMuC") jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017C_V32_DATA_Uncertainty_AK4PFchs.txt");
   else if (SampleName == "DoubleMuF") jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017F_V32_DATA_Uncertainty_AK4PFchs.txt");
   else                               jecUnc = new JetCorrectionUncertainty(SetupDir + "/Fall17_17Nov2017DE_V32_DATA_Uncertainty_AK4PFchs.txt");
