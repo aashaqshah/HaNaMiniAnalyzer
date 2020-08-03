@@ -49,7 +49,7 @@ HaNaBaseMiniAnalyzer::HaNaBaseMiniAnalyzer(const edm::ParameterSet& iConfig):
     metReader = NULL;
 
   if( iConfig.exists( "Jets" ) ){
-    jetReader = new JetReader( iConfig.getParameter< edm::ParameterSet >("Jets") , consumesCollector() , IsData , SetupDir );
+    jetReader = new JetReader( iConfig.getParameter< edm::ParameterSet >("Jets") , consumesCollector() , IsData , SetupDir, SampleName );
   }else
     jetReader = NULL;
 

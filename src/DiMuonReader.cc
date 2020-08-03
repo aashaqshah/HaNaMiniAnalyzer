@@ -22,20 +22,38 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
     TFile* f1 = TFile::Open( TString(SetupDir + "/MuonIDSF.root") );
     gROOT->cd();
     hMuSFID = NULL;
+
+
     if(MuonID == 1 ) // Loose ID
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_LooseID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_LooseID_DEN_genTracks_pt_abseta")->Clone("MuSFID") );
     else if(MuonID == 2 ) // Medium ID
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_MediumID_DEN_genTracks_pt_abseta")->Clone("MuSFID") );
     else if(MuonID == 3 ) // Tight ID
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_TightID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_TightID_DEN_genTracks_pt_abseta")->Clone("MuSFID") );
     else if(MuonID == 4 ) // Soft ID
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_SoftID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_SoftID_DEN_genTracks_pt_abseta")->Clone("MuSFID") );
     else if(MuonID == 5 ) // HighPt ID 
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_HighPtID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_HighPtID_DEN_genTracks_pair_newTuneP_probe_pt_abseta")->Clone("MuSFID") );
     else if(MuonID == 6 ) // MediumPrompt ID
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumPromptID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_MediumPromptID_DEN_genTracks_pt_abseta")->Clone("MuSFID") );
     else if(MuonID == 7 ) // TrkHighPt ID
-      hMuSFID = (TH2*)( f1->Get("MC_NUM_TrkHighPtID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+      hMuSFID = (TH2*)( f1->Get("NUM_TrkHighPtID_DEN_genTracks_pair_newTuneP_probe_pt_abseta")->Clone("MuSFID") );
+
+    //***********************
+    //if(MuonID == 1 ) // Loose ID
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_LooseID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    //else if(MuonID == 2 ) // Medium ID
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    //else if(MuonID == 3 ) // Tight ID
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_TightID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    //else if(MuonID == 4 ) // Soft ID
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_SoftID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    //else if(MuonID == 5 ) // HighPt ID 
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_HighPtID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    //else if(MuonID == 6 ) // MediumPrompt ID
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_MediumPromptID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
+    //else if(MuonID == 7 ) // TrkHighPt ID
+    //  hMuSFID = (TH2*)( f1->Get("MC_NUM_TrkHighPtID_DEN_genTracks_PAR_pt_eta/pt_abseta_ratio")->Clone("MuSFID") );
     else
       cout << "No scale factor is availabel for Muon ID " << MuonID << endl;
     f1->Close();
@@ -43,16 +61,25 @@ DiMuonReader::DiMuonReader( edm::ParameterSet const& iConfig, edm::ConsumesColle
     //Muon Isolation cretia
     f1 = TFile::Open( TString(SetupDir + "/MuonIsoSF.root") );
     gROOT->cd();
+
     if( MuonIsoCut == 0.25 && MuonID == 1)
-      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_LooseID/pt_abseta_ratio")->Clone("MuSFIso") );
+      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_LooseID_pt_abseta")->Clone("MuSFIso") );
     else if( MuonIsoCut == 0.25 && MuonID == 2 )
-      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_MediumID/pt_abseta_ratio")->Clone("MuSFIso") );
+      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_MediumID_pt_abseta")->Clone("MuSFIso") );
     else if( MuonIsoCut == 0.15 && MuonID == 2 )
-      hMuSFIso = (TH2*)( f1->Get("NUM_TightRelIso_DEN_MediumID/pt_abseta_ratio")->Clone("MuSFIso") );
-    else if( MuonIsoCut == 0.10 && MuonID == 7 )
-      hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelTrkIso_DEN_TrkHighPtID/pt_abseta_ratio")->Clone("MuSFIso") );
-    else if( MuonIsoCut == 0.05 && MuonID == 7 )
-      hMuSFIso = (TH2*)( f1->Get("NUM_TightRelTkIso_DEN_TrkHighPtID/pt_abseta_ratio")->Clone("MuSFIso") );
+      hMuSFIso = (TH2*)( f1->Get("NUM_TightRelIso_DEN_MediumID_pt_abseta")->Clone("MuSFIso") );
+
+    //if( MuonIsoCut == 0.25 && MuonID == 1)
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_LooseID/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.25 && MuonID == 2 )
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_MediumID/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.15 && MuonID == 2 )
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_TightRelIso_DEN_MediumID/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.10 && MuonID == 7 )
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelTrkIso_DEN_TrkHighPtID/pt_abseta_ratio")->Clone("MuSFIso") );
+    //else if( MuonIsoCut == 0.05 && MuonID == 7 )
+    //  hMuSFIso = (TH2*)( f1->Get("NUM_TightRelTkIso_DEN_TrkHighPtID/pt_abseta_ratio")->Clone("MuSFIso") );
+    //****************
     //else if( MuonIsoCut == 0.25 && MuonID == TightIDandIPCut ) #WP's for IDandIPcut's has not been defined yet and hence commented
     //  hMuSFIso = (TH2*)( f1->Get("NUM_LooseRelIso_DEN_TightIDandIPCut/pt_abseta_ratio")->Clone("MuSFIso") );
     //else if( MuonIsoCut == 0.15 && MuonID == TightIDandIPCut )

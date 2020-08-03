@@ -25,7 +25,7 @@ using namespace pat;
 
 class JetReader : public BaseEventReader< pat::JetCollection > {
 public:
-  JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector && iC , bool isData , string SetupDir) ;
+  JetReader( edm::ParameterSet const& iConfig, edm::ConsumesCollector && iC , bool isData , string SetupDir, string sample ) ;
   const pat::JetCollection* GetAllJets();
 
   enum SelectionStatus {
@@ -50,6 +50,7 @@ private :
   std::vector<BTagWeight*> weighters;
   BTagWeight* BTagWeighterShape;
   bool IsData;
+  string SampleName;
   /* JET SELECTION PARAMS */
   bool ApplyJER;
   double JetPtCut , JetEtaCut ;

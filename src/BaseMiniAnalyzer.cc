@@ -26,6 +26,7 @@ BaseMiniAnalyzer::BaseMiniAnalyzer(const edm::ParameterSet& iConfig):
   LHEReader = NULL;
   geninfoReader = NULL;
   if( !IsData ){
+    std::cout<<"++++++++++++++++++=========== Sample Name is "<<SampleName <<std::endl;
     edm::ParameterSet LHE = iConfig.getParameter< edm::ParameterSet >("LHE");
     if( LHE.getParameter< bool >( "useLHEW" ) ){
       LHEReader = new LHEEventReader( LHE , consumesCollector() );
@@ -50,7 +51,7 @@ BaseMiniAnalyzer::BaseMiniAnalyzer(const edm::ParameterSet& iConfig):
     metReader = NULL;
 
   if( iConfig.exists( "Jets" ) ){
-    jetReader = new JetReader( iConfig.getParameter< edm::ParameterSet >("Jets") , consumesCollector() , IsData , SetupDir );
+    jetReader = new JetReader( iConfig.getParameter< edm::ParameterSet >("Jets") , consumesCollector() , IsData , SetupDir, SampleName );
   }else
     jetReader = NULL;
 
