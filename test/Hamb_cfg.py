@@ -11,43 +11,11 @@ process.load('Configuration.StandardSequences.Services_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load("RecoMET/METProducers.METSignificance_cfi")
 process.load("RecoMET/METProducers.METSignificanceParams_cfi")
-##____________________________________________________________________________||
 process.load('Configuration.StandardSequences.Services_cff')
 process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
 from Configuration.AlCa.GlobalTag import GlobalTag
 #process.load("JetMETCorrections.Modules.JetResolutionESProducer_cfi")
-#from CondCore.DBCommon.CondDBSetup_cfi import *
 
-#process.jer = cms.ESSource("PoolDBESSource",
-#      CondDBSetup,
-#      toGet = cms.VPSet(
-#         # Pt Resolution
-#         cms.PSet(
-#            record = cms.string('JetResolutionRcd'),
-#            tag    = cms.string('JR_MC_PtResolution_Summer15_25nsV6_AK4PFchs'),
-#            label  = cms.untracked.string('AK4PFchs_pt')
-#            ),
-#
-#         # Phi Resolution
-#         cms.PSet(
-#            record = cms.string('JetResolutionRcd'),
-#            tag    = cms.string('JR_MC_PhiResolution_Summer15_25nsV6_AK4PFchs'),
-#            label  = cms.untracked.string('AK4PFchs_phi')
-#            ),
-#
-#         # Scale factors
-#         cms.PSet(
-#            record = cms.string('JetResolutionScaleFactorRcd'),
-#            tag    = cms.string('JR_DATAMCSF_Summer15_25nsV6_AK4PFchs'),
-#            label  = cms.untracked.string('AK4PFchs')
-#            ),
-#         ),
-#      connect = cms.string('sqlite:Summer15_25nsV6.db')
-#      )
-
-#process.es_prefer_jer = cms.ESPrefer('PoolDBESSource', 'jer')
-
-##____________________________________________________________________________||
 process.TFileService = cms.Service("TFileService", fileName = cms.string("histo.root") )
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
@@ -115,9 +83,7 @@ if options.sync == 0 :
 else:
     from Haamm.HaNaMiniAnalyzer.Sample import *
     theSample = Sample( "Sync" , "Sync" , 100 , False , 0 , "" )
-    #theSample.Files = ['/store/mc/RunIIFall15MiniAODv2/TT_TuneCUETP8M1_13TeV-powheg-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext3-v1/00000/0C5BB11A-E2C1-E511-8C02-002590A831B6.root']
     theSample.Files = ['/store/mc/RunIISpring16MiniAODv2/TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/MINIAODSIM/PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/00000/001AFDCE-C33B-E611-B032-0025905D1C54.root']
-    #theSample.Files = ['/store/data/Run2016C/DoubleMuon/MINIAOD/PromptReco-v2/000/275/658/00000/0498AA19-863B-E611-A9B3-02163E0138A8.root']
     options.nFilesPerJob = 1
     options.output = "out" 
     options.job = 0
@@ -126,7 +92,7 @@ process.Hamb.sample = theSample.Name
 process.Hamb.LHE.useLHEW = theSample.LHEWeight
 process.Hamb.isData = theSample.IsData
 process.Hamb.Jets.BTagCuts = cms.vint32(0,-1)
-process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(20.)
+process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(18.)
 #process.Hamb.DiMuon.MuonLeadingPtCut = cms.double(20.)
 process.Hamb.DiMuon.DiMuLowMassCut = cms.double(10.)
 process.Hamb.DiMuon.MuonSubLeadingPtCut = cms.double(9.)
@@ -155,7 +121,8 @@ if theSample.IsData :
     
     import FWCore.PythonUtilities.LumiList as LumiList
     process.source.lumisToProcess = LumiList.LumiList(filename = (process.Hamb.SetupDir.value() + '/JSON.txt')).getVLuminosityBlockRange()
-    process.GlobalTag.globaltag = '94X_dataRun2_ReReco_EOY17_v2' #Has to be added for 2017 data
+    #process.GlobalTag.globaltag = '94X_dataRun2_ReReco_EOY17_v2' #Has to be added for 2017 data
+    process.GlobalTag.globaltag = '94X_dataRun2_v11' #Has to be added for 2017 data
 
     #Applying Jet Energy Corrections to Data
     from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
@@ -192,7 +159,8 @@ else :
     process.Hamb.MET.Input = "slimmedMETs"
 
     process.Hamb.Jets.ApplyJER = True
-    process.GlobalTag.globaltag = '94X_mc2017_realistic_v13'
+    process.GlobalTag.globaltag = '94X_mc2017_realistic_v17'
+    #process.GlobalTag.globaltag = '94X_mc2017_realistic_v13'
 
     # Applying Jet Energy Corrections to MC
     from PhysicsTools.PatAlgos.tools.jetTools import updateJetCollection
@@ -280,7 +248,7 @@ process.HambDeepCSV.Jets.BTagAlgoSubTypeB = "pfDeepCSVJetTags:probbb"
 process.HambDeepCSV.Jets.BTagWeightShapes = True
 process.HambDeepCSV.Jets.BTagWeightNonShapes = True
 
-process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(20.)
+process.HambDeepCSV.DiMuon.MuonLeadingPtCut = cms.double(18.)
 process.HambDeepCSV.DiMuon.MuonSubLeadingPtCut = cms.double(9.)
 process.HambDeepCSV.DiMuon.DiMuLowMassCut = cms.double(10.)
 process.HambDeepCSV.Jets.JetPtCut = cms.double( 15.)
