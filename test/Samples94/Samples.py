@@ -35,50 +35,57 @@ MiniAOD94Samples.append( DoubleMuF94 )
 WJetsToLNu94 = Sample( "WJetsToLNu" , 61526.7, True , "/WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3/MINIAODSIM" )
 MiniAOD94Samples.append( WJetsToLNu94 )
 
-#new ones
-#PreselectionTL Low Mass KFactor is 1.83 +- 0.12 
-#PreselectionTL High Mass KFactor is 0.95 +- 0.01
 
-
-DYJetsLowMass94 = Sample( "DYJetsLowMass", 18610, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+#1.64
+#DYJetsLowMass94 = Sample( "DYJetsLowMass", 18610*1.64, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+DYJetsLowMass94 = Sample( "DYJetsLowMass", 18610, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsLowMass94 )
 
 ##DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
 
-#MCM Xs=7181
-DYJetsHighMass94 = Sample( "DYJetsHighMass", 6025.2, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+
+#MCM Xs=7181 Use this sample
+#1.03
+#DYJetsHighMass94 = Sample( "DYJetsHighMass", 6025.2*1.03, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+DYJetsHighMass94 = Sample( "DYJetsHighMass", 6025.2, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext3-v1/MINIAODSIM" )
 MiniAOD94Samples.append( DYJetsHighMass94 )
 
-###========================new samples
-#DYJets094 = Sample( "DYJets0",4758.9, True ,  "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-#MiniAOD94Samples.append( DYJets094 )
-#
-#DYJets194 = Sample( "DYJets1", 929.1, True ,  "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-#MiniAOD94Samples.append( DYJets194 )
-#
-#DYJets294 = Sample( "DYJets2", 337.1, True ,  "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-#MiniAOD94Samples.append( DYJets294 )
-#
-###==================== new samples
 
-#/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM
-#TTbar94 = Sample( "TTbar" , 483.7 , True ,  "/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+###========================new DY samples
+#MCM xs=5409
+DYJets094 = Sample( "DYJets0",4758.9, True ,  "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+MiniAOD94Samples.append( DYJets094 )
+
+#MCM Xs=937.4
+DYJets194 = Sample( "DYJets1", 929.1, True ,  "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+MiniAOD94Samples.append( DYJets194 )
+
+#MCM Xs=291
+DYJets294 = Sample( "DYJets2", 337.1, True ,  "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+MiniAOD94Samples.append( DYJets294 )
+
+##==================== new samples
+
+
+#Use this sample
 TTbar94 = Sample( "TTbar" , 831.80 , True ,  "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
 MiniAOD94Samples.append(TTbar94 ) # alternative inclusive sample available
 
-#TTbar_201694 = Sample( "TTbar_2016" , 831.80 , True ,  "/TTJets_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-#MiniAOD94Samples.append(TTbar_201694 ) # alternative inclusive sample available
+
 
 ###TTbar Samples
-#TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 88.29, True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
-##TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 72.1, True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10-v1/MINIAODSIM" )
-#MiniAOD94Samples.append( TTTo2L2Nu94 )
-#
-#TTToHad94 = Sample( "TTToHad" , 377.96 , True ,  "/TTToHadronic_TuneCP5_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM" )
-#MiniAOD94Samples.append( TTToHad94)
-#
-#TTToSemi94 = Sample( "TTToSemi" , 365.34 , True ,  "/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
-#MiniAOD94Samples.append( TTToSemi94 )
+#MCM Xs= 72.1
+TTTo2L2Nu94 = Sample( "TTTo2L2Nu" , 88.29, True ,  "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+MiniAOD94Samples.append( TTTo2L2Nu94 )
+
+#MCM Xs= 313.9
+TTToHad94 = Sample( "TTToHad" , 377.96 , True ,  "/TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
+MiniAOD94Samples.append( TTToHad94)
+
+#MCM Xs= 300.9
+TTToSemi94 = Sample( "TTToSemi" , 365.34 , True ,  "/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM" )
+MiniAOD94Samples.append( TTToSemi94 )
+
 
 #McM Xs=67.91
 TChannelTbar94 = Sample("TChannelTbar" , 80.95 , False ,  "/ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM" )
