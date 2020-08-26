@@ -44,7 +44,7 @@ DYJetsLowMassV294 = Sample( "DYJetsLowMassV2", 18610, True ,  "/DYJetsToLL_M-10t
 MiniAOD94Samples.append( DYJetsLowMassV294 )
 
 DYJetsLowMassV2Ext94 = Sample( "DYJetsLowMassV2Ext", 18610, True ,  "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM" )
-MiniAOD94Samples.append( DYJetsLowMassExtV294 )
+MiniAOD94Samples.append( DYJetsLowMassV2Ext94 )
 #
 ##DYJetsHighMass94 = Sample( "DYJetsHighMass", 7181, True ,  "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1/MINIAODSIM" )
 #
